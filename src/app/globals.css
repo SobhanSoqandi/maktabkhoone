@@ -1,8 +1,39 @@
 @import "tailwindcss";
 
+
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+}
+
+@font-face {
+  font-family: "Vazir";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../../public/fonts/Vazirmatn-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Vazir";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../../public/fonts/Vazirmatn-Bold.woff2") format("woff2");
+}
+
+@layer components {
+
+  .btn {
+    @apply flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm rounded-xl
+  }
+
+  .btn-primary {
+    @apply border border-gray-200 hover:bg-gray-50 transition;
+  }
+
+  .link-style {
+    @apply text-sm font-medium text-gray-700 transition hover:text-teal-600
+  }
 }
 
 @theme inline {
@@ -19,8 +50,20 @@
   }
 }
 
+.swiper-button-prev,
+.swiper-button-next {
+    display: none !important;
+}
+
+@media (min-width: 1024px) {
+    .swiper-button-prev,
+    .swiper-button-next {
+        display: flex !important;
+    }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Vazir';
 }
