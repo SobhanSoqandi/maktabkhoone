@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -22,6 +20,23 @@
 }
 
 
+@layer components {
+  .btn {
+    @apply flex items-center gap-2 px-4 py-2.5 rounded-xl rounded-xl text-sm;
+  }
+
+  .btn-primary {
+    @apply hover:bg-gray-50 border border-gray-200 transition;
+  }
+
+  .link-style {
+    @apply font-medium text-gray-700 hover:text-teal-600 text-sm transition;
+  }
+  .input {
+    @apply px-3 py-2 border border-gray-700 rounded-sm w-75 text-sm;
+  }
+
+
 @utility btn {
   @apply flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm;
 }
@@ -36,6 +51,7 @@
 
 @utility mobile-menu {
    @apply fixed bottom-2 left-1/2 z-50 flex w-[95%] -translate-x-1/2 rounded-3xl border border-gray-100 bg-white; box-shadow: 0px 60px 50px 20px rgba(255,255,255,5);
+
 }
 
 @theme inline {
@@ -45,7 +61,7 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
@@ -68,5 +84,6 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Vazir';
+  font-family: "Vazir";
 }
+
