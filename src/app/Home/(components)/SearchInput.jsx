@@ -1,31 +1,48 @@
-import React from 'react'
-import { FiSearch } from 'react-icons/fi'
+import { FiSearch } from "react-icons/fi";
 
 function SearchInput() {
     return (
-        <div className="relative flex-1 mx-2 md:mx-10">
+        <div className="relative mx-2 flex-1 md:mx-5">
 
-            <input
-                type="text"
-                className="w-full h-12 rounded-2xl border border-gray-200 bg-gray-50 px-5 outline-none focus:border-teal-500"
-            />
-         
-            <div className="pointer-events-none absolute inset-y-0 right-5 flex items-center gap-2 text-gray-400">
-
-                <span>جستجو در</span>
-
+            <div className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2">
                 <img
                     src="/next.svg"
                     alt="مکتب‌خونه"
-                    className="h-3 w-auto"
+                    className="h-4 w-[50px]"
                 />
-
             </div>
 
-            <FiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-2xl text-gray-500" />
+            <input
+                type="text"
+                placeholder="جستجو در دوره‌ها"
+                className="
+                    h-12
+                    w-full
+                    rounded-2xl
+                    border
+                    border-gray-200
+                    bg-gray-50
+                    pr-20
+                    pl-12
+                    outline-none
+                    placeholder:text-gray-400
+                    focus:border-teal-500
+                "
+            />
+
+            <FiSearch
+                className="
+                    absolute
+                    left-5
+                    top-1/2
+                    -translate-y-1/2
+                    text-2xl
+                    text-gray-500
+                "
+            />
 
         </div>
-    )
+    );
 }
 
-export default SearchInput
+export default SearchInput;

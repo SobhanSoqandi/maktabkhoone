@@ -7,10 +7,11 @@ import CategoriresFetch from "./category/CategoriresFetch";
 import Login from "./login/Login";
 
 function Header() {
+
   return (
     <header className="bg-white border-gray-200 border-b w-full">
       <div className="flex justify-between items-center mx-auto max-w-7xl h-20">
-        <div className="hidden md:flex items-center md:ml-10">
+        <div className="hidden xl:flex items-center md:ml-10">
           <Image src="/next.svg" alt="Logo" width={60} height={20} />
         </div>
 
@@ -20,8 +21,8 @@ function Header() {
 
         <SearchInput />
 
-        <div className="hidden md:flex items-center gap-8">
-          <nav className="hidden lg:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-6">
+          <nav className="hidden lg:flex items-center gap-6">
             <Link href="/" className="flex link-style">
               <span className="flex items-center gap-1 text-pink-500">
                 <HiOutlineSparkles className="text-lg" />
@@ -38,6 +39,7 @@ function Header() {
       </div>
     </header>
   );
+
 }
 
 export default Header;

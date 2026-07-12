@@ -9,15 +9,16 @@
   font-family: "Vazir";
   font-style: normal;
   font-weight: 400;
-  src: url("../../public/fonts/Vazirmatn-Regular.woff2") format("woff2");
+  src: url("/fonts/Vazirmatn-Regular.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "Vazir";
   font-style: normal;
   font-weight: 700;
-  src: url("../../public/fonts/Vazirmatn-Bold.woff2") format("woff2");
+  src: url("/fonts/Vazirmatn-Bold.woff2") format("woff2");
 }
+
 
 @layer components {
   .btn {
@@ -34,6 +35,23 @@
   .input {
     @apply px-3 py-2 border border-gray-700 rounded-sm w-75 text-sm;
   }
+
+
+@utility btn {
+  @apply flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm;
+}
+
+@utility btn-primary {
+  @apply border border-gray-200 transition hover:bg-gray-50;
+}
+
+@utility link-style {
+  @apply text-sm font-medium text-gray-700 transition hover:text-teal-600;
+}
+
+@utility mobile-menu {
+   @apply fixed bottom-2 left-1/2 z-50 flex w-[95%] -translate-x-1/2 rounded-3xl border border-gray-100 bg-white; box-shadow: 0px 60px 50px 20px rgba(255,255,255,5);
+
 }
 
 @theme inline {
@@ -56,6 +74,7 @@
 }
 
 @media (min-width: 1024px) {
+
   .swiper-button-prev,
   .swiper-button-next {
     display: flex !important;
@@ -67,3 +86,4 @@ body {
   color: var(--foreground);
   font-family: "Vazir";
 }
+
