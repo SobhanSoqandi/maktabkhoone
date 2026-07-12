@@ -1,6 +1,8 @@
 "use client";
 import React from 'react'
 import useMediaQuery from '@/app/(hooks)/useMediaQuery';
+import DesktopFooter from './DesktopFooter';
+import MobileBottomMenu from './MobileBottomMenu';
 
 function Footer() {
 
@@ -9,7 +11,7 @@ function Footer() {
   return (
     <>
       {
-        isResponsive ? " Desktop footer " : "mobile footer"
+        isResponsive ? <DesktopFooter /> : <MobileBottomMenu />
       }
 
     </>

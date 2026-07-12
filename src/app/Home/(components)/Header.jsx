@@ -10,10 +10,10 @@ import Link from 'next/link';
 function Header() {
     return (
         <header className="w-full border-b border-gray-200 bg-white" >
-            <div className="mx-auto flex h-20 max-w-7xl items-center justify-between">
+            <div className="mx-2 xl:mx-auto flex h-20 max-w-7xl items-center justify-between">
 
 
-                <div className="hidden md:flex items-center md:ml-10">
+                <div className="hidden xl:flex items-center md:ml-10">
                     <img
                         src="/next.svg"
                         alt="Logo"
@@ -28,17 +28,13 @@ function Header() {
 
                 <SearchInput />
 
-                <div className="hidden md:flex items-center gap-8">
+                <div className="hidden md:flex items-center gap-6">
 
-                    <nav className="hidden items-center gap-8 lg:flex">
+                    <nav className="hidden items-center gap-6 lg:flex">
                         <Link
                             href="/"
                             className="link-style flex"
                         >
-                            <span className="flex items-center gap-1 text-pink-500">
-                                <HiOutlineSparkles className="text-lg" />
-                            </span>
-
                             اشتراک مکتب‌پلاس
                         </Link>
 
