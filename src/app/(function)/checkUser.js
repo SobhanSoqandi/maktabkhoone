@@ -1,3 +1,4 @@
+"use client";
 export default function checkUser() {
   const raw = localStorage.getItem("personalInfo");
 

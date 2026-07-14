@@ -4,11 +4,14 @@ import { TiShoppingCart } from "react-icons/ti";
 import checkUser from "@/app/(function)/checkUser";
 import Modal from "@/app/(components)/modal";
 import LoginForm from "./LoginForm";
+import { useState } from "react";
+import UserMenu from "./UserMenu";
 
 export default function Login() {
+  const [isLogin, setIsLogin] = useState(checkUser());
   return (
     <div>
-      {checkUser() ? (
+      {isLogin ? (
         <div className="flex items-center gap-3">
           <button className="btn btn-primary">
             <FaBook className="w-5 h-5" />
@@ -19,21 +22,26 @@ export default function Login() {
             <TiShoppingCart className="w-5 h-5" />
           </button>
 
-          <button className="btn btn-primary">
-            <FaRegUser className="w-5 h-5" />
-          </button>
+          <div className="group relative">
+            <button className="btn btn-primary">
+              <FaRegUser className="w-5 h-5" />
+            </button>
+            <div className="invisible group-hover:visible top-full left-0 z-50 absolute bg-white opacity-0 group-hover:opacity-100 shadow-2xl mt-3 border border-gray-200 rounded-2xl w-64 overflow-hidden scale-95 group-hover:scale-100 transition-all translate-y-3 group-hover:translate-y-0 duration-300 ease-out">
+              <UserMenu />
+            </div>
+          </div>
         </div>
       ) : (
         <Modal>
           <Modal.Open name="login">
             <div className="bg-blue-500 font-bold text-white btn">
-              ورود/ثبت نام
+              ورود | ثبت نام
             </div>
           </Modal.Open>
           <Modal.Window name="login">
-            <div className="flex flex-col gap-2 w-125 h-64">
+            <div className="flex flex-col gap-2 p-5 w-[400px]">
               <Modal.Close />
-              <LoginForm />
+              <LoginForm islogin={setIsLogin} />
             </div>
           </Modal.Window>
         </Modal>

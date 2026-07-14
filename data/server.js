@@ -1,15 +1,15 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import getToken from "@/app/(function)/getToken";
 
-import getToken from "../function/getToken";
 export const url = "http://127.0.0.1:8000";
 const apikey = "YOUR_API_KEY";
 export const api = axios.create({
-  baseURL: url + "/api",
+  baseURL: url + "/",
   withCredentials: false,
   headers: {
     apikey: apikey,
-    "Content-Type": "application/json",
+    // "Content-Type": "application/json",
   },
 });
 
