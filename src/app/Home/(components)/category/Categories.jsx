@@ -69,6 +69,10 @@ export default function Categories({ categories }) {
     return result;
   }, [path, treeCategories]);
 
+
+  console.log(treeCategories);
+  console.log(categories);
+
   return (
     <div
       ref={wrapperRef}
