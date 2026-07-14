@@ -10,7 +10,7 @@ function Header() {
 
   return (
     <header className="bg-white border-gray-200 border-b w-full">
-      <div className="flex justify-between items-center mx-auto max-w-7xl h-20">
+      <div className="flex justify-between items-center mx-auto container px-4 h-20">
         <div className="hidden xl:flex items-center md:ml-10">
           <Image src="/next.svg" alt="Logo" width={60} height={20} />
         </div>
@@ -30,9 +30,6 @@ function Header() {
               اشتراک مکتب‌پلاس
             </Link>
 
-            <Link href="/" className="link-style">
-              سرویس سازمانی
-            </Link>
           </nav>
           <Login />
         </div>
