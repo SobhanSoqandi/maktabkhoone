@@ -1,6 +1,8 @@
+"use client";
+
 import { useMutation } from "@tanstack/react-query";
 
-import { api } from "../server/server";
+import { api } from "../../../data/server";
 import toast from "react-hot-toast";
 
 export default function useMutationData(url, method, toastId, opt = {}) {

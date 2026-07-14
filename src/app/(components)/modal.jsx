@@ -13,7 +13,7 @@ import { IoClose } from "react-icons/io5";
 
 const ModalContext = createContext(null);
 
-function useModal() {
+export function useModal() {
   const context = useContext(ModalContext);
 
   if (!context) {
@@ -89,11 +89,11 @@ function Window({ children, name }) {
   return createPortal(
     <div
       onClick={() => setActiveModal(null)}
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/30 backdrop-blur-sm"
+      className="z-[9999] fixed inset-0 flex justify-center items-center bg-black/30 backdrop-blur-sm"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative rounded-xl bg-white shadow-xl"
+        className="relative bg-white shadow-xl rounded-xl"
       >
         {children}
       </div>
@@ -108,9 +108,9 @@ function Close() {
   return (
     <button
       onClick={() => setActiveModal(null)}
-      className="absolute left-3 top-3"
+      className="top-3 left-3 absolute"
     >
-      <IoClose className="text-2xl text-blue-600 cursor-pointer" />
+      <IoClose className="text-blue-600 text-2xl cursor-pointer" />
     </button>
   );
 }
