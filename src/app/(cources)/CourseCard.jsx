@@ -4,10 +4,10 @@ import { HiClock, HiAcademicCap } from "react-icons/hi2";
 
 export default function CourseCard({ course }) {
   return (
-    <Link
-      href={`/courses/${course.slug}`}
-      className="group overflow-hidden rounded-3xl border border-gray-200 bg-white transition duration-300 hover:-translate-y-2 hover:border-teal-500 hover:shadow-xl"
-    >
+   <Link
+  href={`/courses/${course.slug}`}
+  className="group flex h-full flex-col overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:border-teal-500 hover:shadow"
+>
       <div className="relative h-40 overflow-hidden">
         <Image
           src={course.banner}
@@ -19,7 +19,7 @@ export default function CourseCard({ course }) {
 
       <div className="space-y-4 p-5">
 
-        <h2 className="line-clamp-2 min-h-14 text-lg font-bold leading-8 transition group-hover:text-teal-600">
+        <h2 className="line-clamp-2 min-h-14 text-base font-bold leading-8 transition group-hover:text-teal-600">
           {course.title}
         </h2>
 
@@ -29,9 +29,9 @@ export default function CourseCard({ course }) {
 
         <div className="flex items-center justify-between text-sm text-gray-500">
 
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 badge">
             <HiAcademicCap />
-            <span>{course.course_level}</span>
+            <span >{course.course_level}</span>
           </div>
 
           <div className="flex items-center gap-1">
@@ -48,7 +48,7 @@ export default function CourseCard({ course }) {
           </span>
 
           {course.is_free ? (
-            <span className="text-lg font-bold text-green-600">
+            <span className="bagde">
               رایگان
             </span>
           ) : (

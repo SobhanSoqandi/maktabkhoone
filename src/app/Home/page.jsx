@@ -1,16 +1,18 @@
-import React from "react";
 import Slider from "./(components)/slider/Slider";
-import CategoriesCardFetch from "./(components)/(CategoriesCard)/CategoriesCardFetch";
-import CoursesGrid from "../(cources)/CourcesGrid";
+import CategoriesCard from "./(components)/(CategoriesCard)/CategoriesCard";
+import PopularCourses from "../(cources)/PopularCourses";
+import { req } from "../(function)/request";
 
-function page() {
+export default async function Page() {
+  const categories = await req("/categories/");
+
   return (
     <div>
       <Slider />
-      <CoursesGrid />
-      <CategoriesCardFetch />
+
+      <PopularCourses categories={categories} />
+
+      <CategoriesCard categories={categories} />
     </div>
   );
 }
-
-export default page;
