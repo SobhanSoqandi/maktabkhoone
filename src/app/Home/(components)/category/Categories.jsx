@@ -70,8 +70,6 @@ export default function Categories({ categories }) {
   }, [path, treeCategories]);
 
 
-  console.log(treeCategories);
-  console.log(categories);
 
   return (
     <div
@@ -98,7 +96,7 @@ export default function Categories({ categories }) {
       {isOpen && (
         <div className="right-0 z-50 absolute flex bg-white shadow-2xl mt-1 rounded-xl overflow-hidden">
           {columns.map((items, level) => (
-            <div key={level} className="py-2 border-l last:border-l-0 w-72">
+            <div key={level} className="py-2 w-72">
               {items.map((item) => (
                 <CategoryItem
                   key={item.id}

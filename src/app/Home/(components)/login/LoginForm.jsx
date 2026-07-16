@@ -19,9 +19,9 @@ export default function LoginForm({ islogin }) {
   const { setActiveModal } = useModal();
   return (
     <div className="flex flex-col items-center gap-8 mt-3">
-      <h2 className="font-bold text-xl">ورود / ثبت نام</h2>
+      <h2 className="font-bold text-xl">ورود | ثبت نام</h2>
       <form
-        className="flex flex-col gap-5"
+        className="flex flex-col gap-5 w-[90%]"
         onSubmit={handleSubmit((data) => {
           mutate(data);
         })}
@@ -44,17 +44,17 @@ export default function LoginForm({ islogin }) {
         />
         <button
           type="submit"
-          className="bg-blue-600 hover:bg-blue-700 m-auto py-2 rounded-lg w-75 text-white transition cursor-pointer"
+          className="btn btn-success p-3 justify-center"
         >
           تایید
         </button>
       </form>
       <div className="flex justify-between items-center gap-4 w-75">
-        <div className="hover:bg-blue-500 px-4 py-2 border border-blue-500 rounded-lg text-blue-500 hover:text-white transition cursor-pointer">
+        <div className="btn text-gray-600 border border-gray-200 shadow w-full justify-center">
           ثبت نام
         </div>
 
-        <div className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-lg text-white transition cursor-pointer">
+        <div className="btn btn-success w-full">
           ورود با شماره همراه
         </div>
       </div>

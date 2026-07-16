@@ -110,7 +110,7 @@ function Close() {
       onClick={() => setActiveModal(null)}
       className="top-3 left-3 absolute"
     >
-      <IoClose className="text-blue-600 text-2xl cursor-pointer" />
+      <IoClose className="text-teal-600 text-2xl cursor-pointer" />
     </button>
   );
 }

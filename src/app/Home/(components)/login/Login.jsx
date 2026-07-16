@@ -34,7 +34,7 @@ export default function Login() {
       ) : (
         <Modal>
           <Modal.Open name="login">
-            <div className="bg-blue-500 font-bold text-white btn">
+            <div className="btn btn-success">
               ورود | ثبت نام
             </div>
           </Modal.Open>
