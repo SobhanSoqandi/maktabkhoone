@@ -9,7 +9,6 @@ export default function PopularCoursesHeader({
   activeCategory,
   setActiveCategory,
 }) {
-    const [active, setActive] = useState("همه");
     const allCategories = [
         {
             id: 0,

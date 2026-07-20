@@ -4,7 +4,7 @@ import {
   HiOutlineEllipsisHorizontal,
 } from "react-icons/hi2";
 
-export default function CourcesCard({ course }) {
+export default function CoursesCard({ course }) {
   return (
     <div className="rounded-3xl border border-gray-200 bg-white p-5 transition hover:shadow-lg">
       <div className="flex gap-4">

@@ -23,7 +23,7 @@
 
 
 @utility btn {
-  @apply flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm items-center cursor-pointer;
+  @apply flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm justify-center cursor-pointer;
 }
 
 @utility btn-primary {
@@ -49,7 +49,7 @@
 }
 
 @utility badge {
-     @apply bg-gray-200 p-2 rounded-xl text-xs;
+     @apply bg-gray-200 flex items-center gap-x-1 p-2 rounded-xl ;
 }
 
 
