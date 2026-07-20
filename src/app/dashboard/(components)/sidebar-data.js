@@ -2,7 +2,7 @@ export const sidebarItems = [
   {
     id: 1,
     title: "دوره‌های من",
-    href: "/dashboard/cources",
+    href: "/dashboard/courses",
     icon: "book",
   },
   {

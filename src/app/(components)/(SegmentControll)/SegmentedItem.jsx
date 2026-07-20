@@ -1,3 +1,5 @@
+"use client";
+
 export default function SegmentedItem({
   item,
   active,
@@ -7,11 +9,19 @@ export default function SegmentedItem({
     <button
       onClick={onClick}
       className={`
-        flex-1 rounded-xl p-2 text-center text-lg font-medium transition-all duration-300
+        flex-1
+        rounded-2xl
+        px-6
+        py-4
+        text-center
+        text-base
+        font-medium
+        transition-all
+        duration-300
         ${
           active
-            ? "bg-white text-gray-900 shadow"
-            : "text-gray-500 hover:text-gray-900"
+            ? "bg-white shadow text-gray-900"
+            : "text-gray-500 hover:text-gray-700"
         }
       `}
     >
