@@ -1,7 +1,9 @@
+import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
 import React from "react";
 
-export default function UserMenu() {
+export default function UserMenu({ setlogin }) {
+  const { setUser } = useAuth();
   return (
     <div className="py-2">
       <Link
@@ -30,7 +32,16 @@ export default function UserMenu() {
 
       <div className="bg-gray-100 mx-4 my-2 h-px" />
 
-      <button className="flex hover:bg-red-50 px-5 py-3 w-full text-red-600 transition duration-200">
+      <button
+        onClick={() => {
+          localStorage.removeItem("access_token");
+          localStorage.removeItem("refresh_token");
+
+          setUser(null);
+          setlogin(false);
+        }}
+        className="flex hover:bg-red-50 px-5 py-3 w-full text-red-600 transition duration-200"
+      >
         🚪
         <span className="mr-3">خروج</span>
       </button>

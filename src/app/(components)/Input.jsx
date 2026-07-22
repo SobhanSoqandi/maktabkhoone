@@ -2,6 +2,7 @@ function Input({
   type = "text",
   placeholder = "",
   label,
+  defaultValue = null,
   register = null,
   registerName,
   className = "",
@@ -23,6 +24,7 @@ function Input({
         </div>
       )}
       <input
+        defaultValue={defaultValue}
         {...registerProp}
         id={registerName}
         placeholder={placeholder}

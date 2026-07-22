@@ -6,16 +6,11 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
-import CourseCard from "./CourseCard";
-import { courses } from "./course-data";
-
-export default function PopularCoursesSlider({ activeCategory }) {
-  const filteredCourses =
-    activeCategory === "all"
-      ? courses
-      : courses.filter(
-          (course) => course.slug === activeCategory
-        );
+export default function CoursesSlider({ activeCategory, children }) {
+  // const filteredCourses =
+  //   activeCategory === "all"
+  //     ? courses
+  //     : courses.filter((course) => course.slug === activeCategory);
 
   return (
     <Swiper
@@ -44,11 +39,7 @@ export default function PopularCoursesSlider({ activeCategory }) {
         },
       }}
     >
-      {filteredCourses.map((course) => (
-        <SwiperSlide key={course.id}>
-          <CourseCard course={course} />
-        </SwiperSlide>
-      ))}
+      {children}
     </Swiper>
   );
 }
