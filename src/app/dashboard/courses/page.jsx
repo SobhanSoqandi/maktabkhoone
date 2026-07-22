@@ -1,5 +1,5 @@
 import React from "react";
-import CourcesGrid from "./CourcesGrid";
+import CourcesGrid from "./CoursesGrid";
 
 export default function page() {
   return <div>

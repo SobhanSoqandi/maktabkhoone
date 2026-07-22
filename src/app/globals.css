@@ -20,7 +20,7 @@
 }
 
 @utility btn {
-  @apply flex items-center items-center gap-2 px-4 py-2.5 rounded-xl text-sm cursor-pointer;
+  @apply flex justify-center items-center gap-2 px-4 py-2.5 rounded-xl text-sm cursor-pointer;
 }
 
 @utility btn-primary {
@@ -41,11 +41,11 @@
 }
 
 @utility input {
-  @apply bg-gray-100 rounded-xl focus:shadow-md focus:ring-1 focus:ring-teal-500 focus:outline-none focus:bg-white block w-full p-3;
+  @apply block bg-gray-100 focus:bg-white focus:shadow-md p-3 rounded-xl focus:outline-none focus:ring-1 focus:ring-teal-500 w-full;
 }
 
 @utility badge {
-  @apply bg-gray-200 p-2 rounded-xl text-xs;
+  @apply flex items-center gap-x-1 bg-gray-200 p-2 rounded-xl;
 }
 
 @theme inline {
