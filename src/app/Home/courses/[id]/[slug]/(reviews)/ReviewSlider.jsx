@@ -12,42 +12,37 @@ import ReviewCard from "./ReviewCard";
 export default function ReviewSlider({ reviews }) {
   return (
     <div className="relative min-w-0">
-
       <Swiper
-        modules={[Navigation , Grid]}
+        modules={[Navigation, Grid]}
         navigation
-          grid={{
-    rows: 2,
-    fill: "row",
-  }}
+        grid={{
+          rows: 2,
+          fill: "row",
+        }}
         spaceBetween={24}
         slidesPerView={2}
         breakpoints={{
-    0: {
-      slidesPerView: 1.2,
-      grid: {
-        rows: 1,
-      },
-    },
+          0: {
+            slidesPerView: 1.2,
+            grid: {
+              rows: 1,
+            },
+          },
 
-    768: {
-      slidesPerView: 2,
-      grid: {
-        rows: 2,
-      },
-    },
-  }}
+          768: {
+            slidesPerView: 2,
+            grid: {
+              rows: 2,
+            },
+          },
+        }}
       >
         {reviews.map((review) => (
-          <SwiperSlide
-            key={review.id}
-            className="pb-2"
-          >
+          <SwiperSlide key={review.id} className="pb-2">
             <ReviewCard review={review} />
           </SwiperSlide>
         ))}
       </Swiper>
-
     </div>
   );
 }

@@ -10,19 +10,14 @@ export default function ExpandableText({
   lessText = "نمایش کمتر",
 }) {
   const [expanded, setExpanded] = useState(false);
-
+  if (!text) return null;
   const isLong = text.length > maxLength;
 
-  const content =
-    expanded || !isLong
-      ? text
-      : text.slice(0, maxLength) + "...";
+  const content = expanded || !isLong ? text : text.slice(0, maxLength) + "...";
 
   return (
     <>
-      <p className="leading-9 text-gray-700">
-        {content}
-      </p>
+      <p className="leading-9 text-gray-700">{content}</p>
 
       {isLong && (
         <button
@@ -32,9 +27,7 @@ export default function ExpandableText({
           {expanded ? lessText : moreText}
 
           <HiChevronLeft
-            className={`transition ${
-              expanded ? "-rotate-90" : ""
-            }`}
+            className={`transition ${expanded ? "-rotate-90" : ""}`}
           />
         </button>
       )}

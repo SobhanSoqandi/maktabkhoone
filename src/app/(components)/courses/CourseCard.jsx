@@ -6,7 +6,7 @@ import { base_url } from "../../../../data/info";
 export default function CourseCard({ course }) {
   return (
     <Link
-      href={`/courses/${course.slug}`}
+      href={`/Home/courses/${course.id}/${course.slug}`}
       className="group flex flex-col bg-white shadow-sm hover:shadow p-3 border border-gray-200 hover:border-teal-500 rounded-3xl h-full overflow-hidden transition-all duration-300"
     >
       <div className="relative m-auto pt-2 w-[95%] h-44">
