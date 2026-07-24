@@ -174,11 +174,11 @@ export default async function CoursePage({ params }) {
       students: 12689,
 
       rates: [
-        { star: 5, percent: 82 },
+        { star: 5, percent: 42 },
         { star: 4, percent: 63 },
         { star: 3, percent: 20 },
         { star: 2, percent: 8 },
-        { star: 1, percent: 3 },
+        { star: 1, percent: 8 },
       ],
 
       items: [

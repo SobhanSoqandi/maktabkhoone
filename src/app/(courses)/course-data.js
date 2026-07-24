@@ -9,6 +9,8 @@ export const courses = [
     course_hour: "۲۸ ساعت",
     price: 2450000,
     is_free: false,
+    discount : 10,
+    old_price : 125000,
     status: "پرفروش",
   },
   {
@@ -21,6 +23,7 @@ export const courses = [
     course_hour: "۱۸ ساعت",
     price: 0,
     is_free: true,
+    old_price : 5000,
     status: "رایگان",
   },
   {
@@ -35,7 +38,7 @@ export const courses = [
     is_free: false,
     status: "جدید",
   },{
-    id: 3,
+    id: 4,
     slug: "program",
     title: "آموزش جامع Python",
     teacher: "علی رضایی",
@@ -44,9 +47,11 @@ export const courses = [
     course_hour: "۳۵ ساعت",
     price: 1890000,
     is_free: false,
+     discount : 7,
+    old_price : 25000,
     status: "جدید",
   },{
-    id: 4,
+    id: 5,
     slug: "AI",
     title: "آموزش جامع Python",
     teacher: "علی رضایی",
@@ -54,10 +59,12 @@ export const courses = [
     course_level: "مقدماتی",
     course_hour: "۳۵ ساعت",
     price: 1890000,
+     discount : 20,
+    old_price : 895000,
     is_free: false,
     status: "جدید",
   },{
-    id: 4,
+    id: 6,
     slug: "python",
     title: "آموزش جامع Python",
     teacher: "علی رضایی",
@@ -68,7 +75,7 @@ export const courses = [
     is_free: false,
     status: "جدید",
   },{
-    id: 5,
+    id: 7,
     slug: "python",
     title: "آموزش جامع Python",
     teacher: "علی رضایی",
