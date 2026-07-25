@@ -27,16 +27,14 @@ export default function Login() {
               <FaRegUser className="w-5 h-5" />
             </button>
             <div className="invisible group-hover:visible top-full left-0 z-50 absolute bg-white opacity-0 group-hover:opacity-100 shadow-2xl mt-3 border border-gray-200 rounded-2xl w-64 overflow-hidden scale-95 group-hover:scale-100 transition-all translate-y-3 group-hover:translate-y-0 duration-300 ease-out">
-              <UserMenu />
+              <UserMenu setlogin={setIsLogin} />
             </div>
           </div>
         </div>
       ) : (
         <Modal>
           <Modal.Open name="login">
-            <div className="btn btn-success">
-              ورود | ثبت نام
-            </div>
+            <div className="btn btn-success">ورود | ثبت نام</div>
           </Modal.Open>
           <Modal.Window name="login">
             <div className="flex flex-col gap-2 p-5 w-[400px]">

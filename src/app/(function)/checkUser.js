@@ -1,16 +1,7 @@
 "use client";
+
 export default function checkUser() {
-  const raw = localStorage.getItem("personalInfo");
+  const token = localStorage.getItem("access_token");
 
-  if (!raw || raw === "undefined") {
-    return false;
-  }
-
-  try {
-    const parsed = JSON.parse(raw);
-    return !!parsed;
-  } catch (error) {
-    localStorage.removeItem("personalInfo");
-    return false;
-  }
+  return !!token;
 }

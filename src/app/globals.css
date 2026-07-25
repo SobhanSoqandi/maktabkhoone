@@ -19,39 +19,34 @@
   src: url("/fonts/Vazirmatn-Bold.woff2") format("woff2");
 }
 
-
-
-
 @utility btn {
-  @apply flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm justify-center cursor-pointer;
+  @apply flex justify-center items-center gap-2 px-4 py-2.5 rounded-xl text-sm cursor-pointer;
 }
 
 @utility btn-primary {
-  @apply border border-gray-200 transition hover:bg-gray-50 text-center items-center;
+  @apply items-center hover:bg-gray-50 border border-gray-200 text-center transition;
 }
 
 @utility btn-success {
-  @apply bg-teal-600  text-white transition hover:bg-teal-700;
+  @apply bg-teal-600 hover:bg-teal-700 text-white transition;
 }
 
 @utility link-style {
-  @apply text-sm font-medium text-gray-700 transition hover:text-teal-600;
+  @apply font-medium text-gray-700 hover:text-teal-600 text-sm transition;
 }
 
 @utility mobile-menu {
-   @apply fixed bottom-2 left-1/2 z-50 flex w-[95%] -translate-x-1/2 rounded-3xl border border-gray-100 bg-white; box-shadow: 0px 60px 50px 20px rgba(255,255,255,5);
-
+  @apply fixed bottom-2 left-1/2 z-50 flex w-[95%] -translate-x-1/2 rounded-3xl border border-gray-100 bg-white;
+  box-shadow: 0px 60px 50px 20px rgba(255, 255, 255, 5);
 }
 
 @utility input {
-      @apply bg-gray-100 rounded-xl focus:shadow-md focus:ring-1 focus:ring-teal-500 focus:outline-none focus:bg-white block w-full p-3
-      
+  @apply block bg-gray-100 focus:bg-white focus:shadow-md p-3 rounded-xl focus:outline-none focus:ring-1 focus:ring-teal-500 w-full;
 }
 
 @utility badge {
-     @apply bg-gray-200 flex items-center gap-x-1 p-2 rounded-xl ;
+  @apply flex items-center gap-x-1 bg-gray-200 p-2 rounded-xl;
 }
-
 
 @theme inline {
   --color-background: var(--background);
@@ -73,7 +68,6 @@
 }
 
 @media (min-width: 1024px) {
-
   .swiper-button-prev,
   .swiper-button-next {
     display: flex !important;
@@ -87,33 +81,3 @@ body {
 }
 
 
-
-.dual-range-slider {
-  @apply absolute left-0 top-0 h-2 w-full appearance-none bg-transparent;
-  pointer-events: none;
-}
-
-.dual-range-slider::-webkit-slider-runnable-track {
-  @apply h-2 rounded-full bg-gray-200;
-}
-
-.dual-range-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-
-  @apply h-5 w-5 rounded-full bg-teal-600 border-4 border-white shadow-md;
-
-  pointer-events: auto;
-  cursor: pointer;
-  margin-top: -6px;
-}
-
-.dual-range-slider::-moz-range-track {
-  @apply h-2 rounded-full bg-gray-200;
-}
-
-.dual-range-slider::-moz-range-thumb {
-  @apply h-5 w-5 rounded-full border-4 border-white bg-teal-600 shadow-md;
-  pointer-events: auto;
-  cursor: pointer;
-}
