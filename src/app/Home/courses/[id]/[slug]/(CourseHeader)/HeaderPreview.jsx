@@ -2,12 +2,64 @@
 
 import Modal from "@/app/(components)/modal";
 import Image from "next/image";
-import { HiPlay, HiBookmark, HiClock, HiPaperClip } from "react-icons/hi2";
+import { HiPlay, HiBookmark, HiClock } from "react-icons/hi2";
 import PreviewModal from "./PreviewModal";
 import ReviewModal from "./ReviewModal";
 import { base_url } from "../../../../../../../data/info";
+import { useContext } from "react";
+import useMutationData from "@/app/(hooks)/useMutationData";
+import { WishListContext } from "@/context/WishListContext";
 
 export default function HeaderPreview({ course }) {
+  const { wishlist, refetchWishlist } = useContext(WishListContext);
+
+  const wishDetail =
+    wishlist?.find((item) => item.course_id === course.id) ?? null;
+
+  console.log(wishDetail);
+  const saved = !!wishDetail;
+
+  const { mutate: saveCourse } = useMutationData(
+    "wishlists",
+    "post",
+    "add-wishlist",
+    "دوره به علاقه‌مندی‌ها اضافه شد",
+    {
+      onSuccess: async () => {
+        const res = await refetchWishlist();
+        console.log(res.data);
+      },
+    },
+  );
+
+  const { mutate: removeCourse } = useMutationData(
+    `wishlists`,
+    "delete",
+    "remove-wishlist",
+    "با موفقیت حذف شد",
+    {
+      onSuccess: () => {
+        refetchWishlist();
+      },
+    },
+  );
+
+  const handleWishlist = () => {
+    if (saved) {
+      removeCourse({
+        params: {
+          wishlist_id: wishDetail.id,
+        },
+      });
+    } else {
+      saveCourse({
+        params: {
+          course_id: course.id,
+        },
+      });
+    }
+  };
+
   return (
     <div className="bg-white shadow-sm border border-gray-200 rounded-3xl overflow-hidden">
       <div className="relative rounded-2xl w-full aspect-video overflow-hidden">
@@ -16,7 +68,6 @@ export default function HeaderPreview({ course }) {
           alt={course.title}
           fill
           unoptimized
-          sizes="100vw"
           className="object-cover"
         />
 
@@ -40,18 +91,25 @@ export default function HeaderPreview({ course }) {
 
       <div className="space-y-4 p-5">
         <div className="flex gap-3">
-          <button className="w-full btn btn-success">جلسه اول</button>
+          <button className="flex-1 btn btn-success">جلسه اول</button>
 
-          <button className="bg-gray-100 text-gray-500 btn btn-primary">
-            <HiBookmark className="text-xl lg:text-3xl" />
+          <button
+            onClick={handleWishlist}
+            className={`btn transition-all duration-300 ${
+              saved
+                ? "bg-yellow-500 hover:bg-yellow-600 text-white"
+                : "bg-gray-100 hover:bg-gray-200 text-gray-500"
+            }`}
+          >
+            <HiBookmark
+              className={`text-xl lg:text-3xl ${saved ? "fill-current" : ""}`}
+            />
           </button>
         </div>
 
         <Modal>
           <Modal.Open name="review">
-            <button className="bg-teal-100 hover:bg-teal-200 p-4 w-full text-teal-700 transition btn btn-success">
-              ثبت دیدگاه
-            </button>
+            <button className="w-full btn btn-success">ثبت دیدگاه</button>
           </Modal.Open>
 
           <Modal.Window name="review">
@@ -61,19 +119,12 @@ export default function HeaderPreview({ course }) {
       </div>
 
       <div className="p-5 border-gray-100 border-t">
-        <div className="space-y-4 text-sm">
-          <Item icon={<HiClock />} title={`${course.course_hour} ساعت ویدیو`} />
+        <Item icon={<HiClock />} title={`${course.course_hour} ساعت ویدیو`} />
 
-          {/* <Item
-            icon={<HiPaperClip />}
-            title={`${course.files_count ?? 38} فایل ضمیمه`}
-          /> */}
-
-          <Item
-            icon={<span className="text-xl">∞</span>}
-            title="دسترسی مادام‌العمر"
-          />
-        </div>
+        <Item
+          icon={<span className="text-xl">∞</span>}
+          title="دسترسی مادام‌العمر"
+        />
       </div>
     </div>
   );
@@ -86,7 +137,7 @@ function Item({ icon, title }) {
         {icon}
       </div>
 
-      <span className="text-gray-700">{title}</span>
+      <span>{title}</span>
     </div>
   );
 }

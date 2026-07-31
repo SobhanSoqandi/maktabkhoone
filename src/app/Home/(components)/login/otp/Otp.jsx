@@ -5,6 +5,7 @@ import OtpHeader from "./OtpHeader";
 import PhoneForm from "./PhoneForm";
 import OtpForm from "./OtpForm";
 import { useAuth } from "@/context/AuthContext";
+import { useModal } from "@/app/(components)/modal";
 
 export default function Otp({ setislogin }) {
   const [isSent, setIsSent] = useState(false);

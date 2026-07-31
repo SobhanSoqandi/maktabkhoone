@@ -4,19 +4,38 @@ import { useMutation } from "@tanstack/react-query";
 import { api } from "../../../data/server";
 import toast from "react-hot-toast";
 
-export default function useMutationData(url, method, toastId, opt = {}) {
+export default function useMutationData(
+  url,
+  method,
+  toastId,
+  toastmessage,
+  opt = {},
+) {
   const { mutate, isPending, data, isSuccess, isError, error } = useMutation({
-    mutationFn: async ({ data, params, config } = {}) => {
-      const response = await api[method.toLowerCase()](`/${url}`, data, {
+    mutationFn: async ({ url: customUrl, data, params, config } = {}) => {
+      const endpoint = customUrl ?? `/${url}`;
+
+      const m = method.toLowerCase();
+
+      if (["post", "put", "patch"].includes(m)) {
+        return api[m](endpoint, data, {
+          params,
+          ...config,
+        });
+      }
+
+      return api[m](endpoint, {
         params,
+        data,
         ...config,
       });
-
-      return response;
     },
 
     onSuccess: (responseData) => {
-      toast.success("عملیات با موفقیت انجام شد", { id: toastId });
+      console.log("toastmessage:", toastmessage);
+      toast.success(toastmessage ?? "عملیات با موفقیت انجام شد", {
+        id: toastId,
+      });
 
       opt?.onSuccess?.(responseData);
     },

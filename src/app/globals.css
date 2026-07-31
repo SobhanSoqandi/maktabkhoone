@@ -55,7 +55,7 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
@@ -79,5 +79,3 @@ body {
   color: var(--foreground);
   font-family: "Vazir";
 }
-
-

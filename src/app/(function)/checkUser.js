@@ -1,7 +1,7 @@
 "use client";
 
 export default function checkUser() {
-  const token = localStorage.getItem("access_token");
+  if (typeof window === "undefined") return false;
 
-  return !!token;
+  return !!localStorage.getItem("access_token");
 }

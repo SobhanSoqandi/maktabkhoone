@@ -23,8 +23,26 @@ export function useModal() {
   return context;
 }
 
-function Modal({ children }) {
-  const [activeModal, setActiveModal] = useState(null);
+// ⭐ NEW
+// activeModal و setActiveModal را به صورت props هم دریافت می‌کنیم
+function Modal({
+  children,
+  activeModal: controlledActiveModal,
+  setActiveModal: controlledSetActiveModal,
+}) {
+  const [internalActiveModal, setInternalActiveModal] = useState(null);
+
+  const isControlled =
+    controlledActiveModal !== undefined &&
+    controlledSetActiveModal !== undefined;
+
+  const activeModal = isControlled
+    ? controlledActiveModal
+    : internalActiveModal;
+
+  const setActiveModal = isControlled
+    ? controlledSetActiveModal
+    : setInternalActiveModal;
 
   useEffect(() => {
     document.body.style.overflow = activeModal !== null ? "hidden" : "auto";
@@ -61,7 +79,6 @@ function Open({ children, name }) {
 
 function Window({ children, name }) {
   const { activeModal, setActiveModal } = useModal();
-
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -79,7 +96,9 @@ function Window({ children, name }) {
 
     window.addEventListener("keydown", handleKeyDown);
 
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, [activeModal, name, setActiveModal]);
 
   if (!mounted) return null;
