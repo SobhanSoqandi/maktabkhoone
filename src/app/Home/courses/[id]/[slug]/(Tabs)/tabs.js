@@ -19,4 +19,12 @@ export const tabs = [
     id: "chapters",
     title: " جلسات دوره ",
   },
+  {
+    id: "teacher",
+    title: " درباره مدرس ",
+  },
+  {
+    id: "faq",
+    title: " سوالات پرتکرار  ",
+  },
 ];

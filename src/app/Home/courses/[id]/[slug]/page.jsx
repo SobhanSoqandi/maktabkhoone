@@ -6,6 +6,8 @@ import Description from "./(Description)/Description";
 import Reviews from "./(reviews)/Reviews";
 import Chapters from "./(Chapters)/Chapters";
 import { req } from "@/app/(function)/request";
+import Teacher from "./About-Teacher/Teacher";
+import FAQ from "./faq/FAQ";
 
 
 export default async function CoursePage({ params }) {
@@ -32,9 +34,17 @@ export default async function CoursePage({ params }) {
       id: "review",
       component: <Reviews response={response} />,
     },
-    {
+     {
       id: "chapters",
       component: <Chapters chapters={chapters} />,
+    },
+    {
+      id: "teacher",
+      component: <Teacher />,
+    },
+    {
+      id: "faq",
+      component: <FAQ />,
     },
   ];
 
