@@ -67,7 +67,7 @@ export default function CourseCard({ course }) {
                         )}
 
                         {course.is_free ? (
-                            <span className="badge bg-teal-500 text-white">
+                            <span className="badge bg-teal-50 text-teal-800">
                                 رایگان
                             </span>
                         ) : (

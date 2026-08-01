@@ -24,13 +24,13 @@ const navigationItems = [
     },
     {
         id: 3,
-        href: "/test",
+        href: "/Home/courses",
         label: "دوره‌ها",
         icon: <FiBook />,
     },
     {
         id: 4,
-        href: "/profile",
+        href: "/dashboard",
         label: "حساب",
         icon: <FiUser />,
     },
