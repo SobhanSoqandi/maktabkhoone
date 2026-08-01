@@ -7,6 +7,7 @@ import Reviews from "./(reviews)/Reviews";
 import Chapters from "./(Chapters)/Chapters";
 import { req } from "@/app/(function)/request";
 
+
 export default async function CoursePage({ params }) {
   const { slug, id } = await params;
 

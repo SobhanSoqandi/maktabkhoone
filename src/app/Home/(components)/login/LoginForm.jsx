@@ -8,25 +8,37 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import Otp from "./otp/Otp";
 import { useAuth } from "@/context/AuthContext";
+import useGlobalModal from "@/app/(components)/globalmodal/useGlobalModal";
+import { closeGlobalModal } from "@/lib/modalEmitter";
+import { loginContext } from "@/context/LoginContext";
 
-export default function LoginForm({ islogin }) {
+export default function LoginForm() {
+  const { setIsLogin, isLogin } = useContext(loginContext);
   const [form, setForm] = useState("login");
   const { setUser } = useAuth();
   const { register, handleSubmit } = useForm();
-  const { mutate } = useMutationData("auth/login", "post", "login_toast", {
-    onSuccess: (response) => {
-      localStorage.setItem("access_token", response.data.data.access_token);
-      localStorage.setItem("refresh_token", response.data.data.refresh_token);
-      setUser({
-        id: response.data.data.id,
-        username: response.data.data.userName,
-        phone_number: response.data.data.phone_number,
-        role: response.data.data.role,
-      });
-      setActiveModal(null);
-      islogin(true);
+
+  const { mutate } = useMutationData(
+    "auth/login",
+    "post",
+    "login_toast",
+    "با موفقیت وارد شدید",
+    {
+      onSuccess: (response) => {
+        localStorage.setItem("access_token", response.data.data.access_token);
+        localStorage.setItem("refresh_token", response.data.data.refresh_token);
+        setUser({
+          id: response.data.data.id,
+          username: response.data.data.userName,
+          phone_number: response.data.data.phone_number,
+          role: response.data.data.role,
+        });
+        setActiveModal(null);
+        closeGlobalModal();
+        setIsLogin(true);
+      },
     },
-  });
+  );
   const { setActiveModal } = useModal();
   return (
     <>
@@ -78,7 +90,7 @@ export default function LoginForm({ islogin }) {
           </div>
         </div>
       ) : form == "otp" ? (
-        <Otp setislogin={islogin} />
+        <Otp setIsLogin={setIsLogin} />
       ) : (
         <div>ops</div>
       )}

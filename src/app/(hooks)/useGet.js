@@ -10,7 +10,7 @@ export default function useGet(
   { params, config = {}, ...options } = {},
 ) {
   return useQuery({
-    queryKey: [queryKey, params],
+    queryKey: [queryKey],
 
     queryFn: async () => {
       const { data } = await api.get(`/${url}`, {

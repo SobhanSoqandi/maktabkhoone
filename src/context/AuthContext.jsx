@@ -1,3 +1,4 @@
+"use client";
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 
@@ -22,7 +23,7 @@ export function AuthProvider({ children }) {
         },
       });
 
-      setUser(res.data);
+      setUser(res.data.data);
     } catch (err) {
       console.log(err);
       localStorage.removeItem("access_token");

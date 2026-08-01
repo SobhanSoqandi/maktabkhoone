@@ -4,11 +4,12 @@ import { TiShoppingCart } from "react-icons/ti";
 import checkUser from "@/app/(function)/checkUser";
 import Modal from "@/app/(components)/modal";
 import LoginForm from "./LoginForm";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import UserMenu from "./UserMenu";
+import { loginContext } from "@/context/LoginContext";
 
 export default function Login() {
-  const [isLogin, setIsLogin] = useState(checkUser());
+  const { isLogin } = useContext(loginContext);
   return (
     <div>
       {isLogin ? (
@@ -27,7 +28,7 @@ export default function Login() {
               <FaRegUser className="w-5 h-5" />
             </button>
             <div className="invisible group-hover:visible top-full left-0 z-50 absolute bg-white opacity-0 group-hover:opacity-100 shadow-2xl mt-3 border border-gray-200 rounded-2xl w-64 overflow-hidden scale-95 group-hover:scale-100 transition-all translate-y-3 group-hover:translate-y-0 duration-300 ease-out">
-              <UserMenu setlogin={setIsLogin} />
+              <UserMenu />
             </div>
           </div>
         </div>
@@ -39,7 +40,7 @@ export default function Login() {
           <Modal.Window name="login">
             <div className="flex flex-col gap-2 p-5 w-[400px]">
               <Modal.Close />
-              <LoginForm islogin={setIsLogin} />
+              <LoginForm />
             </div>
           </Modal.Window>
         </Modal>

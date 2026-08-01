@@ -1,5 +1,12 @@
 "use client";
 
-export const getAccessToken = () => localStorage.getItem("access_token");
+export const getAccessToken = () => {
+  if (typeof window === "undefined") return null;
 
-export const getRefreshToken = () => localStorage.getItem("refresh_token");
+  return localStorage.getItem("access_token");
+};
+
+export const getRefreshToken = () => {
+  if (typeof window === "undefined") return null;
+  return localStorage.getItem("refresh_token")|| null;
+};

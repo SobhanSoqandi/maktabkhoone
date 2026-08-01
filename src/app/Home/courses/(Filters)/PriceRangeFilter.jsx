@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import CheckboxFilter from "./(Components)/CheckboxFilter";
 
@@ -8,16 +9,19 @@ function PriceRangeFilter() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const minPrice = searchParams.get("min_price") || "";
-  const maxPrice = searchParams.get("max_price") || "";
+  const isFree = searchParams.get("is_free") === "true";
+
+  const [minPrice, setMinPrice] = useState(searchParams.get("min_price") || "");
+
+  const [maxPrice, setMaxPrice] = useState(searchParams.get("max_price") || "");
 
   function updatePrice(field, value) {
     const params = new URLSearchParams(searchParams.toString());
 
-    if (value === "") {
-      params.delete(field);
-    } else {
+    if (value) {
       params.set(field, value);
+    } else {
+      params.delete(field);
     }
 
     router.replace(`${pathname}?${params.toString()}`, {
@@ -25,43 +29,61 @@ function PriceRangeFilter() {
     });
   }
 
+  // وقتی رایگان شد قیمت‌ها پاک شوند
+  useEffect(() => {
+    if (!isFree) return;
+
+    setMinPrice("");
+    setMaxPrice("");
+
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.delete("min_price");
+    params.delete("max_price");
+
+    router.replace(`${pathname}?${params.toString()}`, {
+      scroll: false,
+    });
+  }, [isFree]);
+
   const is_free = [
     {
-      label: " رایگان ",
+      label: "رایگان",
       value: "true",
     },
   ];
 
-
-
   return (
     <div className="space-y-4 p-4">
-      <div>
-        <label className="block mb-1">حداقل قیمت</label>
-        <input
-          type="number"
-          value={minPrice}
-          onChange={(e) => updatePrice("min_price", e.target.value)}
-          placeholder="مثلا 100000"
-          className="input input-bordered w-full"
-        />
-      </div>
+      <CheckboxFilter filterField="is_free" options={is_free} />
 
-      <div>
-        <label className="block mb-1">حداکثر قیمت</label>
-        <input
-          type="number"
-          value={maxPrice}
-          onChange={(e) => updatePrice("max_price", e.target.value)}
-          placeholder="مثلا 500000"
-          className="input input-bordered w-full"
-        />
-      </div>
+      {!isFree && (
+        <>
+          <div>
+            <label className="block mb-1">حداقل قیمت</label>
 
-      <CheckboxFilter
-        filterField="is_free"
-        options={is_free}
-      />
+            <input
+              type="number"
+              value={minPrice}
+              onChange={(e) => setMinPrice(e.target.value)}
+              onBlur={() => updatePrice("min_price", minPrice)}
+              className="w-full input input-bordered"
+            />
+          </div>
+
+          <div>
+            <label className="block mb-1">حداکثر قیمت</label>
+
+            <input
+              type="number"
+              value={maxPrice}
+              onChange={(e) => setMaxPrice(e.target.value)}
+              onBlur={() => updatePrice("max_price", maxPrice)}
+              className="w-full input input-bordered"
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }
