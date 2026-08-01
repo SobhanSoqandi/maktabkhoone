@@ -1,6 +1,7 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { getAccessToken, getRefreshToken } from "@/app/(function)/getToken";
+import { openGlobalModal } from "@/lib/modalEmitter";
 
 export const url = "http://127.0.0.1:8000";
 const apikey = "YOUR_API_KEY";
@@ -37,22 +38,24 @@ api.interceptors.response.use(
         const res = await axios.post(
           "http://127.0.0.1:8000/auth/refreshToken",
           {
-            refresh_token: getRefreshToken(),
+            refreshToken: getRefreshToken(),
           },
         );
 
         const newAccess = res.data.access_token;
-        const user = JSON.parse(localStorage.getItem("personalInfo"));
-        user.access_token = newAccess;
 
-        localStorage.setItem("personalInfo", user);
+        localStorage.setItem("access_token", newAccess);
+
+        originalRequest.headers = originalRequest.headers || {};
 
         originalRequest.headers.Authorization = `Bearer ${newAccess}`;
 
         return api(originalRequest);
       } catch (e) {
-        localStorage.clear();
-        window.location.href = "/login";
+        console.log("before");
+        openGlobalModal("404");
+        console.log("after");
+        return Promise.reject(e);
       }
     }
 
@@ -60,16 +63,16 @@ api.interceptors.response.use(
   },
 );
 
-api.interceptors.response.use(
-  (response) => {
-    if (response.config.method !== "get") {
-      toast.success("عملیات با موفقیت انجام شد");
-    }
-    console.log(response);
-    return response;
-  },
-  (error) => {
-    console.log(error);
-    return Promise.reject(error);
-  },
-);
+// api.interceptors.response.use(
+//   (response) => {
+//     // if (response.config.method !== "get") {
+//     //   toast.success("عملیات با موفقیت انجام شد");
+//     // }
+//     console.log(response);
+//     return response;
+//   },
+//   (error) => {
+//     console.log(error);
+//     return Promise.reject(error);
+//   },
+// );

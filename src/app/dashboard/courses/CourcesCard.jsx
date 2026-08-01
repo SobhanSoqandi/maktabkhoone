@@ -1,8 +1,11 @@
 import Image from "next/image";
 import { HiOutlinePlay, HiOutlineEllipsisHorizontal } from "react-icons/hi2";
 import { base_url } from "../../../../data/info";
+import Link from "next/link";
+import { courses } from "@/app/(courses)/course-data";
 
 export default function CourcesCard({ course }) {
+  console.log();
   return (
     <div className="bg-white hover:shadow-lg p-5 border border-gray-200 rounded-3xl transition">
       <div className="flex gap-4">
@@ -11,8 +14,8 @@ export default function CourcesCard({ course }) {
           src={base_url + course.banner}
           alt={course.title}
           width={120}
-          height={120}
-          className="rounded-lg w-28 h-20 object-cover"
+          height={150}
+          className="rounded-lg w-28 h-30 object-cover"
         />
 
         <div className="flex-1">
@@ -50,10 +53,13 @@ export default function CourcesCard({ course }) {
           </button>
         </div>
 
-        <button className="flex btn btn-success">
+        <Link
+          href={`/Home/courses/${course.id}/${course.slug}`}
+          className="flex btn btn-success"
+        >
           <HiOutlinePlay className="bg-white p-1 rounded-full text-teal-600 text-xl" />
           ادامه دوره
-        </button>
+        </Link>
       </div>
     </div>
   );

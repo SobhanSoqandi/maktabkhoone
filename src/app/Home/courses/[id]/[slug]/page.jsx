@@ -9,6 +9,7 @@ import { req } from "@/app/(function)/request";
 import Teacher from "./About-Teacher/Teacher";
 import FAQ from "./faq/FAQ";
 
+
 export default async function CoursePage({ params }) {
   const { slug, id } = await params;
 

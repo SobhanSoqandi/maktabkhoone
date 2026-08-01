@@ -1,9 +1,11 @@
 import { useAuth } from "@/context/AuthContext";
+import { loginContext } from "@/context/LoginContext";
 import Link from "next/link";
-import React from "react";
+import React, { useContext } from "react";
 
-export default function UserMenu({ setlogin }) {
+export default function UserMenu() {
   const { setUser } = useAuth();
+  const { setIsLogin } = useContext(loginContext);
   return (
     <div className="py-2">
       <Link
@@ -38,7 +40,7 @@ export default function UserMenu({ setlogin }) {
           localStorage.removeItem("refresh_token");
 
           setUser(null);
-          setlogin(false);
+          setIsLogin(false);
         }}
         className="flex hover:bg-red-50 px-5 py-3 w-full text-red-600 transition duration-200"
       >

@@ -3,7 +3,6 @@
 import CourseCard from "./CourseCard";
 import CoursePagination from "./CoursePagination";
 
-
 export default function CourseList({
   courses,
   currentPage,
@@ -12,20 +11,15 @@ export default function CourseList({
 }) {
   return (
     <section className="flex flex-col gap-6">
-
-      {courses.map((course) => (
-        <CourseCard
-          key={course.id}
-          course={course}
-        />
+      {courses.items.map((course) => (
+        <CourseCard key={course.id} course={course} />
       ))}
 
       <CoursePagination
         currentPage={currentPage}
-        totalPages={totalPages}
+        totalPages={courses.total_pages}
         onPageChange={onPageChange}
       />
-
     </section>
   );
 }

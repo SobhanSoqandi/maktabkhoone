@@ -1,66 +1,57 @@
 import Image from "next/image";
-import {
-  HiOutlinePlay,
-  HiOutlineEllipsisHorizontal,
-} from "react-icons/hi2";
+import { HiOutlinePlay, HiOutlineEllipsisHorizontal } from "react-icons/hi2";
 
 export default function CoursesCard({ course }) {
   return (
-    <div className="rounded-3xl border border-gray-200 bg-white p-5 transition hover:shadow-lg">
+    <div className="bg-white hover:shadow-lg p-5 border border-gray-200 rounded-3xl transition">
       <div className="flex gap-4">
         <Image
           src={course.banner}
           alt={course.title}
           width={120}
           height={120}
-          className="h-20 w-28 rounded-lg object-cover"
+          className="rounded-lg w-28 h-20 object-cover"
         />
 
         <div className="flex-1">
-          <h2 className="line-clamp-2 text-xl font-bold leading-9 text-gray-900">
+          <h2 className="font-bold text-gray-900 text-xl line-clamp-2 leading-9">
             {course.title}
           </h2>
 
-          <p className="mt-2 text-sm text-gray-500">
-            {course.teacher}
-          </p>
+          <p className="mt-2 text-gray-500 text-sm">{course.teacher}</p>
 
-          <div className="mt-4 flex justify-end">
-            <span className="badge">
-              {course.level}
-            </span>
+          <div className="flex justify-end mt-4">
+            <span className="badge">{course.level}</span>
           </div>
         </div>
       </div>
 
-      <div className="mt-8 flex items-center gap-3">
-        <span className="w-10 text-sm font-bold">
+      {/* <div className="flex items-center gap-3 mt-8">
+        {/* <span className="w-10 font-bold text-sm">
           {course.progress}%
-        </span>
+        </span> *
 
-        <div className="h-2 flex-1 overflow-hidden rounded-full bg-gray-200">
+        <div className="flex-1 bg-gray-200 rounded-full h-2 overflow-hidden">
           <div
-            className="h-full rounded-full bg-teal-500 transition-all"
+            className="bg-teal-500 rounded-full h-full transition-all"
             style={{
               width: `${course.progress}%`,
             }}
           />
         </div>
-      </div>
+      </div> */}
 
-      <div className="mt-8 flex items-center justify-between">
+      <div className="flex justify-between items-center mt-8">
         <div className="flex gap-3">
-          <button className="btn btn-primary">
-            ثبت امتیاز
-          </button>
+          <button className="btn btn-primary">ثبت امتیاز</button>
 
           <button className="btn btn-primary">
             <HiOutlineEllipsisHorizontal className="text-2xl" />
           </button>
         </div>
 
-        <button className="flex btn btn-success ">
-          <HiOutlinePlay className="rounded-full bg-white p-1 text-xl text-teal-600" />
+        <button className="flex btn btn-success">
+          <HiOutlinePlay className="bg-white p-1 rounded-full text-teal-600 text-xl" />
           ادامه دوره
         </button>
       </div>

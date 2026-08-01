@@ -4,6 +4,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 import { useState } from "react";
 import { AuthProvider } from "@/context/AuthContext";
+import GlobalModalProvider from "./(components)/globalmodal/GlobalModalProvider";
+import LoginContext from "@/context/LoginContext";
+import WishListProvider from "@/context/WishListContext";
 
 export default function Providers({ children }) {
   const [queryClient] = useState(
@@ -21,7 +24,13 @@ export default function Providers({ children }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>{children}</AuthProvider>
+      <AuthProvider>
+        <LoginContext>
+          <GlobalModalProvider>
+            <WishListProvider>{children}</WishListProvider>
+          </GlobalModalProvider>
+        </LoginContext>
+      </AuthProvider>
       <Toaster position="top-center" />
     </QueryClientProvider>
   );
