@@ -6,9 +6,10 @@ import Link from "next/link";
 import { base_url } from "../../../../../data/info";
 
 export default function CourseCard({ course }) {
+  
   return (
     <Link
-      href={`/Home/courses/${course.id}/${course.slug}`}
+      href={`/Home/courses/${course.id}/${course.title}`}
       className="flex md:flex-row flex-col bg-white hover:shadow-lg border border-gray-200 sm:rounded-2xl overflow-hidden transition"
     >
       <div className="relative p-2 rounded-3xl w-full md:w-[350px] h-44 overflow-hidden shrink-0">

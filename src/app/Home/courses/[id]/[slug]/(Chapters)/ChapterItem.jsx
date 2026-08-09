@@ -12,6 +12,9 @@ export default function ChapterItem({
   isOpen,
   onToggle,
 }) {
+
+  
+
   return (
     <div className="border border-gray-200 shadow rounded-xl">
 

@@ -51,6 +51,7 @@ export default async function CoursePage({ params }) {
   return (
     <div className="">
       <CourseHeader response={response} />
+      
 
       <div className="mx-auto px-3 container">
         <CourseTabs sections={sections} />
