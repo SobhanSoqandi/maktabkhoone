@@ -9,7 +9,7 @@ import { useAuth } from "@/context/AuthContext";
 
 export default function Sidebar({ isOpen }) {
   const { user } = useAuth();
-
+  console.log(user);
   return (
     <aside className="bg-white m-5 border border-gray-200 rounded-3xl w-80">
       <div className="flex justify-between items-center p-5 border-gray-200 border-b-4">

@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 
@@ -9,8 +8,8 @@ export default function PopularCoursesHeader({
   activeCategory,
   setActiveCategory,
   header_title,
+  sliderId,
 }) {
-  const [active, setActive] = useState(0);
   const allCategories = [
     {
       id: 0,
@@ -50,11 +49,15 @@ export default function PopularCoursesHeader({
         </div>
 
         <div className="flex items-center gap-3 shrink-0">
-          <button className="flex justify-center items-center bg-white hover:bg-gray-50 border border-gray-200 hover:border-gray-300 rounded-xl w-12 h-12 transition popular-prev">
+          <button
+            className={`flex justify-center items-center bg-white hover:bg-gray-50 border border-gray-200 hover:border-gray-300 rounded-xl w-12 h-12 transition prev-${sliderId}`}
+          >
             <HiChevronRight className="text-2xl" />
           </button>
 
-          <button className="flex justify-center items-center bg-white hover:bg-gray-50 border border-gray-200 hover:border-gray-300 rounded-xl w-12 h-12 transition popular-next">
+          <button
+            className={`flex justify-center items-center bg-white hover:bg-gray-50 border border-gray-200 hover:border-gray-300 rounded-xl w-12 h-12 transition next-${sliderId}`}
+          >
             <HiChevronLeft className="text-2xl" />
           </button>
 

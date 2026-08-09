@@ -2,58 +2,66 @@
 
 import Image from "next/image";
 import { BiTrash } from "react-icons/bi";
+import { base_url } from "../../../../data/info";
+import useMutationData from "@/app/(hooks)/useMutationData";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function CartItem({ course }) {
+  const queryClient = useQueryClient();
+  const { mutate: delete_course } = useMutationData(
+    `cart-course/${course.cart_course_id}`,
+    "delete",
+    "course_delete",
+    "دوره با موفقیت حذف شد ",
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ["cart"],
+        });
+      },
+    },
+  );
   return (
-   <div className="flex items-center gap-5 border border-gray-200 shadow p-2 rounded-2xl">
+    <div className="flex items-center gap-5 shadow p-2 border border-gray-200 rounded-2xl">
+      <div className="relative rounded-2xl w-56 h-32 overflow-hidden">
+        <Image
+          src={base_url + course.course.banner}
+          alt={course.course.title}
+          unoptimized
+          fill
+          className="object-cover"
+        />
+      </div>
 
-  <div className="relative h-32 w-56 overflow-hidden rounded-2xl">
-    <Image
-      src={course.banner}
-      alt={course.title}
-      fill
-      className="object-cover"
-    />
-  </div>
+      <div className="flex-1">
+        <h3 className="font-black text-lg">{course.course.title}</h3>
 
+        {/* <p className="mt-2 text-gray-500">{course.teacher}</p> */}
 
-  <div className="flex-1">
+        <div className="flex items-center gap-3 mt-5">
+          {course.discount > 0 && (
+            <span className="text-teal-600 text-lg">
+              {((course.discount * course.course.price) / 100).toLocaleString(
+                "fa-IR",
+              )}{" "}
+              تومان تخفیف
+            </span>
+          )}
 
-    <h3 className="text-lg font-black">
-      {course.title}
-    </h3>
+          <span className="font-black text-xl">
+            {course.course.price.toLocaleString("fa-IR")}
+          </span>
 
-    <p className="mt-2 text-gray-500">
-      {course.teacher}
-    </p>
+          <span className="text-gray-500">تومان</span>
+        </div>
+      </div>
 
-    <div className="mt-5 flex items-center gap-3">
-
-      {course.discount > 0 && (
-        <span className="text-lg text-teal-600">
-          {course.discount.toLocaleString("fa-IR")} تومان تخفیف
-        </span>
-      )}
-
-      <span className="text-xl font-black">
-        {course.price.toLocaleString("fa-IR")}
-      </span>
-
-      <span className="text-gray-500">
-        تومان
-      </span>
-
+      <button
+        onClick={() => delete_course()}
+        className="hover:shadow-2xl p-2 text-gray-500 hover:text-red-500 btn btn-primary"
+      >
+        <BiTrash size={22} />
+      </button>
     </div>
-
-  </div>
-
-
-  <button
-    className="btn btn-primary text-gray-500 p-2 hover:shadow-2xl hover:text-red-500"
-  >
-    <BiTrash size={22}/>
-  </button>
-
-</div>
   );
 }

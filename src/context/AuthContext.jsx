@@ -10,7 +10,7 @@ export function AuthProvider({ children }) {
 
   async function loadUser() {
     const token = localStorage.getItem("access_token");
-
+    console.log("TOKEN FROM STORAGE:", token);
     if (!token) {
       setLoading(false);
       return;
@@ -22,8 +22,8 @@ export function AuthProvider({ children }) {
           Authorization: `Bearer ${token}`,
         },
       });
-
-      setUser(res.data.data);
+      console.log(res);
+      setUser(res.data);
     } catch (err) {
       console.log(err);
       localStorage.removeItem("access_token");

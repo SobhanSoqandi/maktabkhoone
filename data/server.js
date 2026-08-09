@@ -52,9 +52,8 @@ api.interceptors.response.use(
 
         return api(originalRequest);
       } catch (e) {
-        console.log("before");
         openGlobalModal("404");
-        console.log("after");
+
         return Promise.reject(e);
       }
     }

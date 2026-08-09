@@ -12,7 +12,18 @@ export default function Categories({ categories }) {
   const wrapperRef = useRef(null);
 
   const isOpen = isHover || isClick;
+  const handleClose = () => {
+    setIsClick(false);
+    setIsHover(false);
+    setPath([]);
+  };
+  const handleClick = (item, level) => {
+    const next = path.slice(0, level);
 
+    next[level] = item;
+
+    setPath(next);
+  };
   const treeCategories = useMemo(() => {
     const map = {};
 
@@ -24,7 +35,6 @@ export default function Categories({ categories }) {
     });
 
     const tree = [];
-
     categories.forEach((item) => {
       if (item.parent_id === null) {
         tree.push(map[item.id]);
@@ -69,8 +79,6 @@ export default function Categories({ categories }) {
     return result;
   }, [path, treeCategories]);
 
-
-
   return (
     <div
       ref={wrapperRef}
@@ -104,6 +112,8 @@ export default function Categories({ categories }) {
                   level={level}
                   path={path}
                   handleHover={handleHover}
+                  handleClick={handleClick}
+                  handleClose={handleClose}
                 />
               ))}
             </div>
