@@ -16,7 +16,7 @@ import { WishListContext } from "@/context/WishListContext";
 
 export default function HeaderPreview({ course }) {
 
-  let isacces = false;
+  let isacces = true;
 
   const { wishlist, refetchWishlist } = useContext(WishListContext);
 
@@ -103,12 +103,15 @@ export default function HeaderPreview({ course }) {
         <div className="flex gap-3">
 
 
-        
-
-
-  {
+          {
             isacces ?
-              <button className="w-full btn btn-success">جلسه اول</button>
+
+              <Link
+                href={`/Home/courses/${course.id}/${course.title}/unit/1`}
+                className="w-full btn btn-success"
+              >
+                جلسه اول
+              </Link>
               :
               <Modal>
                 <Modal.Open>
@@ -117,16 +120,16 @@ export default function HeaderPreview({ course }) {
 
                 <Modal.Window>
                   <div className="p-3 w-96" >
-                   <div className="flex items-center" >
-                    <BsJournalCheck className="text-teal-600" />
-                     <span className="p-2" > دوره به سبد خرید اضافه شد </span>
-                   </div>
+                    <div className="flex items-center" >
+                      <BsJournalCheck className="text-teal-600" />
+                      <span className="p-2" > دوره به سبد خرید اضافه شد </span>
+                    </div>
                     <div className="flex items-center p-3">
                       <div className="w-full" >
                         <button className=" btn bg-teal-100 text-teal-800" >
-                         <Link href="/cart" >
-                          مشاهده سبد  خرید
-                         </Link>
+                          <Link href="/cart" >
+                            مشاهده سبد  خرید
+                          </Link>
                         </button>
                       </div>
                       <div className="flex justify-end items-center w-full gap-4">
@@ -171,11 +174,10 @@ export default function HeaderPreview({ course }) {
 
           <button
             onClick={handleWishlist}
-            className={`btn transition-all duration-300 ${
-              saved
-                ? "bg-yellow-500 hover:bg-yellow-600 text-white"
-                : "bg-gray-100 hover:bg-gray-200 text-gray-500"
-            }`}
+            className={`btn transition-all duration-300 ${saved
+              ? "bg-yellow-500 hover:bg-yellow-600 text-white"
+              : "bg-gray-100 hover:bg-gray-200 text-gray-500"
+              }`}
           >
             <HiBookmark
               className={`text-xl lg:text-3xl ${saved ? "fill-current" : ""}`}
