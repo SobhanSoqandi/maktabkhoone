@@ -1,5 +1,10 @@
-import React from "react";
+import ProfileForm from "./complete-profile/ProfileForm";
+import { profile } from "./complete-profile/profile-data";
 
-export default function page() {
-  return <div>setting</div>;
+export default function Page() {
+  return (
+    <div className="container mx-auto max-w-4xl py-10">
+      <ProfileForm user={profile} />
+    </div>
+  );
 }

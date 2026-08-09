@@ -7,7 +7,6 @@ import ProtectedRoute from "../(components)/ProtectedRoute";
 
 export default function Layout({ children }) {
   const [isOpen, setIsOpen] = useState(false);
-  console.log(isOpen);
 
   return (
     <ProtectedRoute>
@@ -21,7 +20,7 @@ export default function Layout({ children }) {
 
         <div className="flex flex-1 overflow-hidden">
           <div
-            className={`${isOpen ? "hidden" : "block absolute lg:relative"}`}
+            className={`${isOpen ? "hidden" : "block absolute lg:relative z-50"}`}
           >
             <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
           </div>

@@ -31,9 +31,11 @@ function Page() {
         page_size: 7,
       },
     },
+
   );
 
 
+start
   return (
     <div className="mx-auto mt-5 mb-5 md:px-3 container">
       <div className="gap-8 grid grid-cols-12">

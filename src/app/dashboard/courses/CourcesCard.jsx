@@ -5,7 +5,6 @@ import Link from "next/link";
 import { courses } from "@/app/(courses)/course-data";
 
 export default function CourcesCard({ course }) {
-  console.log();
   return (
     <div className="bg-white hover:shadow-lg p-5 border border-gray-200 rounded-3xl transition">
       <div className="flex gap-4">

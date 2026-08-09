@@ -18,7 +18,12 @@ import toast from "react-hot-toast";
 import useGet from "@/app/(hooks)/useGet";
 
 export default function HeaderPreview({ course }) {
+
   const { user } = useAuth();
+
+
+
+
   const { wishlist, refetchWishlist } = useContext(WishListContext);
   const { data: isacces } = useGet(`course/${course.id}/access`, "access");
   const wishDetail =
@@ -112,6 +117,7 @@ export default function HeaderPreview({ course }) {
 
       <div className="space-y-4 p-5">
         <div className="flex gap-3">
+
           {isacces && user ? (
             <button className="w-full btn btn-success">جلسه اول</button>
           ) : (
@@ -159,11 +165,10 @@ export default function HeaderPreview({ course }) {
 
           <button
             onClick={handleWishlist}
-            className={`btn transition-all duration-300 ${
-              saved
-                ? "bg-yellow-500 hover:bg-yellow-600 text-white"
-                : "bg-gray-100 hover:bg-gray-200 text-gray-500"
-            }`}
+            className={`btn transition-all duration-300 ${saved
+              ? "bg-yellow-500 hover:bg-yellow-600 text-white"
+              : "bg-gray-100 hover:bg-gray-200 text-gray-500"
+              }`}
           >
             <HiBookmark
               className={`text-xl lg:text-3xl ${saved ? "fill-current" : ""}`}
