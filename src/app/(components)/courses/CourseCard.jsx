@@ -4,6 +4,7 @@ import { HiClock, HiAcademicCap } from "react-icons/hi2";
 import { base_url } from "../../../../data/info";
 
 export default function CourseCard({ course }) {
+  console.log(course);
   return (
     <Link
       href={`/Home/courses/${course.id}/${course.slug}`}

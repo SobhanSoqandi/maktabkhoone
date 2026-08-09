@@ -9,7 +9,6 @@ import { req } from "@/app/(function)/request";
 import Teacher from "./About-Teacher/Teacher";
 import FAQ from "./faq/FAQ";
 
-
 export default async function CoursePage({ params }) {
   const { slug, id } = await params;
 
@@ -34,13 +33,13 @@ export default async function CoursePage({ params }) {
       id: "review",
       component: <Reviews response={response} />,
     },
-     {
+    {
       id: "chapters",
       component: <Chapters chapters={chapters} />,
     },
     {
       id: "teacher",
-      component: <Teacher />,
+      component: <Teacher teacher_detail={response.teacher_detail} />,
     },
     {
       id: "faq",

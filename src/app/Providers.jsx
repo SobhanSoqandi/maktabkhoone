@@ -31,7 +31,13 @@ export default function Providers({ children }) {
           </GlobalModalProvider>
         </LoginContext>
       </AuthProvider>
-      <Toaster position="top-center" />
+      <Toaster
+        position="top-right"
+        containerStyle={{
+          top: 20,
+          zIndex: 100000,
+        }}
+      />
     </QueryClientProvider>
   );
 }

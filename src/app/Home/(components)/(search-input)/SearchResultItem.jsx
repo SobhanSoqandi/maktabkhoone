@@ -2,46 +2,29 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { base_url } from "../../../../../data/info";
 
-export default function SearchResultItem({
-  course,
-}) {
+export default function SearchResultItem({ course }) {
   return (
     <Link
-      href={`/courses/${course.id}/${course.slug}`}
-      className="
-        flex
-        items-center
-        gap-3
-        rounded-xl
-        p-2
-        transition
-        hover:bg-gray-50
-      "
+      href={`/Home/courses/${course.id}/${course.slug}`}
+      className="flex items-center gap-3 hover:bg-gray-50 p-2 rounded-xl transition"
     >
-      <div className="relative h-14 w-20 overflow-hidden rounded-xl">
-
+      <div className="relative rounded-xl w-20 h-14 overflow-hidden">
         <Image
-          src={course.banner}
+          src={base_url + course.banner}
           alt={course.title}
           fill
+          unoptimized
           className="object-cover"
         />
-
       </div>
 
       <div className="flex-1">
+        <h4 className="font-bold line-clamp-1">{course.title}</h4>
 
-        <h4 className="line-clamp-1 font-bold">
-          {course.title}
-        </h4>
-
-        <p className="mt-1 text-xs text-gray-500">
-          {course.teacher}
-        </p>
-
+        <p className="mt-1 text-gray-500 text-xs">{course.teacher}</p>
       </div>
-
     </Link>
   );
 }

@@ -6,7 +6,7 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
-export default function CoursesSlider({ activeCategory, children }) {
+export default function CoursesSlider({ activeCategory, children, sliderId }) {
   // const filteredCourses =
   //   activeCategory === "all"
   //     ? courses
@@ -17,8 +17,8 @@ export default function CoursesSlider({ activeCategory, children }) {
       key={activeCategory}
       modules={[Navigation]}
       navigation={{
-        prevEl: ".popular-prev",
-        nextEl: ".popular-next",
+        prevEl: `.prev-${sliderId}`,
+        nextEl: `.next-${sliderId}`,
       }}
       spaceBetween={24}
       observer={true}

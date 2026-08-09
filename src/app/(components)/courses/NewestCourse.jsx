@@ -32,12 +32,13 @@ export default function NewestCourse({ categories }) {
           categories={categories}
           activeCategory={activeCategory}
           setActiveCategory={setActiveCategory}
+          sliderId="newest"
         />
 
         {isFetching ? (
           <div className="h-97.5">loading</div>
         ) : (
-          <CoursesSlider activeCategory={activeCategory}>
+          <CoursesSlider activeCategory={activeCategory} sliderId="newest">
             <>
               {course_data.items.map((course) => (
                 <SwiperSlide key={course.id}>

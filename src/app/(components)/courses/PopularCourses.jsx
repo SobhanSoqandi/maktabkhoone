@@ -32,12 +32,13 @@ export default function PopularCourses({ categories }) {
           categories={categories}
           activeCategory={activeCategory}
           setActiveCategory={setActiveCategory}
+          sliderId="popular"
         />
 
         {isFetching ? (
           <div className="h-97.5">loading</div>
         ) : (
-          <CoursesSlider activeCategory={activeCategory}>
+          <CoursesSlider activeCategory={activeCategory} sliderId="popular">
             <>
               {course_data.items.map((course) => (
                 <SwiperSlide key={course.id}>

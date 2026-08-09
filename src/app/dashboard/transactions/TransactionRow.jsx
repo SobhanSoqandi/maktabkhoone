@@ -1,50 +1,30 @@
 "use client";
 
+import { toPersianDate } from "@/app/Utils/date";
 import { HiOutlineCheckCircle, HiOutlineXMark } from "react-icons/hi2";
 
 function TransactionRow({ transaction }) {
-  const success = transaction.status === "موفق";
-
   return (
-    <div
-      className="
-        group flex flex-col gap-4 rounded-2xl border border-gray-200
-        bg-white p-4 shadow-sm transition
-        hover:border-teal-100 hover:shadow-md
-        md:flex-row md:items-center md:gap-5 sm:p-5
-      "
-    >
-     
-      <div
-        className="
-          flex h-11 w-11 shrink-0 items-center justify-center
-          rounded-xl bg-gray-100 text-sm font-bold text-gray-600
-          transition group-hover:bg-teal-50 group-hover:text-teal-700
-        "
-      >
-        {transaction.id}
+    <div className="group flex md:flex-row flex-col md:items-center gap-7 md:gap-5 bg-white shadow-sm hover:shadow-md p-4 sm:p-5 border border-gray-200 hover:border-teal-100 rounded-2xl transition">
+      <div className="flex justify-center items-center bg-gray-100 group-hover:bg-teal-50 rounded-xl w-11 h-11 font-bold text-gray-600 group-hover:text-teal-700 text-sm transition shrink-0">
+        #{transaction.id}
       </div>
 
-      
-      <div className="min-w-0 flex-1">
-        <h3 className="truncate font-bold text-gray-900">
-          {transaction.title}
-        </h3>
-        <p className="mt-1 text-xs text-gray-500">
-          {transaction.transactionId}
-        </p>
-      </div>
+      <h3 className="flex-1 font-bold text-gray-900 truncate">
+        {transaction.payment_method}
+      </h3>
 
-     
-      <div className="flex flex-wrap items-center gap-x-6 gap-y-3 sm:flex-nowrap sm:gap-x-8">
-        {/* وضعیت */}
+      <p className="flex-[.5] mt-1 text-gray-500 text-xs">
+        {transaction.transaction_id}
+      </p>
+      <div className="flex flex-wrap sm:flex-nowrap items-center gap-x-6 gap-y-3 sm:gap-x-8">
         <div
           className={`
-            flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold
-            ${success ? "bg-green-50 text-green-600" : "bg-red-50 text-red-600"}
+            flex items-center justify-between gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold w-22
+            ${transaction.status == "success" ? "bg-green-50 text-green-600" : "bg-red-50 text-red-600"}
           `}
         >
-          {success ? (
+          {transaction.status == "success" ? (
             <HiOutlineCheckCircle className="text-base" />
           ) : (
             <HiOutlineXMark className="text-base" />
@@ -52,22 +32,17 @@ function TransactionRow({ transaction }) {
           {transaction.status}
         </div>
 
-        {/* تاریخ */}
-        <div className="min-w-[80px] text-sm text-gray-600">
-          <div>{transaction.date}</div>
-          <div className="mt-0.5 text-xs text-gray-400">{transaction.time}</div>
+        <div className="min-w-[80px] text-gray-600 text-sm">
+          <div>{toPersianDate(transaction.created_at)}</div>
+          {/* <div className="mt-0.5 text-gray-400 text-xs">{transaction.time}</div> */}
         </div>
 
-        {/* مبلغ */}
         <div className="min-w-[100px] font-black text-gray-900">
-          {transaction.price.toLocaleString("fa-IR")}
-          <span className="mr-1 text-xs font-medium text-gray-500">تومان</span>
+          {transaction.amount.toLocaleString("fa-IR")}
+          <span className="mr-1 font-medium text-gray-500 text-xs">تومان</span>
         </div>
 
-        {/* دکمه رسید */}
-        <button
-          className="btn btn-primary shrink-0 w-full sm:w-auto  "
-        >
+        <button className="flex-1 w-full sm:w-auto btn btn-primary shrink-0">
           مشاهده رسید
         </button>
       </div>

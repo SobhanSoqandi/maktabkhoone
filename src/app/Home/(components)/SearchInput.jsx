@@ -6,90 +6,55 @@ import SearchDropdown from "./(search-input)/SearchDropdown";
 import { useRouter } from "next/navigation";
 
 export default function SearchInput() {
-    const [search, setSearch] = useState("");
-    const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState("");
+  const [open, setOpen] = useState(false);
 
-    const router = useRouter();
+  const router = useRouter();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-        if (!search.trim()) return;
-        router.push(`/Home/courses?q=${encodeURIComponent(search)}`);
+    if (!search.trim()) return;
+    router.push(`/Home/courses?search=${encodeURIComponent(search)}`);
+    setOpen(false);
+  };
+
+  const wrapperRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setOpen(false);
+      }
     };
 
-    const wrapperRef = useRef(null);
+    document.addEventListener("mousedown", handleClickOutside);
 
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (
-                wrapperRef.current &&
-                !wrapperRef.current.contains(event.target)
-            ) {
-                setOpen(false);
-            }
-        };
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
-        document.addEventListener("mousedown", handleClickOutside);
+  return (
+    <div ref={wrapperRef} className="relative flex-1 mx-2 md:mx-5">
+      <div className="top-1/2 right-5 z-10 absolute -translate-y-1/2 pointer-events-none">
+        <img src="/next.svg" alt="مکتب‌خونه" className="w-[50px] h-4" />
+      </div>
 
-        return () => {
-            document.removeEventListener(
-                "mousedown",
-                handleClickOutside
-            );
-        };
-    }, []);
+      <form onSubmit={handleSubmit}>
+        <input
+          value={search}
+          onFocus={() => setOpen(true)}
+          onChange={(e) => setSearch(e.target.value)}
+          type="text"
+          placeholder="جستجو در دوره‌ها"
+          className="bg-gray-50 pr-20 pl-12 border border-gray-200 focus:border-teal-500 rounded-2xl outline-none w-full h-12"
+        />
+      </form>
 
-    return (
-        <div
-            ref={wrapperRef}
-            className="relative mx-2 flex-1 md:mx-5"
-        >
-            <div className="pointer-events-none absolute right-5 top-1/2 z-10 -translate-y-1/2">
-                <img
-                    src="/next.svg"
-                    alt="مکتب‌خونه"
-                    className="h-4 w-[50px]"
-                />
-            </div>
+      <FiSearch className="top-1/2 left-5 absolute text-gray-500 text-2xl -translate-y-1/2" />
 
-            <form onSubmit={handleSubmit}>
-                <input
-                    value={search}
-                    onFocus={() => setOpen(true)}
-                    onChange={(e) => setSearch(e.target.value)}
-                    type="text"
-                    placeholder="جستجو در دوره‌ها"
-                    className="
-                    h-12
-                    w-full
-                    rounded-2xl
-                    border
-                    border-gray-200
-                    bg-gray-50
-                    pr-20
-                    pl-12
-                    outline-none
-                    focus:border-teal-500
-                "
-                />
-            </form>
-
-            <FiSearch
-                className="
-                    absolute
-                    left-5
-                    top-1/2
-                    -translate-y-1/2
-                    text-2xl
-                    text-gray-500
-                "
-            />
-
-            <SearchDropdown
-                open={open}
-                search={search}
-            />
-        </div >
-    );
+      <SearchDropdown open={open} search={search} />
+    </div>
+  );
 }

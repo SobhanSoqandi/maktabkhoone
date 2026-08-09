@@ -7,6 +7,7 @@ import LoginForm from "./LoginForm";
 import { useContext, useState } from "react";
 import UserMenu from "./UserMenu";
 import { loginContext } from "@/context/LoginContext";
+import Link from "next/link";
 
 export default function Login() {
   const { isLogin } = useContext(loginContext);
@@ -19,9 +20,9 @@ export default function Login() {
             <span>دوره‌های من</span>
           </button>
 
-          <button className="btn btn-primary">
+          <Link href={"/cart"} className="btn btn-primary">
             <TiShoppingCart className="w-5 h-5" />
-          </button>
+          </Link>
 
           <div className="group relative">
             <button className="btn btn-primary">
