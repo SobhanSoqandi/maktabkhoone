@@ -1,21 +1,18 @@
 export default function VideoPlayer({ videoUrl }) {
-
-  
-
   if (!videoUrl) {
     return (
-      <div className="flex aspect-video w-full items-center justify-center bg-black text-sm text-gray-400">
+      <div className="flex justify-center items-center bg-black w-full aspect-video text-gray-400 text-sm">
         ویدئوی این جلسه در دسترس نیست.
       </div>
     );
   }
 
   return (
-    <div className="aspect-video w-full overflow-hidden bg-black">
+    <div className="bg-black w-full aspect-video overflow-hidden">
       <video
         key={videoUrl}
         controls
-        className="h-full w-full"
+        className="w-full h-full"
         preload="metadata"
       >
         <source src={videoUrl} type="video/mp4" />
