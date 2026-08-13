@@ -1,10 +1,12 @@
+"use client";
+import useGet from "@/app/(hooks)/useGet";
 import ProfileForm from "./complete-profile/ProfileForm";
-import { profile } from "./complete-profile/profile-data";
 
 export default function Page() {
+  const { data: profile, isLoading } = useGet("users/me", ["user_profile"]);
   return (
-    <div className="container mx-auto max-w-4xl py-10">
-      <ProfileForm user={profile} />
+    <div className="mx-auto py-10 max-w-4xl container">
+      {isLoading ? <div>loading</div> : <ProfileForm user={profile} />}
     </div>
   );
 }

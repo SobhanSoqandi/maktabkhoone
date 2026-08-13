@@ -9,7 +9,7 @@ import { base_url } from "../../../../../../../data/info";
 import { BsCheck2Square, BsJournalCheck } from "react-icons/bs";
 import Link from "next/link";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useMutationData from "@/app/(hooks)/useMutationData";
 import { WishListContext } from "@/context/WishListContext";
 import { useAuth } from "@/context/AuthContext";
@@ -17,15 +17,30 @@ import { CartButton } from "./CartButton";
 import toast from "react-hot-toast";
 import useGet from "@/app/(hooks)/useGet";
 
-export default function HeaderPreview({ course }) {
-
+export default function HeaderPreview({ course, section }) {
   const { user } = useAuth();
+  const [firstLessonId, setFirstLessonId] = useState(null);
 
+  useEffect(() => {
+    if (section?.length) {
+      const firstChapter = section.sort(
+        (a, b) => a.order_index - b.order_index,
+      )[0];
 
+      const firstLesson = firstChapter?.lessons?.sort(
+        (a, b) => a.order_index - b.order_index,
+      )[0];
 
+      setFirstLessonId(firstLesson?.id);
+    }
+  }, [section]);
 
+  console.log("SLUG:", course.slug);
   const { wishlist, refetchWishlist } = useContext(WishListContext);
-  const { data: isacces } = useGet(`course/${course.id}/access`, "access");
+  const { data: isacces } = useGet(`course/${course.id}/access`, [
+    "access",
+    course.id,
+  ]);
   const wishDetail =
     wishlist?.find((item) => item.course_id === course.id) ?? null;
 
@@ -34,7 +49,7 @@ export default function HeaderPreview({ course }) {
   const { mutate: add_to_cart } = useMutationData(
     "cart-course/",
     "post",
-    "add_course_cart",
+    ["add_course_cart", course.id],
     "دوره به سبد اضافه شد ",
     {
       onError: (error) => {
@@ -117,9 +132,13 @@ export default function HeaderPreview({ course }) {
 
       <div className="space-y-4 p-5">
         <div className="flex gap-3">
-
           {isacces && user ? (
-            <button className="w-full btn btn-success">جلسه اول</button>
+            <Link
+              href={`/Home/courses/${course.id}/${course.slug}/unit/${firstLessonId}`}
+              className="w-full btn btn-success"
+            >
+              شروع دوره
+            </Link>
           ) : (
             <Modal>
               <CartButton course={course} add_to_cart={add_to_cart} />
@@ -165,10 +184,11 @@ export default function HeaderPreview({ course }) {
 
           <button
             onClick={handleWishlist}
-            className={`btn transition-all duration-300 ${saved
-              ? "bg-yellow-500 hover:bg-yellow-600 text-white"
-              : "bg-gray-100 hover:bg-gray-200 text-gray-500"
-              }`}
+            className={`btn transition-all duration-300 ${
+              saved
+                ? "bg-yellow-500 hover:bg-yellow-600 text-white"
+                : "bg-gray-100 hover:bg-gray-200 text-gray-500"
+            }`}
           >
             <HiBookmark
               className={`text-xl lg:text-3xl ${saved ? "fill-current" : ""}`}

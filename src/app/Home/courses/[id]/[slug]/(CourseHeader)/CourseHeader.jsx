@@ -23,7 +23,7 @@ export default function CourseHeader({ response }) {
         </div>
 
         <div className="order-1 lg:order-2 w-full lg:w-[430px]">
-          <HeaderPreview course={response.course} />
+          <HeaderPreview course={response.course} section={response.section} />
         </div>
       </div>
     </section>
