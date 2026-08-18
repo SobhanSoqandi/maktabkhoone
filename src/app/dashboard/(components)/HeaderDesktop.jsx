@@ -25,7 +25,7 @@ function HeaderDesktop() {
                             <span className="flex items-center gap-1 text-pink-500">
                                 <HiOutlineSparkles className="text-lg" />
                             </span>
-                            اشتراک مکتب‌پلاس
+                             پنل مدرس
                         </Link>
 
                     </nav>
