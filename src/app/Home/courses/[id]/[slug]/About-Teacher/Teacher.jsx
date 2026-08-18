@@ -54,13 +54,13 @@ export default function TeacherDescription({ teacher_detail: teacher }) {
         </div>
 
         <div className="relative border border-gray-200 rounded-full w-24 h-24 overflow-hidden">
-          <Image
-            src={base_url + teacher.teacher.user.avatar}
+          {/* <Image
+            src={base_url + teacher?.teacher?.user?.avatar}
             alt={teacher.teacher.firstname + teacher.teacher.lastname}
             fill
             unoptimized
             className="object-cover"
-          />
+          /> */}
         </div>
       </div>
 

@@ -12,7 +12,7 @@ export default function SupportCard({
             : HiOutlineChatBubbleLeftRight;
 
     return (
-        <div className="flex items-center justify-between rounded-3xl border border-gray-200 bg-white p-6">
+        <div className="flex items-center flex-col md:flex-row gap-y-4 md:justify-between rounded-3xl border border-gray-200 bg-white p-6">
 
             <div className="flex items-center gap-5">
 
@@ -33,9 +33,8 @@ export default function SupportCard({
 
 
             </div>
-
-
-            <div className="flex p-2 h-12 min-w-[250px] items-center justify-center rounded-2xl bg-cyan-100">
+            
+            <div className="flex p-2 h-12 px-8 items-center justify-center rounded-2xl bg-cyan-100">
                 <span className="text-base font-bold text-cyan-700">
                     {value}
                 </span>
