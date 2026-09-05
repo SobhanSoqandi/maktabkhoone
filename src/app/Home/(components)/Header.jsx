@@ -13,12 +13,12 @@ function Header() {
       <div className="flex justify-between items-center mx-auto container px-4 h-20">
         <div className="flex" >
           <div className="hidden xl:flex items-center md:ml-10">
-          <Image src="/next.svg" alt="Logo" width={60} height={20} />
-        </div>
+            <Image src="/next.svg" alt="Logo" width={60} height={20} />
+          </div>
 
-        <div className="hidden md:block">
-          <CategoriresFetch />
-        </div>
+          <div className="hidden md:block">
+            <CategoriresFetch />
+          </div>
         </div>
 
         <SearchInput />
@@ -29,7 +29,12 @@ function Header() {
               <span className="flex items-center gap-1 text-pink-500">
                 <HiOutlineSparkles className="text-lg" />
               </span>
-               پنل مدرس
+              پنل مدرس
+            </Link>
+
+            <Link href="/Home/teaching" className="flex link-style">
+             
+              تدریس کنید
             </Link>
 
           </nav>
