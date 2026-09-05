@@ -21,11 +21,16 @@ function HeaderDesktop() {
 
                 <div className="hidden md:flex items-center gap-6">
                     <nav className="hidden lg:flex items-center gap-6">
-                        <Link href="/" className="flex link-style">
+                        <Link href="/teacher-panel" className="flex link-style">
                             <span className="flex items-center gap-1 text-pink-500">
                                 <HiOutlineSparkles className="text-lg" />
                             </span>
                              پنل مدرس
+                        </Link>
+
+                         <Link href="/teaching" className="flex link-style">
+                                <HiOutlineSparkles className="text-lg" />
+                              تدریس کنید
                         </Link>
 
                     </nav>
