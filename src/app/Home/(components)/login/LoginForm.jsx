@@ -11,6 +11,7 @@ import { useAuth } from "@/context/AuthContext";
 import useGlobalModal from "@/app/(components)/globalmodal/useGlobalModal";
 import { closeGlobalModal } from "@/lib/modalEmitter";
 import { loginContext } from "@/context/LoginContext";
+import RegisterForm from "./RegisterForm";
 
 export default function LoginForm() {
   const { setIsLogin, isLogin } = useContext(loginContext);
@@ -29,9 +30,9 @@ export default function LoginForm() {
         localStorage.setItem("refresh_token", response.data.data.refresh_token);
         setUser({
           id: response.data.data.id,
-          username: response.data.data.userName,
+          username: response.data.data.username,
           phone_number: response.data.data.phone_number,
-          role: response.data.data.role,
+          role_id: response.data.data.role,
         });
         setActiveModal(null);
         closeGlobalModal();
@@ -77,7 +78,10 @@ export default function LoginForm() {
             </button>
           </form>
           <div className="flex justify-between items-center gap-4 w-[90%]">
-            <div className="justify-center shadow border border-gray-200 w-full text-gray-600 btn">
+            <div
+              onClick={() => setForm("register")}
+              className="justify-center shadow border border-gray-200 w-full text-gray-600 btn"
+            >
               ثبت نام
             </div>
 
@@ -92,7 +96,7 @@ export default function LoginForm() {
       ) : form == "otp" ? (
         <Otp setIsLogin={setIsLogin} />
       ) : (
-        <div>ops</div>
+        form === "register" && <RegisterForm setForm={setForm} />
       )}
     </>
   );

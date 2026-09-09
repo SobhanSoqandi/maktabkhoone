@@ -3,6 +3,7 @@ import Link from "next/link";
 import { HiClock, HiAcademicCap } from "react-icons/hi2";
 import { base_url } from "../../../../data/info";
 
+
 export default function CourseCard({ course }) {
   console.log(course);
   return (
@@ -12,7 +13,7 @@ export default function CourseCard({ course }) {
     >
       <div className="relative m-auto pt-2 w-[95%] h-44">
         <Image
-          src={base_url + course.banner}
+          src={course.banner ?  base_url + course.banner : "/images/default.png"}
           alt={course.title}
           fill
           unoptimized

@@ -15,7 +15,7 @@ export default function PhoneForm({ setIsSent, setPhone }) {
         console.log(data);
         mutate(
           {
-            data: data,
+            data: {...data , purpose: "LOGIN",},
           },
           {
             onSuccess: () => {

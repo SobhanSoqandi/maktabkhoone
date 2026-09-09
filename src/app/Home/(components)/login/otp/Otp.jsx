@@ -1,16 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import OtpHeader from "./OtpHeader";
 import PhoneForm from "./PhoneForm";
 import OtpForm from "./OtpForm";
 import { useAuth } from "@/context/AuthContext";
 import { useModal } from "@/app/(components)/modal";
+import { loginContext } from "@/context/LoginContext";
 
 export default function Otp({ setislogin }) {
   const [isSent, setIsSent] = useState(false);
   const [phone, setPhone] = useState("");
   const { setActiveModal } = useModal();
+  const { setIsLogin, isLogin } = useContext(loginContext);
   const { setUser } = useAuth();
   return (
     <div className="flex flex-col gap-8">
@@ -34,7 +36,7 @@ export default function Otp({ setislogin }) {
               phone_number: response.data.phone_number,
               role: response.data.role,
             });
-            setislogin(true);
+            setIsLogin(true);
           }}
         />
       )}
