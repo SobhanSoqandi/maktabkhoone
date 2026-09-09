@@ -32,7 +32,7 @@
 }
 
 @utility link-style {
-  @apply font-medium text-gray-700 hover:text-teal-600 text-sm transition;
+  @apply font-medium p-1.5 text-gray-700 hover:text-teal-600 hover:border border-gray-200 rounded-md text-sm transition;
 }
 
 @utility mobile-menu {

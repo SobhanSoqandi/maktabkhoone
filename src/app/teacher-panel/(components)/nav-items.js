@@ -7,13 +7,20 @@ import {
   FiHeadphones,
   FiInfo,
 } from "react-icons/fi";
+import { PiStudentBold } from "react-icons/pi";
 
 export const primaryNavItems = [
   { label: "دوره‌های من", href: "/teacher-panel/courses", icon: FiLayers },
   {
-    label: "احراز هویت",
-    icon: FiSmile,
-    href: "/verify",
+
+    label: "پروفایل",
+    icon: PiStudentBold ,
+    children: [
+      // { label: "اطلاعات حساب", href: "/teacher-panel/profile/profile-info" },
+      { label: " اطلاعات هویتی ", href: "/teacher-panel/profile/profile-info" },
+      { label: " اطلاعات قرار دادی ", href: "/teacher-panel/profile/contract-info" },
+    ],
+
   },
   { label: "آمارها", href: "/stats", icon: FiTrendingUp },
   { label: "گزارش درآمد", href: "/income", icon: FiFileText },
