@@ -1,6 +1,6 @@
 import { req } from "@/app/(function)/request";
 import CoursePlayerLayout from "../[unitId]/(components)/course-player/CoursePlayerLayout";
-import { div } from "motion/react-client";
+
 
 export default async function UnitPage({ params }) {
   const { id, slug, unitId } = await params;

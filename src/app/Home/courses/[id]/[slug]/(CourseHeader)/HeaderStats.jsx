@@ -7,7 +7,7 @@ import {
   HiCheckBadge,
 } from "react-icons/hi2";
 
-export default function HeaderStats({ course }) {
+export default function HeaderStats({ course , files_count }) {
   const items = [
     {
       id: 1,
@@ -33,12 +33,12 @@ export default function HeaderStats({ course }) {
       title: "آخرین بروزرسانی",
       value: course.updated_at ?? "۱۴۰۵/۰۴/۱۲",
     },
-    // {
-    //   id: 5,
-    //   icon: HiDocumentText,
-    //   title: "فایل ضمیمه",
-    //   value: `${course.files_count ?? 38} فایل`,
-    // },
+    {
+      id: 5,
+      icon: HiDocumentText,
+      title: "فایل ضمیمه",
+      value: files_count == 0 ? "ندارد" : `${files_count } فایل`,
+    },
     {
       id: 6,
       icon: HiCheckBadge,

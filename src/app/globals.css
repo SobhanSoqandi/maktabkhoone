@@ -55,7 +55,7 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
@@ -81,19 +81,28 @@ body {
 }
 
 @keyframes btn-shake {
-  0%, 40% {
+  0%,
+  40% {
     transform: translateX(0);
   }
 
-  4%, 12%, 20%, 28%, 36% {
+  4%,
+  12%,
+  20%,
+  28%,
+  36% {
     transform: translateX(-3px);
   }
 
-  8%, 16%, 24%, 32% {
+  8%,
+  16%,
+  24%,
+  32% {
     transform: translateX(3px);
   }
 
-  40%, 100% {
+  40%,
+  100% {
     transform: translateX(0);
   }
 }

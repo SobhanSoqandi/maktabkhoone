@@ -12,6 +12,7 @@ import { PiStudentBold } from "react-icons/pi";
 export const primaryNavItems = [
   { label: "دوره‌های من", href: "/teacher-panel/courses", icon: FiLayers },
   {
+
     label: "پروفایل",
     icon: PiStudentBold ,
     children: [
@@ -19,6 +20,7 @@ export const primaryNavItems = [
       { label: " اطلاعات هویتی ", href: "/teacher-panel/profile/profile-info" },
       { label: " اطلاعات قرار دادی ", href: "/teacher-panel/profile/contract-info" },
     ],
+
   },
   { label: "آمارها", href: "/stats", icon: FiTrendingUp },
   { label: "گزارش درآمد", href: "/income", icon: FiFileText },

@@ -5,11 +5,16 @@ import OtpTimer from "./OtpTimer";
 import useMutationData from "@/app/(hooks)/useMutationData";
 import { useForm } from "react-hook-form";
 import { useModal } from "@/app/(components)/modal";
+import { useAuth } from "@/context/AuthContext";
+import { loginContext } from "@/context/LoginContext";
+import { useContext } from "react";
 
 export default function OtpForm({ phone, onBack, btn_text, onSuccess, url }) {
   const { register, handleSubmit } = useForm();
   const { mutate } = useMutationData(url, "post", "verify-otp");
-  const { setActiveModal } = useModal();
+ 
+  
+  
   return (
     <form
       onSubmit={handleSubmit((formData) => {
