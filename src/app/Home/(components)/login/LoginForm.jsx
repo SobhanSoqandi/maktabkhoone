@@ -12,6 +12,7 @@ import useGlobalModal from "@/app/(components)/globalmodal/useGlobalModal";
 import { closeGlobalModal } from "@/lib/modalEmitter";
 import { loginContext } from "@/context/LoginContext";
 import RegisterForm from "./RegisterForm";
+import { processQueue } from "../../../../../data/server";
 
 export default function LoginForm() {
   const { setIsLogin, isLogin } = useContext(loginContext);
@@ -34,9 +35,11 @@ export default function LoginForm() {
           phone_number: response.data.data.phone_number,
           role_id: response.data.data.role,
         });
+
         setActiveModal(null);
         closeGlobalModal();
         setIsLogin(true);
+        processQueue(null, response.data.access_token);
       },
     },
   );
