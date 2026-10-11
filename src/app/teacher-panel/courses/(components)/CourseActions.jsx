@@ -27,8 +27,8 @@ export function CourseActions({ courseId, status }) {
 
   return (
     <div className="flex flex-wrap items-stretch gap-2 sm:items-center sm:gap-2.5">
-      <SecondaryLink href={detailHref} label="اطلاعات دوره" icon={FiArrowLeft} />
-      <SecondaryLink href={detailHref} label="مشاهده فصل‌ها" icon={FiArrowLeft} />
+      <SecondaryLink href={`${detailHref}/detail`} label="اطلاعات دوره" icon={FiArrowLeft} />
+      <SecondaryLink href={`${detailHref}/chapters`} label="مشاهده فصل‌ها" icon={FiArrowLeft} />
       <button
         type="button"
         className={[

@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import Input from "@/app/(components)/Input";
 
-// TODO: این دیتای دستیه، بعداً با فراخوانی GET از بک‌اند جایگزین می‌شه
+
 const CURRENT_PROFILE = {
   first_name: "علی",
   last_name: "رضایی",

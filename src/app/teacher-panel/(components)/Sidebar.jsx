@@ -164,15 +164,18 @@ export function Sidebar({ isMobileOpen, onMobileClose }) {
         />
       )}
 
-      <aside
-        className={[
-          "fixed inset-y-0 right-0 z-50 flex h-screen w-[280px] shrink-0 flex-col overflow-y-auto overflow-x-hidden",
-          "border-l border-gray-200 bg-white transition-all duration-300 ease-in-out",
-          isMobileOpen ? "translate-x-0 shadow-2xl" : "translate-x-full shadow-none",
-          collapsed ? "md:w-[76px]" : "md:w-[260px]",
-          "md:translate-x-0 md:shadow-none",
-        ].join(" ")}
-      >
+     
+<aside
+  className={[
+    "fixed inset-y-0 right-0 z-50 flex h-screen w-[280px] shrink-0 flex-col overflow-y-auto overflow-x-hidden",
+    "border-l border-gray-200 bg-white transition-all duration-300 ease-in-out",
+    isMobileOpen ? "translate-x-0 shadow-2xl" : "translate-x-full shadow-none",
+    collapsed ? "md:w-[76px]" : "md:w-[260px]",
+    "md:static md:translate-x-0 md:shadow-none",
+  ].join(" ")}
+>
+
+
         <div className="flex items-center justify-between px-3 pt-4">
           <button
             onClick={toggleCollapsed}
