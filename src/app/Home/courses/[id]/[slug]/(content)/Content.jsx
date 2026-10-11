@@ -45,11 +45,11 @@ export default function Content() {
       icon: <HiOutlineCalendarDays />,
       title: "10 هفته مهلت ارسال تمرین و پروژه",
     },
-    // {
-    //   id: 8,
-    //   icon: <HiOutlineDocumentText />,
-    //   title: "1 جلسه متنی",
-    // },
+    {
+      id: 8,
+      icon: <HiOutlineDocumentText />,
+      title: "1 جلسه متنی",
+    },
   ];
 
   return (

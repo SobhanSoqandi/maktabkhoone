@@ -47,7 +47,7 @@ export default function TeacherDescription({ teacher_detail: teacher }) {
       <div className="flex md:flex-row flex-col-reverse justify-between items-start md:items-center gap-6">
         <div className="flex-1">
           <h2 className="font-black text-3xl">
-            {teacher.teacher.firstname + teacher.teacher.lastname}
+            {teacher.teacher.user.student_profile.name + teacher.teacher.user.student_profile.last_name}
           </h2>
 
           <p className="mt-4 text-gray-500 leading-9">{teacher.teacher.desc}</p>

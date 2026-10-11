@@ -8,21 +8,26 @@ import AvatarUploader from "./AvatarUploader";
 import useMutationData from "@/app/(hooks)/useMutationData";
 import { base_url } from "../../../../../data/info";
 import { useQueryClient } from "@tanstack/react-query";
+import { useAuth } from "@/context/AuthContext";
 
 export default function ProfileForm({ user }) {
   const [avatarPreview, setAvatarPreview] = useState(
     user?.avatar ? base_url + user.avatar : null,
   );
 
+  const { setUser } = useAuth();
   const [avatarFile, setAvatarFile] = useState(null);
   const queryClient = useQueryClient();
+  console.log(user);
   const { mutate, isPending } = useMutationData(
     "users/",
     "patch",
     "profile",
     "پروفایل بروزرسانی شد",
     {
-      onSuccess: () => {
+      onSuccess: (res) => {
+        setUser(res.data);
+
         queryClient.invalidateQueries({
           queryKey: ["user_profile"],
         });
@@ -39,6 +44,7 @@ export default function ProfileForm({ user }) {
       username: user?.username ?? "",
       name: user?.student_profile?.name ?? "",
       last_name: user?.student_profile?.last_name ?? "",
+      email: user?.email ?? "",
     },
   });
 
@@ -55,6 +61,10 @@ export default function ProfileForm({ user }) {
 
     if (data.last_name) {
       formData.append("last_name", data.last_name);
+    }
+
+    if (data.email) {
+      formData.append("email", data.email);
     }
 
     if (avatarFile) {
@@ -87,6 +97,15 @@ export default function ProfileForm({ user }) {
           placeholder="نام کاربری"
           register={register}
           registerName="username"
+          errors={errors}
+          className="input"
+        />
+
+        <Input
+          label="ایمیل"
+          placeholder="ایمیل خود را وارد کنید"
+          register={register}
+          registerName="email"
           errors={errors}
           className="input"
         />

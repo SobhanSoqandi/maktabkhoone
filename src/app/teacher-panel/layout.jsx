@@ -1,6 +1,7 @@
 
 "use client";
 
+
 import { useState } from "react";
 import { Sidebar } from "./(components)/Sidebar";
 import { MobileHeader } from "./(components)/MobileHeader";
@@ -9,6 +10,7 @@ export default function PanelLayout({ children }) {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   return (
+
     <div className="flex min-h-screen flex-col bg-[#ffffff] md:flex-row">
       <MobileHeader
         isOpen={isMobileOpen}
@@ -23,6 +25,9 @@ export default function PanelLayout({ children }) {
       <main className="min-w-0 flex-1 p-4 pt-4 md:p-8 md:pt-8">
         {children}
       </main>
-    </div>
+
+      </div>
+
+   
   );
 }

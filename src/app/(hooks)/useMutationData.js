@@ -30,9 +30,9 @@ export default function useMutationData(
         ...config,
       });
     },
+    ...opt,
 
     onSuccess: (responseData) => {
-      console.log("toastmessage:", toastmessage);
       toast.success(toastmessage ?? "عملیات با موفقیت انجام شد", {
         id: toastId,
       });
@@ -53,8 +53,6 @@ export default function useMutationData(
 
       opt?.onError?.(error);
     },
-
-    ...opt,
   });
 
   return {

@@ -1,21 +1,17 @@
-import { FiCode } from "react-icons/fi";
+import Image from "next/image";
+import { base_url } from "../../../../../data/info";
 
-export function CourseThumbnail({ brandLabel, gradientFrom, gradientTo }) {
+export function CourseThumbnail({ image, title }) {
   return (
-    <div
-      className={[
-        "relative h-36 w-full shrink-0 overflow-hidden rounded-2xl bg-gradient-to-br",
-        "sm:h-40 md:h-[120px] md:w-[210px]",
-        gradientFrom,
-        gradientTo,
-      ].join(" ")}
-    >
-      <span className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-lg bg-white/10 text-white">
-        <FiCode size={14} />
-      </span>
-      <span className="absolute inset-0 flex items-center justify-center px-4 text-center text-base font-bold text-white/90 sm:text-lg">
-        {brandLabel}
-      </span>
+    <div className="relative rounded-2xl w-full md:w-[210px] h-36 sm:h-40 md:h-[120px] overflow-hidden shrink-0">
+      <Image
+        src={image ? base_url + image : "/images/default.png"}
+        alt={title || "تصویر دوره"}
+        fill
+        className="object-cover"
+        unoptimized
+        sizes="(max-width: 768px) 100vw, 210px"
+      />
     </div>
   );
 }

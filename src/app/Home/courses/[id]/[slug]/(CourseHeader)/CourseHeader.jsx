@@ -7,6 +7,7 @@ import HeaderPreview from "./HeaderPreview";
 import HeaderStats from "./HeaderStats";
 
 export default function CourseHeader({ response }) {
+ 
   return (
     <section className="mx-auto px-10 py-8 container">
       <div className="flex lg:flex-row flex-col gap-8">
@@ -18,7 +19,7 @@ export default function CourseHeader({ response }) {
             teacher={response.teacher_firstname + response.teacher_lastname}
           />
           <div className="mt-8">
-            <HeaderStats course={response.course} />
+            <HeaderStats course={response.course}   files_count={response.files.length}/>
           </div>
         </div>
 

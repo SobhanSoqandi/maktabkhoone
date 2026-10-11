@@ -15,9 +15,13 @@ export default function CartItem({ course }) {
     "دوره با موفقیت حذف شد ",
     {
       onSuccess: () => {
+        console.log("INVALIDATE");
+
         queryClient.invalidateQueries({
-          queryKey: ["cart"],
+          queryKey: ["get_cart"],
         });
+
+        console.log("INVALIDATE DONE");
       },
     },
   );

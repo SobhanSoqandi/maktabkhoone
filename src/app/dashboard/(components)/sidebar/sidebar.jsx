@@ -6,15 +6,28 @@ import Link from "next/link";
 import { BiLogOut } from "react-icons/bi";
 import { sidebarItems } from "./sidebar-data";
 import { useAuth } from "@/context/AuthContext";
+import Image from "next/image";
+import { base_url } from "../../../../../data/info";
 
 export default function Sidebar({ isOpen }) {
   const { user } = useAuth();
-  console.log(user);
+  
   return (
     <aside className="bg-white m-5 border border-gray-200 rounded-3xl w-80">
       <div className="flex justify-between items-center p-5 border-gray-200 border-b-4">
         <div className="flex justify-center items-center bg-gray-100 rounded-full w-16 h-16">
-          <HiOutlineUser className="text-gray-400 text-4xl" />
+          {user?.avatar ? (
+            <Image
+              src={base_url + user.avatar}
+              alt={user.name || "User avatar"}
+              width={48}
+              unoptimized
+              height={48}
+              className="rounded-full w-12 h-12 object-cover"
+            />
+          ) : (
+            <HiOutlineUser className="text-gray-400 text-4xl" />
+          )}
         </div>
 
         <div className="flex-1 pr-4">
