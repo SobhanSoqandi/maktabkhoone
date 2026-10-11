@@ -4,15 +4,27 @@ import { useForm } from "react-hook-form";
 
 import Input from "@/app/(components)/Input";
 
+
+
+const CURRENT_PROFILE = {
+  first_name: "علی",
+  last_name: "رضایی",
+  national_code: "1234567890",
+  mobile: "09121234567",
+  birth_date: "۱۳۷۵/۰۱/۰۱",
+  is_verified: false,
+};
+
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
+
 
 import { useEffect, useState } from "react";
 import useGet from "@/app/(hooks)/useGet";
 import useMutationData from "@/app/(hooks)/useMutationData";
 
-// *TODO: این دیتای دستیه، بعداً با فراخوانی GET از بک‌اند جایگزین می‌شه*
+
 
 function ProfileInfoPage() {
   const { data: CURRENT_PROFILE, isLoading } = useGet(
