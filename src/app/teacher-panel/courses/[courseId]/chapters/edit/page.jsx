@@ -1,16 +1,10 @@
-import { notFound } from "next/navigation";
+"use client";
+import { notFound, useSearchParams } from "next/navigation";
 import { Edit } from "./(components)/Edit";
-import { chapters } from "../../chapters/(components)/chapters-data";
+import useGet from "@/app/(hooks)/useGet";
 
-export default async function EditPage({ searchParams }) {
-  const { chapterId } = await searchParams;
+export default function EditPage({ searchParams }) {
+  const { chapterId } = useSearchParams;
 
-
-  const chapter = chapterId
-    ? chapters.find((c) => String(c.id) === chapterId)
-    : null;
-
-  if (chapterId && !chapter) notFound();
-
-  return <Edit chapter={chapter} />;
+  return <Edit chapter={chapterId} />;
 }

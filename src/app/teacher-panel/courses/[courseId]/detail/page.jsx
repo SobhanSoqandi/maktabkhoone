@@ -1,12 +1,11 @@
-import { notFound } from "next/navigation";
+"use client";
+
+import { useParams } from "next/navigation";
 import { CourseForm } from "../(components)/CourseForm";
-import { getCourseById } from "../(components)/course-detail-data";
+import useGet from "@/app/(hooks)/useGet";
 
-export default async function CourseDetailPage({ params }) {
-  const { courseId } = await params;
-  const course = await getCourseById(courseId);
+export default function CourseDetailPage({ params }) {
+  const { courseId } = useParams();
 
-  if (!course) notFound();
-
-  return <CourseForm course={course} />;
+  return <CourseForm course_id={courseId} />;
 }

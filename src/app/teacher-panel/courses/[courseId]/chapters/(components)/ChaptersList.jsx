@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { DndContext, closestCenter } from "@dnd-kit/core";
@@ -13,12 +13,14 @@ import { FiPlus } from "react-icons/fi";
 import { ChapterRow, gridClass } from "./ChapterRow";
 
 export function ChaptersList({ initialChapters }) {
-  
   const basePath = usePathname();
 
   const [chapters, setChapters] = useState(initialChapters);
+  console.log(chapters);
   const [changed, setChanged] = useState(false);
-
+  useEffect(() => {
+    setChapters(initialChapters ?? []);
+  }, [initialChapters]);
   function handleDragEnd({ active, over }) {
     if (!over || active.id === over.id) return;
 
@@ -39,8 +41,8 @@ export function ChaptersList({ initialChapters }) {
   }
 
   return (
-    <div className="flex flex-col gap-8 lg:flex-row lg:items-start">
-      <section className="min-w-0 flex-1">
+    <div className="flex lg:flex-row flex-col lg:items-start gap-8">
+      <section className="flex-1 min-w-0">
         <div
           className={`${gridClass} bg-slate-600 py-3 text-sm font-bold text-white`}
         >
@@ -51,7 +53,10 @@ export function ChaptersList({ initialChapters }) {
           <span>حذف</span>
         </div>
 
-        <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+        <DndContext
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
+        >
           <SortableContext
             items={chapters.map((c) => c.id)}
             strategy={verticalListSortingStrategy}
@@ -69,20 +74,20 @@ export function ChaptersList({ initialChapters }) {
         </DndContext>
 
         {chapters.length === 0 && (
-          <p className="py-10 text-center text-sm text-slate-500">
+          <p className="py-10 text-slate-500 text-sm text-center">
             هنوز فصلی اضافه نشده است.
           </p>
         )}
 
-        <p className="mt-8 text-sm text-slate-700">
+        <p className="mt-8 text-slate-700 text-sm">
           با گرفتن و کشیدن فصل‌ها می‌توانید ترتیب آن‌ها را تغییر دهید.
         </p>
       </section>
 
-      <aside className="flex w-full flex-col gap-4 lg:min-h-[400px] lg:w-64 lg:justify-between">
+      <aside className="flex flex-col lg:justify-between gap-4 w-full lg:w-64 lg:min-h-[400px]">
         <Link
           href={`${basePath}/edit`}
-          className="flex items-center justify-between rounded border border-slate-400 px-4 py-3 text-slate-700 hover:bg-slate-50"
+          className="flex justify-between items-center hover:bg-slate-50 px-4 py-3 border border-slate-400 rounded text-slate-700"
         >
           <span>افزودن فصل</span>
           <FiPlus size={18} />
@@ -92,7 +97,7 @@ export function ChaptersList({ initialChapters }) {
           type="button"
           onClick={handleSave}
           disabled={!changed}
-          className="rounded bg-slate-600 px-4 py-4 text-lg text-white hover:bg-slate-500 disabled:opacity-50"
+          className="bg-slate-600 hover:bg-slate-500 disabled:opacity-50 px-4 py-4 rounded text-white text-lg"
         >
           ذخیره تغییرات
         </button>

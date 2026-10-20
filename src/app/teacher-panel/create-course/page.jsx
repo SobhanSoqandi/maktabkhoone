@@ -22,7 +22,8 @@ export default function Page() {
     "دوره با موفقیت اضافه شد",
     {
       onSuccess: (res) => {
-        router.push(`/teacher-panel/courses/${res.data.id}`);
+        console.log(115);
+        router.push(`/teacher-panel/courses/${res.data.id}/detail`);
       },
     },
   );
