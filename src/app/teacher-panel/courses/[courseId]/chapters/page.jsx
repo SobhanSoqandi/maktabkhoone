@@ -1,6 +1,19 @@
+"use client";
+
+import { useParams, useSearchParams } from "next/navigation";
+import { req } from "@/app/(function)/request";
 import { ChaptersList } from "./(components)/ChaptersList";
-import { chapters } from "./(components)/chapters-data";
+import useGet from "@/app/(hooks)/useGet";
 
 export default function ChaptersPage() {
-  return <ChaptersList initialChapters={chapters} />;
+  const { courseId } = useParams();
+
+  const { data } = useGet(`section/course_id`, "get_chapters", {
+    params: {
+      id: courseId,
+    },
+  });
+  console.log(data);
+
+  return <ChaptersList initialChapters={data ?? []} />;
 }

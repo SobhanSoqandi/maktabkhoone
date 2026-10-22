@@ -6,7 +6,7 @@ import { openGlobalModal } from "@/lib/modalEmitter";
 
 export const url = "http://127.0.0.1:8000";
 
-const apikey = "YOUR_API_KEY";
+export const apikey = "YOUR_API_KEY";
 
 export const api = axios.create({
   baseURL: url + "/",
@@ -15,6 +15,25 @@ export const api = axios.create({
     apikey: apikey,
   },
 });
+
+const authListeners = new Set();
+
+export const onAuthChange = (listener) => {
+  authListeners.add(listener);
+  return () => authListeners.delete(listener);
+};
+
+const emitAuthChange = (payload) => {
+  authListeners.forEach((listener) => listener(payload));
+};
+
+const clearSession = () => {
+  localStorage.removeItem("access_token");
+  localStorage.removeItem("refresh_token");
+  emitAuthChange({ loggedIn: false });
+};
+
+const AUTH_PATHS = ["auth/login", "auth/refreshToken"];
 
 api.interceptors.request.use(
   (config) => {
@@ -27,10 +46,7 @@ api.interceptors.request.use(
 
     return config;
   },
-
-  (error) => {
-    return Promise.reject(error);
-  },
+  (error) => Promise.reject(error),
 );
 
 let isRefreshing = false;
@@ -50,17 +66,20 @@ export const processQueue = (error, token = null) => {
 };
 
 api.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+  (response) => response,
 
   async (error) => {
     const originalRequest = error.config;
 
+    const isAuthCall = AUTH_PATHS.some((path) =>
+      originalRequest?.url?.includes(path),
+    );
+
     if (
       error.response?.status !== 401 ||
       !originalRequest ||
-      originalRequest._retry
+      originalRequest._retry ||
+      isAuthCall
     ) {
       return Promise.reject(error);
     }
@@ -69,79 +88,48 @@ api.interceptors.response.use(
 
     if (isRefreshing) {
       return new Promise((resolve, reject) => {
-        failedQueue.push({
-          resolve,
-          reject,
-        });
+        failedQueue.push({ resolve, reject });
       }).then((newAccessToken) => {
         originalRequest.headers = originalRequest.headers || {};
-
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-
         return api(originalRequest);
       });
     }
-
-    isRefreshing = true;
 
     const refreshToken = getRefreshToken();
 
     if (!refreshToken) {
-      isRefreshing = false;
-
+      clearSession();
       openGlobalModal("404");
-
-      return new Promise((resolve, reject) => {
-        failedQueue.push({
-          resolve,
-          reject,
-        });
-      });
+      return Promise.reject(error);
     }
 
+    isRefreshing = true;
+
     try {
-      const response = await axios.post(
+      const { data } = await axios.post(
         `${url}/auth/refreshToken`,
-        {
-          refreshToken: refreshToken,
-        },
-        {
-          headers: {
-            apikey: apikey,
-          },
-        },
+        { refreshToken },
+        { headers: { apikey } },
       );
 
-      const newAccessToken = response.data.access_token;
+      localStorage.setItem("access_token", data.access_token);
 
-      localStorage.setItem("access_token", newAccessToken);
+      emitAuthChange({ loggedIn: true, user: data.user });
 
-      isRefreshing = false;
-
-      processQueue(null, newAccessToken);
+      processQueue(null, data.access_token);
 
       originalRequest.headers = originalRequest.headers || {};
-
-      originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+      originalRequest.headers.Authorization = `Bearer ${data.access_token}`;
 
       return api(originalRequest);
     } catch (refreshError) {
-      isRefreshing = false;
-
+      processQueue(refreshError);
+      clearSession();
       openGlobalModal("404");
-
-      return new Promise((resolve, reject) => {
-        failedQueue.push({
-          resolve,
-          reject,
-        });
-      }).then((newAccessToken) => {
-        originalRequest.headers = originalRequest.headers || {};
-
-        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-
-        return api(originalRequest);
-      });
+      return Promise.reject(refreshError);
+    } finally {
+      isRefreshing = false;
     }
   },
 );
