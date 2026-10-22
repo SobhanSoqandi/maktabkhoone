@@ -1,41 +1,52 @@
 "use client";
-import { createContext, useContext, useEffect, useState } from "react";
-import axios from "axios";
 
-const AuthContext = createContext();
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
+
+import { getAccessToken, getRefreshToken } from "@/app/(function)/getToken";
+import { api, onAuthChange } from "../../data/server";
+
+const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  async function loadUser() {
-    const token = localStorage.getItem("access_token");
-    console.log("TOKEN FROM STORAGE:", token);
-    if (!token) {
+  const loadUser = useCallback(async () => {
+    if (!getAccessToken() && !getRefreshToken()) {
+      setUser(null);
       setLoading(false);
       return;
     }
 
     try {
-      const res = await axios.get("http://127.0.0.1:8000/users/me", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log(res);
+      const res = await api.get("users/me");
       setUser(res.data);
     } catch (err) {
-      console.log(err);
-      localStorage.removeItem("access_token");
-      localStorage.removeItem("refresh_token");
+      if (err.response?.status === 401) {
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
+        setUser(null);
+      }
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
-  }
+  }, []);
 
   useEffect(() => {
     loadUser();
-  }, []);
+
+    const unsubscribe = onAuthChange(({ loggedIn }) => {
+      if (!loggedIn) setUser(null);
+    });
+
+    return unsubscribe;
+  }, [loadUser]);
+
+  const logout = () => {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    setUser(null);
+  };
 
   return (
     <AuthContext.Provider
@@ -44,6 +55,8 @@ export function AuthProvider({ children }) {
         setUser,
         loading,
         loadUser,
+        logout,
+        isLoggedIn: !!user,
       }}
     >
       {children}
