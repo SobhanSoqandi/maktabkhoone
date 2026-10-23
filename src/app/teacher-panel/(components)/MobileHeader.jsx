@@ -8,7 +8,7 @@ export function MobileHeader({ isOpen, onToggle }) {
       <h1 className="text-lg font-semibold text-gray-900">پنل مدیریت</h1>
       <button
         onClick={onToggle}
-        className="flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50"
+        className="flex h-10 w-10 items-center justify-center text-gray-600 hover:bg-gray-50"
       >
         {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
       </button>

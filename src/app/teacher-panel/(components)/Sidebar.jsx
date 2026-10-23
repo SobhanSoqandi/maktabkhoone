@@ -79,23 +79,23 @@ export function Sidebar({ isMobileOpen, onMobileClose }) {
     const isOpen = Boolean(openMenus[item.label]);
 
     const rowClasses = [
-      "flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-[15px] transition-colors",
+      "flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-[16px] transition-colors",
       collapsed ? "justify-center" : "justify-between",
       active
-        ? "bg-teal-50 font-semibold text-teal-700"
-        : "text-gray-500 hover:bg-teal-50",
+        ? "bg-blue-50 font-semibold text-blue-500"
+        : "text-gray-600 hover:bg-blue-50 hover:text-blue-500",
     ].join(" ");
 
     const rowContent = (
       <>
         <span className={collapsed ? "flex items-center" : "flex items-center gap-3"}>
-          <Icon size={20} className={active ? "text-teal-700" : "text-gray-400"} />
+          <Icon size={20} className={active ? "text-blue-500" : "text-gray-500"} />
           {!collapsed && <span>{item.label}</span>}
         </span>
         {!collapsed && hasChildren && (
           <FiChevronDown
             size={16}
-            className={["text-teal-600 transition-transform", isOpen ? "rotate-180" : ""].join(" ")}
+            className={["text-gray-500 transition-transform", isOpen ? "rotate-180" : ""].join(" ")}
           />
         )}
       </>
@@ -126,10 +126,10 @@ export function Sidebar({ isMobileOpen, onMobileClose }) {
                     href={child.href}
                     onClick={handleNavigation}
                     className={[
-                      "rounded-lg px-3 py-2 text-sm transition-colors",
+                      "rounded-lg px-3 py-2 text-[15px] transition-colors",
                       childActive
-                        ? "font-semibold text-teal-600"
-                        : "text-gray-600 hover:bg-teal-50",
+                        ? "font-semibold text-blue-600"
+                        : "text-gray-500 hover:bg-blue-50",
                     ].join(" ")}
                   >
                     {child.label}
@@ -179,13 +179,13 @@ export function Sidebar({ isMobileOpen, onMobileClose }) {
         <div className="flex items-center justify-between px-3 pt-4">
           <button
             onClick={toggleCollapsed}
-            className="hidden md:flex h-8 w-8 items-center justify-center rounded-xl border border-teal-500 text-teal-600 hover:bg-teal-50"
+            className="hidden md:flex h-8 w-8 items-center justify-center rounded-xl border border-blue-500 text-blue-600 hover:bg-blue-50"
           >
             {collapsed ? <FiChevronLeft size={16} /> : <FiChevronRight size={16} />}
           </button>
 
           {!collapsed && (
-            <Link href="/Home" className="flex h-8 w-8 items-center justify-center rounded-xl bg-teal-600 text-white">
+            <Link href="/Home" className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-600 text-white">
               <FiBookOpen size={18} />
             </Link>
           )}
@@ -202,13 +202,13 @@ export function Sidebar({ isMobileOpen, onMobileClose }) {
         </nav>
 
         <div className="flex items-center gap-2.5 border-t border-gray-200 px-4 py-3">
-          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-black/[0.06] text-sm font-medium text-gray-600">
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-blue-100 text-lg font-medium text-blue-800">
             س
           </span>
           {!collapsed && (
             <span className="text-right leading-tight">
-              <span className="block text-sm font-semibold text-gray-900">سبحان سوقندی</span>
-              <span className="block text-xs text-gray-400" dir="ltr">۰۹۳۰۳۱۳۶۶۱۷</span>
+              <span className="block text-lg font-semibold text-gray-900">سبحان سوقندی</span>
+              <span className="block text-medium text-gray-400" dir="ltr">۰۹۳۰۳۱۳۶۶۱۷</span>
             </span>
           )}
         </div>

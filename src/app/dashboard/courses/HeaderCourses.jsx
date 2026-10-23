@@ -57,7 +57,7 @@ export default function HeaderCourses( { categories }) {
             defaultValue={searchParams.get("search") || ""}
             onChange={(e) => updateQuery("search", e.target.value)}
             placeholder="جستجو در دوره‌ها..."
-            className="h-12 w-full rounded-xl border border-gray-200 pr-12 pl-4 text-sm outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-100"
+            className="h-12 w-full rounded-xl border border-gray-200 pr-12 pl-4 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
           />
         </div>
 

@@ -48,14 +48,14 @@ export default function Login() {
       {user?.role_id ? (
         <Link
           href="/teacher-panel/courses"
-          className="flex items-center gap-2 font-bold text-teal-700 hover:text-teal-900 text-sm transition-colors"
+          className="flex items-center gap-2 font-bold text-blue-700 hover:text-blue-900 text-sm transition-colors"
         >
           پنل مدرس
         </Link>
       ) : (
         <Link
           href="/Teacher-Registration"
-          className="flex items-center gap-2 font-semibold text-slate-600 hover:text-teal-700 text-sm transition-colors"
+          className="flex items-center gap-2 font-semibold text-slate-600 hover:text-blue-700 text-sm transition-colors"
         >
           تدریس کنید
         </Link>
@@ -63,12 +63,12 @@ export default function Login() {
       <div>
         {isLogin ? (
           <div className="flex items-center gap-3">
-            <button type="button" className="btn btn-primary">
+            <button type="button" className="btn btn-light text-gray-500">
               <FaBook className="w-5 h-5" />
               <span>دوره‌های من</span>
             </button>
 
-            <Link href="/cart" className="btn btn-primary">
+            <Link href="/cart" className="btn border border-cyan-200 hover:bg-cyan-50 text-cyan-500">
               <TiShoppingCart className="w-5 h-5" />
             </Link>
 
@@ -76,11 +76,13 @@ export default function Login() {
               <button
                 type="button"
                 onClick={toggleUserMenu}
-                className="btn btn-primary"
+                className="btn btn-primary text-medium font-bold"
                 aria-expanded={isUserMenuOpen}
                 aria-haspopup="menu"
               >
+                
                 <FaRegUser className="w-5 h-5" />
+                داشبورد
               </button>
 
               {isUserMenuOpen && (

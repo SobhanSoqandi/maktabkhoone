@@ -18,9 +18,9 @@ export default function CourseHeader({ response }) {
             students={response.students}
             teacher={response.teacher_firstname + response.teacher_lastname}
           />
-          <div className="mt-8">
+          {/* <div className="mt-8">
             <HeaderStats course={response.course}   files_count={response.files.length}/>
-          </div>
+          </div> */}
         </div>
 
         <div className="order-1 lg:order-2 w-full lg:w-[430px]">

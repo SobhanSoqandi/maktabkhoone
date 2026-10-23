@@ -22,7 +22,7 @@ export default function CourseTabItem({
 
         ${
           active
-            ? "text-teal-600"
+            ? "text-blue-500"
             : "text-gray-500 hover:text-gray-900"
         }
       `}
@@ -39,7 +39,7 @@ export default function CourseTabItem({
           w-full
           px-auto
           rounded-full
-          bg-teal-600
+          bg-blue-500
           transition-all
           duration-300
 

@@ -8,7 +8,7 @@ export default function SelectBox({ value, onChange, options, placeholder }) {
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="bg-white px-4 pl-10 border border-gray-200 focus:border-teal-500 rounded-xl outline-none focus:ring-2 focus:ring-teal-100 w-full h-12 text-gray-700 text-sm transition appearance-none"
+        className="bg-white px-4 pl-10 border border-blue-200 focus:border-blue-500 rounded-xl outline-none focus:ring-2 focus:ring-blue-100 w-full h-12 text-gray-700 text-sm transition appearance-none"
       >
         <option value="">{placeholder}</option>
 

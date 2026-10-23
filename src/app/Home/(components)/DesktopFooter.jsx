@@ -3,7 +3,19 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaInstagram, FaTelegramPlane, FaLinkedinIn, FaYoutube, FaFacebookF, FaCode, FaGlobeEurope, FaBusinessTime, FaArrowLeft, FaHeadset, FaArrowUp } from 'react-icons/fa';
+import {
+  FaInstagram,
+  FaTelegramPlane,
+  FaLinkedinIn,
+  FaYoutube,
+  FaFacebookF,
+  FaCode,
+  FaGlobeEurope,
+  FaBusinessTime,
+  FaArrowLeft,
+  FaHeadset,
+  FaArrowUp,
+} from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { HiOutlineComputerDesktop } from 'react-icons/hi2';
 
@@ -33,7 +45,10 @@ const socials = [
 function FooterLink({ children, href = '#' }) {
   return (
     <li>
-      <Link href={href} className="inline-flex text-sm leading-7 text-slate-400 transition-colors duration-200 hover:text-cyan-300">
+      <Link
+        href={href}
+        className="inline-flex text-sm leading-7 text-slate-500 transition-colors duration-200 hover:text-blue-600"
+      >
         {children}
       </Link>
     </li>
@@ -42,72 +57,102 @@ function FooterLink({ children, href = '#' }) {
 
 export default function DesktopFooter() {
   return (
-    <footer dir="rtl" className="relative overflow-hidden bg-[#071b2d] text-white">
-      <div className="pointer-events-none absolute -right-40 top-0 h-96 w-96 rounded-full bg-cyan-400/[0.07] blur-[100px]" />
-      <div className="pointer-events-none absolute -left-40 bottom-0 h-80 w-80 rounded-full bg-blue-500/[0.08] blur-[100px]" />
+    <footer dir="rtl" className="relative overflow-hidden border-t border-blue-100 bg-white text-slate-800">
+      <div className="pointer-events-none absolute -right-40 top-0 h-96 w-96 rounded-full bg-blue-100/60 blur-[100px]" />
+      <div className="pointer-events-none absolute -left-40 bottom-0 h-80 w-80 rounded-full bg-sky-100/70 blur-[100px]" />
 
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
-        <div className="grid gap-8 border-b border-white/10 py-12 lg:grid-cols-[1.2fr_2fr] lg:items-center lg:gap-16 lg:py-16">
+        <div className="grid gap-8 border-b border-slate-200 py-10 sm:py-12 lg:grid-cols-[1.2fr_2fr] lg:items-center lg:gap-16 lg:py-14">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-cyan-300/15 bg-cyan-300/[0.07] px-3 py-1.5 text-xs font-semibold text-cyan-300">
-              <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />
+            <span className="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-3 py-1.5 text-xs font-bold text-blue-700">
+              <span className="h-1.5 w-1.5 rounded-full bg-blue-600" />
               آینده از یادگیری شروع می‌شود
             </span>
-            <h2 className="mt-5 text-2xl font-black leading-relaxed sm:text-3xl">
-              قدم بعدی تو، <span className="text-cyan-300">یک مهارت تازه</span>
+
+            <h2 className="mt-5 text-2xl font-black leading-relaxed text-slate-900 sm:text-3xl">
+              قدم بعدی تو، <span className="text-blue-600">یک مهارت تازه</span>
             </h2>
-            <p className="mt-3 max-w-md text-sm leading-8 text-slate-400">
+
+            <p className="mt-3 max-w-md text-sm leading-8 text-slate-500">
               یاد بگیر، رشد کن و مسیر حرفه‌ای خودت را با آموزش‌های کاربردی مکتب‌خونه بساز.
             </p>
           </div>
 
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-5 sm:p-7">
-            <div className="pointer-events-none absolute -left-8 -top-12 h-40 w-40 rounded-full bg-cyan-300/[0.08] blur-3xl" />
+          <div className="relative overflow-hidden rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-sky-50 p-5 shadow-sm shadow-blue-100/50 sm:p-7">
+            <div className="pointer-events-none absolute -left-8 -top-12 h-40 w-40 rounded-full bg-blue-100/70 blur-3xl" />
+
             <div className="relative flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <div className="flex items-center gap-2 text-cyan-300">
+                <div className="flex items-center gap-2 text-blue-600">
                   <FaHeadset size={18} />
-                  <span className="text-sm font-bold">همراه شما هستیم</span>
+                  <span className="text-sm font-extrabold">همراه شما هستیم</span>
                 </div>
-                <p className="mt-2 text-lg font-bold">سؤالی داری؟ با ما صحبت کن.</p>
-                <p className="mt-2 text-sm text-slate-400">تیم پشتیبانی مکتب‌خونه در کنار شماست.</p>
+
+                <p className="mt-2 text-lg font-extrabold text-slate-900">
+                  سؤالی داری؟ با ما صحبت کن.
+                </p>
+
+                <p className="mt-2 text-sm leading-7 text-slate-500">
+                  تیم پشتیبانی مکتب‌خونه در کنار شماست.
+                </p>
               </div>
-              <a href="tel:02191013171" className="group inline-flex shrink-0 items-center justify-center gap-3 rounded-xl bg-cyan-300 px-5 py-3.5 font-bold text-[#071b2d] transition hover:bg-cyan-200">
+
+              <a
+                href="tel:02191013171"
+                className="group inline-flex shrink-0 items-center justify-center gap-3 rounded-xl bg-blue-600 px-5 py-3.5 font-bold text-white shadow-lg shadow-blue-600/15 transition duration-300 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-blue-600/25"
+              >
                 ۰۲۱-۹۱۰۱۳۱۷۱
-                <FaArrowLeft className="transition-transform group-hover:-translate-x-1" />
+                <FaArrowLeft className="transition-transform duration-300 group-hover:-translate-x-1" />
               </a>
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-x-5 gap-y-10 border-b border-white/10 py-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10 lg:py-14">
+        <div className="grid grid-cols-2 gap-x-5 gap-y-9 border-b border-slate-200 py-10 sm:gap-y-10 sm:py-12 lg:grid-cols-4 lg:gap-10 lg:py-14">
           {categories.map(({ title, icon: Icon, links }) => (
             <div key={title}>
               <div className="mb-5 flex items-center gap-3">
-                <span className="grid h-10 w-10 place-items-center rounded-xl border border-cyan-300/10 bg-cyan-300/[0.07] text-lg text-cyan-300">
+                <span className="grid h-10 w-10 place-items-center rounded-xl border border-blue-100 bg-blue-50 text-lg text-blue-600 transition duration-300 group-hover:bg-blue-100">
                   <Icon />
                 </span>
-                <h3 className="font-bold text-white">{title}</h3>
+                <h3 className="font-extrabold text-slate-800">{title}</h3>
               </div>
+
               <ul className="space-y-2">
-                {links.map((link) => <FooterLink key={link}>{link}</FooterLink>)}
+                {links.map((link) => (
+                  <FooterLink key={link}>{link}</FooterLink>
+                ))}
               </ul>
             </div>
           ))}
         </div>
 
-        <div className="grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-6 lg:gap-8 lg:py-14">
+        <div className="grid gap-9 py-10 sm:grid-cols-2 sm:py-12 lg:grid-cols-6 lg:gap-8 lg:py-14">
           <div className="lg:col-span-2">
             <Link href="/" className="inline-flex items-center gap-3">
-              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-cyan-300 text-2xl font-black text-[#071b2d]">م</span>
-              <span className="text-2xl font-black tracking-tight">مکتب‌خونه</span>
+              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-blue-600 text-2xl font-black text-white shadow-lg shadow-blue-600/20">
+                م
+              </span>
+
+              <span className="text-2xl font-black tracking-tight text-slate-900">
+                مکتب‌خونه
+              </span>
             </Link>
-            <p className="mt-5 max-w-xs text-sm leading-8 text-slate-400">
+
+            <p className="mt-5 max-w-xs text-sm leading-8 text-slate-500">
               فضایی برای یادگیری، کشف استعدادها و ساختن آینده‌ای حرفه‌ای‌تر.
             </p>
+
             <div className="mt-6 flex flex-wrap gap-2.5">
               {socials.map(({ icon: Icon, label, href }) => (
-                <a key={label} href={href} target="_blank" rel="noreferrer" aria-label={label} className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/[0.04] text-slate-300 transition duration-200 hover:-translate-y-1 hover:border-cyan-300/30 hover:bg-cyan-300/10 hover:text-cyan-300">
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={label}
+                  className="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 bg-white text-slate-500 transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600"
+                >
                   <Icon size={17} />
                 </a>
               ))}
@@ -116,30 +161,50 @@ export default function DesktopFooter() {
 
           {sections.map((section) => (
             <div key={section.title}>
-              <h3 className="mb-5 font-bold text-white">{section.title}</h3>
+              <h3 className="mb-5 font-extrabold text-slate-800">
+                {section.title}
+              </h3>
+
               <ul className="space-y-2">
-                {section.links.map((link) => <FooterLink key={link}>{link}</FooterLink>)}
+                {section.links.map((link) => (
+                  <FooterLink key={link}>{link}</FooterLink>
+                ))}
               </ul>
             </div>
           ))}
         </div>
 
-        <div className="flex flex-col gap-6 border-t border-white/10 py-7 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-6 border-t border-slate-200 py-7 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-4">
-            <div className="flex h-16 w-16 items-center justify-center rounded-xl border border-white/10 bg-white p-1.5">
-              <Image src="/images/enamad.jpg" alt="نماد اعتماد الکترونیکی" width={100} height={100} className="h-full w-full object-contain" />
+            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white p-1.5 shadow-sm">
+              <Image
+                src="/images/enamad.jpg"
+                alt="نماد اعتماد الکترونیکی"
+                width={100}
+                height={100}
+                className="h-full w-full object-contain"
+              />
             </div>
+
             <div>
-              <p className="text-sm font-bold text-white">یادگیری با اطمینان</p>
-              <p className="mt-1 text-xs leading-6 text-slate-400">مکتب‌خونه، همراه مسیر رشد شما</p>
+              <p className="text-sm font-extrabold text-slate-800">
+                یادگیری با اطمینان
+              </p>
+              <p className="mt-1 text-xs leading-6 text-slate-500">
+                مکتب‌خونه، همراه مسیر رشد شما
+              </p>
             </div>
           </div>
 
-          <p className="text-xs leading-7 text-slate-400 sm:max-w-md sm:text-left">
+          <p className="text-xs leading-7 text-slate-500 sm:max-w-md sm:text-left">
             تمام حقوق این وب‌سایت متعلق به شرکت ندای دانش همراه ایرانیان (مکتب‌خونه) است.
           </p>
 
-          <a href="#" aria-label="بازگشت به بالای صفحه" className="flex h-10 w-10 shrink-0 items-center justify-center self-end rounded-xl border border-white/10 text-slate-300 transition hover:border-cyan-300/30 hover:bg-cyan-300/10 hover:text-cyan-300 sm:self-auto">
+          <a
+            href="#"
+            aria-label="بازگشت به بالای صفحه"
+            className="flex h-10 w-10 shrink-0 items-center justify-center self-end rounded-xl border border-slate-200 bg-white text-blue-600 transition duration-300 hover:border-blue-200 hover:bg-blue-50 sm:self-auto"
+          >
             <FaArrowUp />
           </a>
         </div>

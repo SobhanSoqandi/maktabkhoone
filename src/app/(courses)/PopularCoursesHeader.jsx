@@ -24,7 +24,7 @@ export default function PopularCoursesHeader({
             <div className="mb-8 flex items-center justify-between">
 
                 <div className="flex items-center gap-3">
-                    <div className="h-7 w-1.5 rounded-full bg-teal-500" />
+                    <div className="h-7 w-1.5 rounded-full bg-blue-500" />
 
                     <h2 className="text-2xl font-bold text-gray-900">
                         محبوب‌ترین دوره‌ها
