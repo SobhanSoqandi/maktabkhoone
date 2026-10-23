@@ -13,7 +13,7 @@ export default function RecentSearches({
                     جستجو های اخیر 
                 </h3>
 
-                <button className="btn btn-primary text-lg p-2 text-zinc-500" >
+                <button className="btn btn-primary text-lg p-2 text-rose-500" >
                     <BiTrash />
                 </button>
             </div>
@@ -29,10 +29,10 @@ export default function RecentSearches({
               px-4
               py-2
               text-sm
-              text-teal-600
+              text-blue-600
               transition
-              hover:bg-teal-50
-              hover:text-teal-700
+              hover:bg-blue-50
+              hover:text-blue-700
               whitespace-nowrap
             "
           >

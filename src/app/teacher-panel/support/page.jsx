@@ -26,7 +26,7 @@ function page() {
             />
 
 
-        <button className='btn btn-primary w-full sm:w-56 bg-teal-400 text-white btn-shake hover:bg-teal-300' >
+        <button className='btn btn-primary w-full sm:w-56 bg-blue-500 text-white btn-shake hover:bg-blue-600' >
             <FiPhoneCall />
             درخواست پشتیبانی
         </button>

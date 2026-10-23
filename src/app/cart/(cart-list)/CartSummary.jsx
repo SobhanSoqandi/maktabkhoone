@@ -41,7 +41,7 @@ export default function CartSummary({ courses }) {
         </div>
 
         <div className="relative flex items-center w-full max-w-md">
-          <FaGift className="right-3 z-10 absolute text-gray-400" />
+          <FaGift className="right-3 text-xl z-10 absolute text-blue-500" />
 
           <input
             type="text"
@@ -65,7 +65,7 @@ export default function CartSummary({ courses }) {
         </div>
       </div>
 
-      <button className="mt-8 p-4 w-full btn btn-success">
+      <button className="mt-8 p-4 w-full btn btn-success bg-emerald-500">
         ادامه فرایند خرید
       </button>
 

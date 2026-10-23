@@ -3,6 +3,7 @@
 import useGet from "@/app/(hooks)/useGet";
 
 import TransactionsTable from "./TransactionsTable";
+import Loading from "@/app/(components)/Loading";
 
 export default function Page() {
   const { data: transactions, isLoading } = useGet("payments", "get_payment");
@@ -14,7 +15,9 @@ export default function Page() {
 
       <>
         {isLoading ? (
-          <div>loading</div>
+          <div>
+            <Loading />
+          </div>
         ) : (
           <TransactionsTable transactions={transactions} />
         )}

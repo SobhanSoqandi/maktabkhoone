@@ -53,7 +53,7 @@ function CoursesHeader({ activeSort, setactiveSort }) {
         <button
           onClick={() => changeSort("")}
           className={`text-nowrap transition ${
-            !activeSort ? "text-teal-600 font-bold" : "hover:text-teal-500"
+            !activeSort ? "text-blue-600 font-bold" : "hover:text-blue-500"
           }`}
         >
           {" "}
@@ -63,8 +63,8 @@ function CoursesHeader({ activeSort, setactiveSort }) {
           onClick={() => changeSort("newest")}
           className={`text-nowrap transition ${
             activeSort === "newest"
-              ? "text-teal-600 font-bold"
-              : "hover:text-teal-500"
+              ? "text-blue-600 font-bold"
+              : "hover:text-blue-500"
           }`}
         >
           {" "}
@@ -74,8 +74,8 @@ function CoursesHeader({ activeSort, setactiveSort }) {
           onClick={() => changeSort("popular")}
           className={`text-nowrap transition ${
             activeSort === "popular"
-              ? "text-teal-600 font-bold"
-              : "hover:text-teal-500"
+              ? "text-blue-600 font-bold"
+              : "hover:text-blue-500"
           }`}
         >
           {" "}
@@ -86,8 +86,8 @@ function CoursesHeader({ activeSort, setactiveSort }) {
           onClick={() => changeSort("price_high")}
           className={`text-nowrap transition ${
             activeSort === "price_high"
-              ? "text-teal-600 font-bold"
-              : "hover:text-teal-500"
+              ? "text-blue-600 font-bold"
+              : "hover:text-blue-500"
           }`}
         >
           {" "}
@@ -97,8 +97,8 @@ function CoursesHeader({ activeSort, setactiveSort }) {
           onClick={() => changeSort("price_low")}
           className={`text-nowrap transition ${
             activeSort === "price_low"
-              ? "text-teal-600 font-bold"
-              : "hover:text-teal-500"
+              ? "text-blue-600 font-bold"
+              : "hover:text-blue-500"
           }`}
         >
           کمترین قیمت
@@ -107,8 +107,8 @@ function CoursesHeader({ activeSort, setactiveSort }) {
           onClick={() => changeSort("oldest")}
           className={`text-nowrap transition ${
             activeSort === "oldest"
-              ? "text-teal-600 font-bold"
-              : "hover:text-teal-500"
+              ? "text-blue-600 font-bold"
+              : "hover:text-blue-500"
           }`}
         ></button>
       </div>

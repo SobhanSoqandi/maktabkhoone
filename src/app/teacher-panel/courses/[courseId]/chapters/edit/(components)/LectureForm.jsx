@@ -91,7 +91,7 @@ export function LectureForm({ unit }) {
       <div className="flex items-center gap-3">
         <button
           type="submit"
-          className="min-w-40 rounded bg-teal-600 px-5 py-3 text-white hover:bg-teal-500"
+          className="min-w-40 rounded bg-blue-600 px-5 py-3 text-white hover:bg-blue-500"
         >
           {isEdit ? "ذخیره تغییرات" : "ایجاد جلسه"}
         </button>

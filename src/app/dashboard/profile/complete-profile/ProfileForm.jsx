@@ -132,7 +132,7 @@ export default function ProfileForm({ user }) {
       <button
         type="submit"
         disabled={isPending}
-        className="mt-10 w-full btn btn-success"
+        className="mt-10 w-full md:w-60 p-3 btn btn-success"
       >
         {isPending ? "در حال ذخیره..." : "ذخیره تغییرات"}
       </button>

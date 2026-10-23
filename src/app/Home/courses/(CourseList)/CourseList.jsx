@@ -10,7 +10,7 @@ export default function CourseList({
   onPageChange,
 }) {
   return (
-    <section className="flex flex-col gap-6">
+    <section className="flex flex-col gap-6 m-3">
       {courses.items.map((course) => (
         <CourseCard key={course.id} course={course} />
       ))}

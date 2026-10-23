@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from "next/image";
@@ -5,9 +6,11 @@ import { BiTrash } from "react-icons/bi";
 import { base_url } from "../../../../data/info";
 import useMutationData from "@/app/(hooks)/useMutationData";
 import { useQueryClient } from "@tanstack/react-query";
+import { toPersianNumbers } from "@/app/Utils/toPersianNumbers";
 
 export default function CartItem({ course }) {
   const queryClient = useQueryClient();
+
   const { mutate: delete_course } = useMutationData(
     `cart-course/${course.cart_course_id}`,
     "delete",
@@ -25,26 +28,27 @@ export default function CartItem({ course }) {
       },
     },
   );
+
   return (
-    <div className="flex items-center gap-5 shadow p-2 border border-gray-200 rounded-2xl">
-      <div className="relative rounded-2xl w-56 h-32 overflow-hidden">
+    <article className="group flex flex-col gap-4 rounded-2xl border border-blue-100 bg-white p-3 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-[0_10px_30px_-18px_rgba(37,99,235,0.3)] sm:flex-row sm:items-center sm:gap-5 sm:p-4">
+      <div className="relative h-44 w-full shrink-0 overflow-hidden rounded-xl bg-blue-50 sm:h-28 sm:w-40 md:h-32 md:w-48">
         <Image
           src={base_url + course.course.banner}
           alt={course.course.title}
           unoptimized
           fill
-          className="object-cover"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
       </div>
 
-      <div className="flex-1">
-        <h3 className="font-black text-lg">{course.course.title}</h3>
+      <div className="flex min-w-0 flex-1 flex-col justify-between gap-4 sm:py-1">
+        <h3 className="line-clamp-2 text-base font-black leading-7 text-slate-800 transition-colors duration-300 group-hover:text-blue-700 sm:text-lg">
+          {course.course.title}
+        </h3>
 
-        {/* <p className="mt-2 text-gray-500">{course.teacher}</p> */}
-
-        <div className="flex items-center gap-3 mt-5">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
           {course.discount > 0 && (
-            <span className="text-teal-600 text-lg">
+            <span className="rounded-lg border border-blue-100 bg-blue-50 px-2.5 py-1.5 text-xs font-bold text-blue-600 sm:text-sm">
               {((course.discount * course.course.price) / 100).toLocaleString(
                 "fa-IR",
               )}{" "}
@@ -52,20 +56,29 @@ export default function CartItem({ course }) {
             </span>
           )}
 
-          <span className="font-black text-xl">
-            {course.course.price.toLocaleString("fa-IR")}
-          </span>
+          <div className="flex flex-wrap items-baseline gap-1.5">
+            <span className="text-xl tracking-tight text-slate-900 sm:text-xl">
+              {toPersianNumbers(course.course.price)}
+            </span>
 
-          <span className="text-gray-500">تومان</span>
+            <span className="text-xs font-medium text-slate-400 sm:text-sm">
+              تومان
+            </span>
+          </div>
         </div>
       </div>
 
-      <button
-        onClick={() => delete_course()}
-        className="hover:shadow-2xl p-2 text-gray-500 hover:text-red-500 btn btn-primary"
-      >
-        <BiTrash size={22} />
-      </button>
-    </div>
+      <div className="flex items-center justify-end border-t border-slate-100 pt-3 sm:ml-1 sm:border-0 sm:pt-0">
+        <button
+          type="button"
+          onClick={() => delete_course()}
+          aria-label="حذف دوره از سبد خرید"
+          title="حذف از سبد خرید"
+          className="flex h-10 w-10 items-center justify-center rounded-xl border border-blue-100 bg-blue-50 text-blue-500 transition-all duration-200 hover:border-red-100 hover:bg-red-50 hover:text-red-500 active:scale-95 sm:h-11 sm:w-11"
+        >
+          <BiTrash size={22} />
+        </button>
+      </div>
+    </article>
   );
 }

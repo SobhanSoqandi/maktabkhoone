@@ -55,10 +55,10 @@ export default function HeaderStats({ course , files_count }) {
         return (
           <div
             key={item.id}
-            className="flex items-center gap-2 bg-white hover:shadow-md p-4 border border-gray-200 hover:border-teal-500 rounded-2xl transition"
+            className="flex items-center gap-2 bg-white hover:shadow-md p-4 border border-gray-200 hover:border-blue-500 rounded-2xl transition"
           >
-            <div className="flex justify-center items-center bg-teal-50 rounded-2xl w-10 sm:w-14 h-10 sm:h-14">
-              <Icon className="text-teal-600 text-2xl sm:text-3xl" />
+            <div className="flex justify-center items-center bg-blue-50 rounded-2xl w-10 sm:w-14 h-10 sm:h-14">
+              <Icon className="text-blue-600 text-2xl sm:text-3xl" />
             </div>
 
             <div>

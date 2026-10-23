@@ -2,7 +2,7 @@ import Image from "next/image";
 import { HiOutlinePlay, HiOutlineEllipsisHorizontal } from "react-icons/hi2";
 import { base_url } from "../../../../data/info";
 import Link from "next/link";
-import { courses } from "@/app/(courses)/course-data";
+
 
 export default function CourcesCard({ course }) {
   return (
@@ -35,7 +35,7 @@ export default function CourcesCard({ course }) {
 
         <div className="flex-1 bg-gray-200 rounded-full h-2 overflow-hidden">
           <div
-            className="bg-teal-500 rounded-full h-full transition-all"
+            className="bg-blue-500 rounded-full h-full transition-all"
             style={{
               width: `${course.progress}%`,
             }}

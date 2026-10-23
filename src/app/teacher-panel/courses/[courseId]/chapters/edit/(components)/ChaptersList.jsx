@@ -13,7 +13,7 @@ import { FiPlus } from "react-icons/fi";
 import { ChapterRow, gridClass } from "./ChapterRow";
 
 export function ChaptersList({ initialChapters }) {
-  // آدرس همین صفحه (…/chapters) پایه‌ی همه‌ی لینک‌هاست
+
   const basePath = usePathname();
 
   const [chapters, setChapters] = useState(initialChapters);

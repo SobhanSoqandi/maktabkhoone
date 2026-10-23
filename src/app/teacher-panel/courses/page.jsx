@@ -44,8 +44,8 @@ export default function CoursesPage() {
 
       <div className="flex flex-col gap-4 sm:gap-5">
         {isLoading ? (
-          <div className="py-16 text-slate-400 text-sm text-center">
-            در حال دریافت دوره‌ها...
+          <div className="py-16 text-blue-600 text-sm text-center">
+             در حال دریافت دوره‌ها...
           </div>
         ) : filteredCourses.length > 0 ? (
           filteredCourses.map((course) => (

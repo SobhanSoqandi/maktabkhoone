@@ -37,7 +37,7 @@ export default function PhoneForm({ setIsSent, setPhone }) {
 
       <button
         type="submit"
-        className="bg-teal-600 hover:bg-teal-700 py-3 rounded-xl w-full font-bold text-white transition"
+        className="btn btn-success w-full"
       >
         ارسال کد
       </button>

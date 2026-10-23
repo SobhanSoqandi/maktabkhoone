@@ -1,26 +1,11 @@
-import Image from "next/image";
+
 import { FaRegStar } from "react-icons/fa";
 import { HiOutlineUsers } from "react-icons/hi2";
 import { IoPlayCircleOutline } from "react-icons/io5";
 
 import ExpandableText from "@/app/Utils/ExpandableText";
-import { base_url } from "../../../../../../../data/info";
 
 export default function TeacherDescription({ teacher_detail: teacher }) {
-  //   const teacher = {
-  //     name: "جادی میرمیرانی",
-  //     avatar: "/images/teacher.jpg",
-  //     desc: "برنامه‌نویس، مدیر سیستم، آموزشگر...",
-  //     courses: 9,
-  //     students: 341558,
-  //     reviews: 25421,
-  //     description: `جادی به معنای حقیقی کلمه، یک گیک و یک هکر است،
-  //         البته منظور از هکر، دزدی پسورد و ایمیل مردم نیست! بلکه به
-  //          معنی عشق به دانستن و عشق به تحقیق درباره خیلی از چیزهایی
-  //         هست که می‌بینم و می‌شنویم. جادی بیشتر از ۲۰ سال است که به
-  //         صورت حرفه‌ای برنامه‌نویسی می‌کند و تجربیات زیادی در این زمینه داره`,
-  //   };
-  console.log(teacher);
   const stats = [
     {
       id: 1,
@@ -43,46 +28,34 @@ export default function TeacherDescription({ teacher_detail: teacher }) {
   ];
 
   return (
-    <section className="bg-white p-8 border border-gray-200 rounded-3xl">
-      <div className="flex md:flex-row flex-col-reverse justify-between items-start md:items-center gap-6">
-        <div className="flex-1">
-          <h2 className="font-black text-3xl">
-            {teacher.teacher.user.student_profile.name + teacher.teacher.user.student_profile.last_name}
+    <section className="rounded-2xl border border-blue-100 bg-white p-5 sm:p-6">
+      <div className="flex flex-col-reverse items-start justify-between gap-5 sm:flex-row sm:items-center">
+        <div className="min-w-0 flex-1">
+          <h2 className="text-xl font-extrabold leading-relaxed text-slate-800 sm:text-2xl">
+            {/* {teacher.teacher.user.student_profile.name + teacher.teacher.user.student_profile.last_name ?? "none"} */}
           </h2>
 
-          <p className="mt-4 text-gray-500 leading-9">{teacher.teacher.desc}</p>
+          <p className="mt-2 text-sm leading-7 text-slate-500 sm:text-base sm:leading-8">
+            {teacher.teacher.desc}
+          </p>
         </div>
 
-        <div className="relative border border-gray-200 rounded-full w-24 h-24 overflow-hidden">
-          {/* <Image
-            src={base_url + teacher?.teacher?.user?.avatar}
-            alt={teacher.teacher.firstname + teacher.teacher.lastname}
-            fill
-            unoptimized
-            className="object-cover"
-          /> */}
-        </div>
+        
       </div>
 
-      <div className="gap-4 grid grid-cols-1 md:grid-cols-3 mt-10">
+      <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
         {stats.map((item) => {
           const Icon = item.icon;
 
           return (
-            <div
-              key={item.id}
-              className="flex items-center gap-3 bg-white hover:shadow-md p-4 border border-gray-200 hover:border-teal-500 rounded-2xl transition"
-            >
-              <div className="flex justify-center items-center bg-teal-50 rounded-2xl w-10 sm:w-14 h-10 sm:h-14">
-                <Icon className="text-teal-600 text-2xl sm:text-3xl" />
+            <div key={item.id} className="flex min-w-0 items-center gap-3 rounded-xl border border-slate-100 bg-slate-50/70 p-3.5 transition-colors duration-200 hover:border-blue-200 hover:bg-blue-50/50">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-100/70 text-blue-600">
+                <Icon className="text-xl" />
               </div>
 
-              <div>
-                <p className="mb-1 text-gray-500 text-xs sm:text-sm">
-                  {item.title}
-                </p>
-
-                <h3 className="font-bold text-gray-900 text-sm sm:text-base">
+              <div className="min-w-0">
+                <p className="text-xs text-slate-500 sm:text-sm">{item.title}</p>
+                <h3 className="mt-1 break-words text-sm font-bold text-slate-800 sm:text-base">
                   {item.value}
                 </h3>
               </div>
@@ -91,8 +64,11 @@ export default function TeacherDescription({ teacher_detail: teacher }) {
         })}
       </div>
 
-      <div className="mt-10">
-        <ExpandableText text={teacher.teacher.bio} maxLength={100} />
+      <div className="mt-6 border-t border-slate-100 pt-5">
+        <h3 className="mb-3 text-base font-bold text-slate-800">درباره مدرس</h3>
+        <div className="text-sm leading-8 text-slate-600 sm:text-base">
+          <ExpandableText text={teacher.teacher.bio} maxLength={100} />
+        </div>
       </div>
     </section>
   );

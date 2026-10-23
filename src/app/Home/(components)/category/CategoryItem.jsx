@@ -26,7 +26,7 @@ export default function CategoryItem({
     text-sm
     transition-all
     duration-200
-    ${active ? "bg-teal-50 text-teal-700" : "text-gray-700 hover:bg-gray-50"}
+    ${active ? "bg-blue-50 text-blue-700" : "text-gray-700 hover:bg-gray-50"}
   `;
 
   return (
@@ -57,7 +57,7 @@ export default function CategoryItem({
               text-gray-500
               transition-transform
               duration-300
-              group-hover:text-teal-600
+              group-hover:text-blue-600
               ${active ? "-rotate-90" : "group-hover:-translate-x-1"}
             `}
             xmlns="http://www.w3.org/2000/svg"

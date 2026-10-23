@@ -48,11 +48,11 @@ export default function SearchInput() {
           onChange={(e) => setSearch(e.target.value)}
           type="text"
           placeholder="جستجو در دوره‌ها"
-          className="bg-gray-50 pr-20 pl-12 border border-gray-200 focus:border-teal-500 rounded-2xl outline-none w-full h-12"
+          className="bg-blue-50 pr-20 pl-12 border border-gray-200 focus:border-blue-500 text-blue-600 rounded-2xl outline-none w-full h-12"
         />
       </form>
 
-      <FiSearch className="top-1/2 left-5 absolute text-gray-500 text-2xl -translate-y-1/2" />
+      <FiSearch className="top-1/2 left-5 absolute text-blue-500 text-2xl -translate-y-1/2" />
 
       <SearchDropdown open={open} search={search} />
     </div>

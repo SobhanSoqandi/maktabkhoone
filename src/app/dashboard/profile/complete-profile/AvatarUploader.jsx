@@ -45,7 +45,7 @@ export default function AvatarUploader({ preview, setPreview, setFile }) {
       <button
         type="button"
         onClick={handleSelect}
-        className="right-1 bottom-1 absolute flex justify-center items-center bg-teal-500 hover:bg-teal-600 shadow-lg rounded-full w-12 h-12 text-white hover:scale-110 transition-all duration-300"
+        className="right-1 bottom-1 absolute flex justify-center items-center bg-blue-500 hover:bg-blue-600 shadow-lg rounded-full w-12 h-12 text-white hover:scale-110 transition-all duration-300"
       >
         <HiOutlineCamera className="text-2xl" />
       </button>

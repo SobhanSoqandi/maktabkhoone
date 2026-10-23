@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -6,90 +5,48 @@ import { FaArrowLeft, FaGraduationCap, FaPlay } from 'react-icons/fa';
 
 export default function Hero({ imageSrc, title, subtitle, ctaLabel = 'شروع تدریس و ثبت دوره', onCtaClick }) {
   return (
-    <section className="relative isolate overflow-hidden bg-[#071f35]">
-      <div className="absolute inset-0 -z-20">
-        <img src={imageSrc} alt="" className="h-full w-full object-cover opacity-25" />
-      </div>
-      <div className="absolute inset-0 -z-10 bg-gradient-to-l from-[#071f35] via-[#071f35]/95 to-[#071f35]/55" />
-      <div className="absolute -left-32 top-0 -z-10 h-80 w-80 rounded-full bg-cyan-400/10 blur-3xl" />
+    <section className="relative isolate overflow-hidden bg-gradient-to-bl from-[#2563eb] via-[#1d4ed8] to-[#0b1f5c] text-white">
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_0%,rgba(147,197,253,.4),transparent_50%)]" />
+      <div className="absolute inset-0 -z-10 opacity-[.07] [background-image:radial-gradient(#fff_1px,transparent_1px)] [background-size:24px_24px]" />
 
-      <div className="mx-auto grid min-h-[580px] max-w-7xl items-center gap-12 px-5 py-16 sm:px-8 lg:grid-cols-2 lg:px-12 lg:py-20">
-        <div className="max-w-2xl text-right">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-sm font-medium text-cyan-200">
-            <FaGraduationCap />
-            دانش تو، شروع یک مسیر تازه
-          </div>
+      <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 pb-32 pt-16 sm:px-8 lg:grid-cols-2 lg:px-12 lg:pb-40 lg:pt-24">
+        <div className="max-w-xl text-right">
+          <h1 className="text-3xl font-black leading-[1.7] sm:text-4xl lg:text-5xl">{title}</h1>
+          <p className="mt-6 text-base leading-9 text-blue-100 sm:text-lg">{subtitle}</p>
 
-          <h1 className="text-3xl font-black leading-[1.7] tracking-tight text-white sm:text-4xl lg:text-5xl">
-            {title || 'تجربه‌ات را به یک دوره آموزشی تبدیل کن'}
-          </h1>
-
-          <p className="mt-5 max-w-xl text-base leading-9 text-slate-300 sm:text-lg">
-            {subtitle || 'دانسته‌ها و تجربه‌های حرفه‌ای‌ات را با دیگران به اشتراک بگذار. دوره‌ات را ثبت کن و مسیر تدریس را شروع کن.'}
-          </p>
-
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/teacher-panel/register"
               onClick={onCtaClick}
-              className="group inline-flex min-h-14 items-center justify-center gap-3 rounded-xl bg-cyan-400 px-7 py-4 font-bold text-[#071f35] shadow-lg shadow-cyan-950/20 transition hover:-translate-y-0.5 hover:bg-cyan-300"
+              className="group inline-flex min-h-14 items-center justify-center gap-3 rounded-2xl bg-white px-7 font-extrabold text-blue-700 shadow-xl shadow-blue-950/30 transition hover:-translate-y-0.5 hover:bg-blue-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               {ctaLabel}
               <FaArrowLeft className="transition-transform group-hover:-translate-x-1" />
             </Link>
-
             <a
               href="#why-teach"
-              className="inline-flex min-h-14 items-center justify-center gap-3 rounded-xl border border-white/15 px-6 py-4 font-semibold text-white transition hover:border-cyan-300/40 hover:bg-white/5"
+              className="inline-flex min-h-14 items-center justify-center gap-3 rounded-2xl border border-white/30 px-6 font-semibold transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
-              <FaPlay className="text-xs text-cyan-300" />
+              <FaPlay className="text-xs" />
               آشنایی با مزایا
             </a>
           </div>
-
-          <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-slate-300">
-            <span className="inline-flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />
-              ثبت دوره به‌صورت آنلاین
-            </span>
-            <span className="inline-flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />
-              شروع مسیر تدریس
-            </span>
-          </div>
         </div>
 
-        <div className="relative mx-auto hidden w-full max-w-lg lg:block">
-          <div className="absolute -inset-4 rounded-[2rem] border border-white/10 rotate-2" />
-
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.06] p-2 shadow-2xl shadow-black/20">
-            <img
-              src={imageSrc}
-              alt="تدریس و تولید محتوای آموزشی"
-              className="h-[390px] w-full rounded-xl object-cover"
-            />
-            <div className="absolute inset-x-2 bottom-2 rounded-b-xl bg-gradient-to-t from-[#071f35] via-[#071f35]/90 to-transparent px-6 pb-6 pt-16">
-              <p className="text-sm font-medium text-cyan-300">از تجربه تا آموزش</p>
-              <p className="mt-2 text-xl font-bold text-white">اولین دوره‌ات را بساز</p>
-              <p className="mt-2 text-sm leading-7 text-slate-300">
-                دانشت می‌تواند نقطه شروع یادگیری دیگران باشد.
-              </p>
-            </div>
-          </div>
-
-          <div className="absolute -right-5 top-10 flex items-center gap-3 rounded-xl border border-white/10 bg-[#102f46] px-4 py-3 shadow-xl">
-            <div className="grid h-10 w-10 place-items-center rounded-lg bg-cyan-400/10 text-cyan-300">
+        <div className="relative mx-auto w-full max-w-lg">
+          <div className="absolute -inset-3 rotate-3 rounded-[2rem] bg-white/10" />
+          <img src={imageSrc} alt="تدریس و تولید محتوای آموزشی" className="relative h-72 w-full rounded-3xl object-cover shadow-2xl shadow-blue-950/40 sm:h-96" />
+          <div className="absolute -bottom-5 right-4 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 text-slate-900 shadow-xl sm:-right-5">
+            <span className="grid h-11 w-11 place-items-center rounded-xl bg-blue-600 text-white">
               <FaGraduationCap size={20} />
-            </div>
+            </span>
             <div>
-              <p className="text-sm font-bold text-white">مسیر مدرس شدن</p>
-              <p className="mt-1 text-xs text-slate-400">از ثبت دوره شروع کن</p>
+              <p className="text-sm font-extrabold">مسیر مدرس شدن</p>
+              <p className="mt-0.5 text-xs text-slate-500">از ثبت درخواست شروع کن</p>
             </div>
           </div>
         </div>
       </div>
-
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-l from-transparent via-cyan-300/40 to-transparent" />
     </section>
   );
 }

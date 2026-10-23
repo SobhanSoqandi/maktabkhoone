@@ -41,7 +41,7 @@ function StatusFilter({ value, onChange }) {
               className={[
                 "block w-full px-4 py-2 text-right text-sm transition-colors",
                 item.value === value
-                  ? "font-semibold text-emerald-600"
+                  ? "font-semibold text-blue-600"
                   : "text-slate-600 hover:bg-slate-50",
               ].join(" ")}
             >
@@ -64,7 +64,7 @@ export function CoursesToolbar({
     <div className="flex sm:flex-row flex-col sm:flex-wrap sm:justify-between sm:items-center gap-3">
       <button
         type="button"
-        className="flex justify-center items-center gap-2 sm:order-2 bg-rose-700 hover:bg-rose-800 px-5 py-2.5 rounded-xl sm:w-auto font-semibold text-white text-sm transition-colors"
+        className="btn btn-primary"
       >
         <Link href={"/teacher-panel/create-course"}>ساخت دوره جدید</Link>
         <FiPlus size={16} />
