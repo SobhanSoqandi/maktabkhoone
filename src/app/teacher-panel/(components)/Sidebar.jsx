@@ -3,8 +3,16 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FiBookOpen, FiChevronLeft, FiChevronRight, FiChevronDown } from "react-icons/fi";
+import {
+  FiBookOpen,
+  FiChevronLeft,
+  FiChevronRight,
+  FiChevronDown,
+} from "react-icons/fi";
 import { primaryNavItems, secondaryNavItems } from "./nav-items";
+import { useAuth } from "@/context/AuthContext";
+import Image from "next/image";
+import { base_url } from "../../../../data/info";
 
 const STORAGE_KEY = "panel-sidebar-collapsed";
 
@@ -14,8 +22,7 @@ function isPathActive(pathname, href) {
     : `${pathname.split("/").slice(0, -1).join("/")}/${href}`;
 
   return (
-    pathname === normalizedHref ||
-    pathname.startsWith(normalizedHref + "/")
+    pathname === normalizedHref || pathname.startsWith(normalizedHref + "/")
   );
 }
 
@@ -29,6 +36,8 @@ export function Sidebar({ isMobileOpen, onMobileClose }) {
   const [openMenus, setOpenMenus] = useState({});
   const pathname = usePathname();
 
+  const { user } = useAuth();
+  console.log(user);
   useEffect(() => {
     const stored = window.localStorage.getItem(STORAGE_KEY);
     if (stored === "1") setCollapsed(true);
@@ -75,7 +84,9 @@ export function Sidebar({ isMobileOpen, onMobileClose }) {
   function renderItem(item) {
     const Icon = item.icon;
     const hasChildren = Boolean(item.children);
-    const active = hasChildren ? isParentActive(pathname, item) : isPathActive(pathname, item.href);
+    const active = hasChildren
+      ? isParentActive(pathname, item)
+      : isPathActive(pathname, item.href);
     const isOpen = Boolean(openMenus[item.label]);
 
     const rowClasses = [
@@ -88,14 +99,24 @@ export function Sidebar({ isMobileOpen, onMobileClose }) {
 
     const rowContent = (
       <>
-        <span className={collapsed ? "flex items-center" : "flex items-center gap-3"}>
-          <Icon size={20} className={active ? "text-blue-500" : "text-gray-500"} />
+        <span
+          className={
+            collapsed ? "flex items-center" : "flex items-center gap-3"
+          }
+        >
+          <Icon
+            size={20}
+            className={active ? "text-blue-500" : "text-gray-500"}
+          />
           {!collapsed && <span>{item.label}</span>}
         </span>
         {!collapsed && hasChildren && (
           <FiChevronDown
             size={16}
-            className={["text-gray-500 transition-transform", isOpen ? "rotate-180" : ""].join(" ")}
+            className={[
+              "text-gray-500 transition-transform",
+              isOpen ? "rotate-180" : "",
+            ].join(" ")}
           />
         )}
       </>
@@ -117,7 +138,7 @@ export function Sidebar({ isMobileOpen, onMobileClose }) {
           </button>
 
           {!collapsed && isOpen && (
-            <div className="mt-1 flex flex-col gap-1 border-r border-gray-200 pr-3 mr-4">
+            <div className="flex flex-col gap-1 mt-1 mr-4 pr-3 border-gray-200 border-r">
               {item.children.map((child) => {
                 const childActive = isPathActive(pathname, child.href);
                 return (
@@ -159,33 +180,39 @@ export function Sidebar({ isMobileOpen, onMobileClose }) {
     <>
       {isMobileOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/50 md:hidden"
+          className="md:hidden z-40 fixed inset-0 bg-black/50"
           onClick={onMobileClose}
         />
       )}
 
-     
-<aside
-  className={[
-    "fixed inset-y-0 right-0 z-50 flex h-screen w-[280px] shrink-0 flex-col overflow-y-auto overflow-x-hidden",
-    "border-l border-gray-200 bg-white transition-all duration-300 ease-in-out",
-    isMobileOpen ? "translate-x-0 shadow-2xl" : "translate-x-full shadow-none",
-    collapsed ? "md:w-[76px]" : "md:w-[260px]",
-    "md:static md:translate-x-0 md:shadow-none",
-  ].join(" ")}
->
-
-
-        <div className="flex items-center justify-between px-3 pt-4">
+      <aside
+        className={[
+          "fixed inset-y-0 right-0 z-50 flex h-screen w-[280px] shrink-0 flex-col overflow-y-auto overflow-x-hidden",
+          "border-l border-gray-200 bg-white transition-all duration-300 ease-in-out",
+          isMobileOpen
+            ? "translate-x-0 shadow-2xl"
+            : "translate-x-full shadow-none",
+          collapsed ? "md:w-[76px]" : "md:w-[260px]",
+          "md:static md:translate-x-0 md:shadow-none",
+        ].join(" ")}
+      >
+        <div className="flex justify-between items-center px-3 pt-4">
           <button
             onClick={toggleCollapsed}
-            className="hidden md:flex h-8 w-8 items-center justify-center rounded-xl border border-blue-500 text-blue-600 hover:bg-blue-50"
+            className="hidden md:flex justify-center items-center hover:bg-blue-50 border border-blue-500 rounded-xl w-8 h-8 text-blue-600"
           >
-            {collapsed ? <FiChevronLeft size={16} /> : <FiChevronRight size={16} />}
+            {collapsed ? (
+              <FiChevronLeft size={16} />
+            ) : (
+              <FiChevronRight size={16} />
+            )}
           </button>
 
           {!collapsed && (
-            <Link href="/Home" className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-600 text-white">
+            <Link
+              href="/Home"
+              className="flex justify-center items-center bg-blue-600 rounded-xl w-8 h-8 text-white"
+            >
               <FiBookOpen size={18} />
             </Link>
           )}
@@ -201,14 +228,30 @@ export function Sidebar({ isMobileOpen, onMobileClose }) {
           {secondaryNavItems.map(renderItem)}
         </nav>
 
-        <div className="flex items-center gap-2.5 border-t border-gray-200 px-4 py-3">
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-blue-100 text-lg font-medium text-blue-800">
-            س
+        <div className="flex items-center gap-2.5 px-4 py-3 border-gray-200 border-t">
+          <span className="flex justify-center items-center bg-blue-100 rounded-full w-11 h-11 overflow-hidden font-medium text-blue-800 text-lg shrink-0">
+            {user?.avatar ? (
+              <Image
+                src={base_url + user.avatar}
+                alt={user.username}
+                width={44}
+                height={44}
+                unoptimized
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              user?.username?.[0]?.toUpperCase()
+            )}
           </span>
-          {!collapsed && (
+
+          {!collapsed && user && (
             <span className="text-right leading-tight">
-              <span className="block text-lg font-semibold text-gray-900">سبحان سوقندی</span>
-              <span className="block text-medium text-gray-400" dir="ltr">۰۹۳۰۳۱۳۶۶۱۷</span>
+              <span className="block font-semibold text-gray-900 text-lg">
+                {user.username}
+              </span>
+              <span className="block text-gray-400 text-medium" dir="ltr">
+                {user.phone_number}
+              </span>
             </span>
           )}
         </div>

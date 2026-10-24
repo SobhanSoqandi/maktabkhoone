@@ -13,8 +13,7 @@ export default async function CoursePage({ params }) {
   const { slug, id } = await params;
 
   const response = await req(`/course/${id}`);
-  console.log("ressssssssssssss:",response)
-  
+
   const chapters = response.section;
 
   const sections = [
@@ -48,11 +47,9 @@ export default async function CoursePage({ params }) {
     },
   ];
 
-
   return (
     <div className="">
       <CourseHeader response={response} />
-      
 
       <div className="mx-auto container">
         <CourseTabs sections={sections} />

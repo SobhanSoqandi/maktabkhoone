@@ -41,8 +41,10 @@ export default function useMutationData(
     },
 
     onError: (error) => {
-      const msgData = error?.response?.data?.message;
+      const responseData = error?.response?.data;
 
+      const msgData =
+        responseData?.detail ?? responseData?.message ?? responseData?.error;
       let message = "خطایی رخ داده است";
 
       if (typeof msgData === "string") message = msgData;

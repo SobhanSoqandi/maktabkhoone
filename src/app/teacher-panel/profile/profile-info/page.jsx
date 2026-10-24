@@ -1,73 +1,104 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-
-import Input from "@/app/(components)/Input";
-
-
-
-const CURRENT_PROFILE = {
-  first_name: "علی",
-  last_name: "رضایی",
-  national_code: "1234567890",
-  mobile: "09121234567",
-  birth_date: "۱۳۷۵/۰۱/۰۱",
-  is_verified: false,
-};
 
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
+import gregorian from "react-date-object/calendars/gregorian";
+import gregorian_en from "react-date-object/locales/gregorian_en";
 
-
-import { useEffect, useState } from "react";
+import Input from "@/app/(components)/Input";
 import useGet from "@/app/(hooks)/useGet";
 import useMutationData from "@/app/(hooks)/useMutationData";
+import { useQueryClient } from "@tanstack/react-query";
+import { Quando } from "next/font/google";
 
+const PERSIAN_DIGITS = "۰۱۲۳۴۵۶۷۸۹";
+const ARABIC_DIGITS = "٠١٢٣٤٥٦٧٨٩";
 
+function toEnglishDigits(value) {
+  if (typeof value !== "string") return value;
+  return value
+    .replace(/[۰-۹]/g, (d) => String(PERSIAN_DIGITS.indexOf(d)))
+    .replace(/[٠-٩]/g, (d) => String(ARABIC_DIGITS.indexOf(d)));
+}
 
 function ProfileInfoPage() {
   const { data: CURRENT_PROFILE, isLoading } = useGet(
     "teachers/me",
     "teacher_profile",
   );
-  const { mutate } = useMutationData("teachers/me", "patch", "update_info");
+  const queryClient = useQueryClient();
+  const { mutate, isPending } = useMutationData(
+    "teachers/me",
+    "patch",
+    "update_info",
+    "اپدیت با موفقیت انجام شد ",
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ["teacher_profile"],
+        });
+      },
+    },
+  );
+
   const {
     register,
     handleSubmit,
-
     formState: { errors },
     reset,
   } = useForm();
 
   const [birthDate, setBirthDate] = useState(null);
+  const initialized = useRef(false);
 
   useEffect(() => {
-    if (!isLoading && CURRENT_PROFILE) {
-      console.log("CURRENT_PROFILE:", CURRENT_PROFILE);
-      console.log("isLoading:", isLoading);
-      const user = CURRENT_PROFILE.user;
-      const studentProfile = user.student_profile;
-      reset({
-        first_name: studentProfile.name,
-        last_name: studentProfile.last_name,
-        national_code: CURRENT_PROFILE.national_code,
-        mobile: user.phone_number,
-        education: CURRENT_PROFILE.education,
-        bio: CURRENT_PROFILE.bio,
-      });
-      const birthday = CURRENT_PROFILE.user.student_profile.birthday;
-      if (birthday) {
-        const date = new DateObject({
-          date: new Date(birthday),
-        });
+    if (!CURRENT_PROFILE || initialized.current) return;
+    initialized.current = true;
 
-        date.convert(persian, persian_fa);
+    const profile = CURRENT_PROFILE.user?.student_profile;
 
-        setBirthDate(date);
-      }
+    reset({
+      first_name: profile?.name ?? "",
+      last_name: profile?.last_name ?? "",
+      national_code: CURRENT_PROFILE.national_code ?? "",
+      mobile: CURRENT_PROFILE.user?.phone_number ?? "",
+      education: CURRENT_PROFILE.education ?? "",
+      bio: CURRENT_PROFILE.bio ?? "",
+    });
+
+    if (profile?.birthday) {
+      const date = new DateObject({
+        date: String(profile.birthday).slice(0, 10),
+        format: "YYYY-MM-DD",
+        calendar: gregorian,
+        locale: gregorian_en,
+      }).convert(persian, persian_fa);
+
+      setBirthDate(date);
     }
-  }, [isLoading, CURRENT_PROFILE, reset]);
+  }, [CURRENT_PROFILE, reset]);
+
+  const onSubmit = (formData) => {
+    const birthday = birthDate
+      ? new DateObject(birthDate)
+          .convert(gregorian, gregorian_en)
+          .format("YYYY-MM-DD")
+      : null;
+
+    mutate({
+      data: {
+        ...formData,
+        national_code: toEnglishDigits(formData.national_code),
+        mobile: toEnglishDigits(formData.mobile),
+        birthday,
+      },
+    });
+  };
+
   if (isLoading || !CURRENT_PROFILE) {
     return (
       <div dir="rtl" className="flex justify-center items-center min-h-screen">
@@ -75,20 +106,12 @@ function ProfileInfoPage() {
       </div>
     );
   }
+
   return (
     <div dir="rtl" className="bg-gray-50 md:p-10 min-h-screen">
       <div className="mx-auto max-w-4xl">
         <form
-          onSubmit={handleSubmit((data) => {
-            console.log(birthDate.toDate());
-
-            mutate({
-              data: {
-                ...data,
-                birthday: birthDate ? birthDate.toDate() : null,
-              },
-            });
-          })}
+          onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-8 bg-white shadow-sm p-6 md:p-10 rounded-2xl"
         >
           <div className="flex justify-between items-center">
@@ -126,7 +149,7 @@ function ProfileInfoPage() {
               validation={{
                 required: "کد ملی را وارد کنید",
                 pattern: {
-                  value: /^\d{10}$/,
+                  value: /^[0-9۰-۹٠-٩]{10}$/,
                   message: "کد ملی باید ۱۰ رقم باشد",
                 },
               }}
@@ -142,7 +165,7 @@ function ProfileInfoPage() {
               validation={{
                 required: "شماره همراه را وارد کنید",
                 pattern: {
-                  value: /^09\d{9}$/,
+                  value: /^(09|۰۹)[0-9۰-۹]{9}$/,
                   message: "شماره همراه معتبر نیست",
                 },
               }}
@@ -185,7 +208,12 @@ function ProfileInfoPage() {
             </label>
 
             <textarea
-              {...register("bio")}
+              {...register("bio", {
+                maxLength: {
+                  value: 1000,
+                  message: "حداکثر ۱۰۰۰ کاراکتر مجاز است",
+                },
+              })}
               className="w-full min-h-32 resize-none input"
               placeholder="درباره خودتان بنویسید..."
             />
@@ -195,8 +223,12 @@ function ProfileInfoPage() {
             )}
           </div>
 
-          <button type="submit" className="self-start px-10 btn btn-success">
-            ذخیره تغییرات
+          <button
+            type="submit"
+            disabled={isPending}
+            className="self-start px-10 btn btn-success"
+          >
+            {isPending ? "در حال ذخیره..." : "ذخیره تغییرات"}
           </button>
         </form>
       </div>

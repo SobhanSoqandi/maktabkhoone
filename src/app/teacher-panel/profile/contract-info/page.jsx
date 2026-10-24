@@ -21,15 +21,17 @@ function ContractInfoPage() {
   };
 
   return (
-    <div dir="rtl" className="min-h-screen bg-gray-50 p-6 md:p-10">
-      <div className="max-w-3xl mx-auto">
+    <div dir="rtl" className="bg-gray-50 p-6 md:p-10 min-h-screen">
+      <div className="mx-auto max-w-3xl">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="bg-white rounded-2xl shadow-sm p-6 md:p-10 flex flex-col gap-6"
+          className="flex flex-col gap-6 bg-white shadow-sm p-6 md:p-10 rounded-2xl"
         >
-          <h2 className="text-lg font-medium text-gray-900">ویرایش اطلاعات قراردادی</h2>
+          <h2 className="font-medium text-gray-900 text-lg">
+            ویرایش اطلاعات قراردادی
+          </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="gap-6 grid grid-cols-1 md:grid-cols-2">
             <Input
               label="شماره شبا"
               registerName="shaba_number"
@@ -37,7 +39,10 @@ function ContractInfoPage() {
               errors={errors}
               validation={{
                 required: "شماره شبا را وارد کنید",
-                pattern: { value: /^\d{16}$/, message: "شماره شبا باید ۱۶ رقم باشد" },
+                pattern: {
+                  value: /^\d{16}$/,
+                  message: "شماره شبا باید ۱۶ رقم باشد",
+                },
               }}
               className="input"
               lableClassName="text-sm font-medium text-gray-700"
@@ -50,7 +55,10 @@ function ContractInfoPage() {
               errors={errors}
               validation={{
                 required: "کد پستی را وارد کنید",
-                pattern: { value: /^\d{10}$/, message: "کد پستی باید ۱۰ رقم باشد" },
+                pattern: {
+                  value: /^\d{10}$/,
+                  message: "کد پستی باید ۱۰ رقم باشد",
+                },
               }}
               className="input"
               lableClassName="text-sm font-medium text-gray-700"
@@ -58,7 +66,7 @@ function ContractInfoPage() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium text-gray-700">
+            <label className="font-medium text-gray-700 text-sm">
               آدرس <span className="text-red-500">*</span>
             </label>
             <textarea
@@ -69,11 +77,11 @@ function ContractInfoPage() {
               }`}
             />
             {errors.address && (
-              <p className="text-xs text-red-500">{errors.address.message}</p>
+              <p className="text-red-500 text-xs">{errors.address.message}</p>
             )}
           </div>
 
-          <button type="submit" className="btn btn-success self-center px-16">
+          <button type="submit" className="self-center px-16 btn btn-success">
             ذخیره تغییرات
           </button>
         </form>

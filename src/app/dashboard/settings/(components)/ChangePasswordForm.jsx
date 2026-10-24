@@ -34,28 +34,36 @@ export default function ChangePasswordForm() {
   }
 
   return (
-    <div className="w-[90vw] max-w-lg overflow-hidden rounded-3xl bg-white">
-      <div className="flex items-center gap-4 border-b border-slate-100 bg-blue-50/60 px-8 py-7">
-        <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-600/30">
+    <div className="bg-white rounded-3xl w-[90vw] max-w-lg overflow-hidden">
+      <div className="flex items-center gap-4 bg-blue-50/60 px-8 py-7 border-slate-100 border-b">
+        <div className="place-items-center grid bg-blue-600 shadow-blue-600/30 shadow-lg rounded-2xl w-14 h-14 text-white shrink-0">
           <HiOutlineShieldCheck size={28} />
         </div>
 
         <div>
-          <h2 className="text-xl font-extrabold text-slate-900">تغییر رمز عبور</h2>
-          <p className="mt-1 text-sm leading-6 text-slate-500">
+          <h2 className="font-extrabold text-slate-900 text-xl">
+            تغییر رمز عبور
+          </h2>
+          <p className="mt-1 text-slate-500 text-sm leading-6">
             برای افزایش امنیت حساب، رمز عبور جدید انتخاب کنید.
           </p>
         </div>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 p-8">
-        <Input
-          label="رمز عبور فعلی"
-          type="password"
-          register={register}
-          registerName="pre_pass"
-          className={inputClass}
-        />
+        <div>
+          <Input
+            label="رمز عبور فعلی"
+            type="password"
+            register={register}
+            registerName="pre_pass"
+            className={inputClass}
+          />
+
+          <p className="mt-2 px-1 text-slate-500 text-xs leading-5">
+            اگر تا الان رمز عبور تنظیم نکرده‌اید، این فیلد را خالی بگذارید.
+          </p>
+        </div>
 
         <Input
           label="رمز عبور جدید"
@@ -78,7 +86,7 @@ export default function ChangePasswordForm() {
         />
 
         {errors.confirm_password && (
-          <p className="rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-600">
+          <p className="bg-red-50 px-4 py-3 rounded-xl font-medium text-red-600 text-sm">
             {errors.confirm_password.message}
           </p>
         )}
@@ -86,7 +94,7 @@ export default function ChangePasswordForm() {
         <button
           disabled={isPending}
           type="submit"
-          className="w-full rounded-xl bg-blue-600 py-3.5 font-bold text-white shadow-lg shadow-blue-600/30 transition hover:bg-blue-700 active:scale-[0.98] disabled:opacity-60"
+          className="bg-blue-600 hover:bg-blue-700 disabled:opacity-60 shadow-blue-600/30 shadow-lg py-3.5 rounded-xl w-full font-bold text-white active:scale-[0.98] transition"
         >
           {isPending ? "در حال ذخیره..." : "ذخیره تغییرات"}
         </button>
