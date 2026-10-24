@@ -40,30 +40,30 @@ export default function Page() {
   };
 
   return (
-    <div dir="rtl" className="min-h-screen bg-slate-50 px-4 py-10 sm:px-8">
+    <div dir="rtl" className="bg-slate-50 px-4 sm:px-8 py-10 min-h-screen">
       <div className="mx-auto max-w-4xl">
-        <div className="mb-8 flex items-center gap-4">
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-600/20">
+        <div className="flex items-center gap-4 mb-8">
+          <div className="flex justify-center items-center bg-blue-600 shadow-blue-600/20 shadow-lg rounded-2xl w-14 h-14 text-white">
             <FiBookOpen size={27} />
           </div>
           <div>
-            <h1 className="text-xl font-extrabold text-slate-800 sm:text-2xl">
+            <h1 className="font-extrabold text-slate-800 text-xl sm:text-2xl">
               ایجاد دوره جدید
             </h1>
-            <p className="mt-2 text-sm text-slate-500">
+            <p className="mt-2 text-slate-500 text-sm">
               اطلاعات اولیه دوره خود را وارد کنید.
             </p>
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+        <div className="bg-white shadow-sm border border-slate-200 rounded-3xl overflow-hidden">
           {isLoading ? (
             <Loading lable="درحال بارگیری . . ." />
           ) : (
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="space-y-4 p-6 sm:p-10 grid  md:grid-cols-2 gap-5">
+              <div className="gap-5 space-y-4 grid md:grid-cols-2 p-6 sm:p-10">
                 <div>
-                  <label className="mb-3 block text-sm font-bold text-slate-700">
+                  <label className="block mb-3 font-bold text-slate-700 text-sm">
                     عنوان دوره
                   </label>
                   <Input
@@ -75,7 +75,7 @@ export default function Page() {
                 </div>
 
                 <div >
-                  <label className="mb-3 block text-sm font-bold text-slate-700">
+                  <label className="block mb-3 font-bold text-slate-700 text-sm">
                     دسته‌بندی دوره
                   </label>
                   <SelectBox
@@ -91,10 +91,10 @@ export default function Page() {
                 </div>
               </div>
 
-              <div className="flex justify-end border-t border-slate-100 bg-slate-50/70 p-6 sm:px-10 right">
+              <div className="right flex justify-end bg-slate-50/70 p-6 sm:px-10 border-slate-100 border-t">
                 <button
                   type="submit"
-                  className="btn btn-success w-full md:w-40"
+                  className="w-full md:w-40 btn btn-success"
                 >
                   مرحله بعد
                   <FiArrowLeft size={18} className="transition-transform group-hover:-translate-x-1" />

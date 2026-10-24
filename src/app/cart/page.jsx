@@ -34,7 +34,9 @@ function CartLoading() {
 }
 
 export default function Page() {
-  const { data: cart, isLoading } = useGet("cart", "get_cart");
+  const { data: cart, isLoading } = useGet("cart", "get_cart", {
+    staleTime: 0,
+  });
 
   if (isLoading) {
     return <CartLoading />;

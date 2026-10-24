@@ -55,7 +55,7 @@ export function Edit() {
         className="input"
       />
 
-      <Input
+      {/* <Input
         label="ترتیب فصل"
         registerName="order_index"
         register={register}
@@ -65,7 +65,7 @@ export function Edit() {
           valueAsNumber: true,
         }}
         className="input"
-      />
+      /> */}
 
       <div className="flex items-center gap-3">
         <button type="submit" className="min-w-40 btn btn-success">
