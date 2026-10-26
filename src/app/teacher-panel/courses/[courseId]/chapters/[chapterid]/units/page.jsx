@@ -1,10 +1,19 @@
+"use client";
+
+import { useMemo } from "react";
+import { useParams } from "next/navigation";
+import useGet from "@/app/(hooks)/useGet";
 import { UnitsList } from "./(components)/UnitsList";
-import { units } from "./(components)/units-data";
 
-export default async function UnitsPage({ params }) {
-  const { chapterId } = await params;
+export default function UnitsPage() {
+  const { chapterid } = useParams();
 
-  const chapterUnits = units.filter((u) => u.section_id === Number(chapterId));
+  const { data } = useGet("lesson/", "get_units");
 
-  return <UnitsList initialUnits={chapterUnits} />;
+  const units = useMemo(
+    () => data?.filter((u) => u.section_id === Number(chapterid)) ?? [],
+    [data, chapterid],
+  );
+
+  return <UnitsList initialUnits={units} />;
 }
