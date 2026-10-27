@@ -1,14 +1,16 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
+import { useQueryClient } from "@tanstack/react-query";
 import { FiChevronDown } from "react-icons/fi";
+import Image from "next/image";
+
 import Input from "@/app/(components)/Input";
-import { FileField } from "./FileField";
-import { courseLevels } from "./course-levels";
 import useGet from "@/app/(hooks)/useGet";
 import useMutationData from "@/app/(hooks)/useMutationData";
-import Image from "next/image";
+import { FileField } from "./FileField";
+import { courseLevels } from "./course-levels";
 import { base_url } from "../../../../../../data/info";
 
 const inputClassName =
@@ -63,6 +65,9 @@ function SelectField({
 }
 
 export function CourseForm({ course_id }) {
+  const queryClient = useQueryClient();
+  const initialized = useRef(false);
+
   const { data: courseData, isLoading: courseLoading } = useGet(
     `course/${course_id}`,
     [course_id, "course_detail"],
@@ -88,41 +93,38 @@ export function CourseForm({ course_id }) {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      faTitle: "",
+      title: "",
+      slug: "",
       description: "",
-      categoryId: "",
-      teacherId: "",
-      courseLevel: "",
+      category_id: "",
+      course_level: "",
       prerequisites: "",
       price: "",
-      isFree: false,
-      courseHour: "",
-      bannerFile: null,
-      trailerFile: null,
+      is_free: false,
+      course_hour: "",
     },
   });
 
   useEffect(() => {
-    if (!courseData?.course) return;
+    if (!courseData?.course || initialized.current) return;
+    initialized.current = true;
 
     const course = courseData.course;
 
     reset({
       title: course.title ?? "",
+      slug: course.slug ?? "",
       description: course.description ?? "",
       category_id: String(course.category_id ?? ""),
-      teacher_id: course.teacher_id ?? "",
       course_level: course.course_level ?? "",
       prerequisites: course.prerequisites ?? "",
       price: course.price ?? "",
       is_free: course.is_free ?? false,
       course_hour: course.course_hour ?? "",
-      bannerFile: null,
-      trailerFile: null,
     });
   }, [courseData, reset]);
 
-  const isFree = watch("isFree");
+  const isFree = watch("is_free");
 
   const categories = Array.isArray(categoryData)
     ? categoryData.map((category) => ({
@@ -135,12 +137,13 @@ export function CourseForm({ course_id }) {
     const formData = new FormData();
 
     formData.append("title", values.title);
+    formData.append("slug", values.slug);
     formData.append("description", values.description);
     formData.append("category_id", values.category_id);
     formData.append("course_level", values.course_level);
     formData.append("prerequisites", values.prerequisites || "");
     formData.append("price", values.price || "");
-    formData.append("is_free", String(values.is_free));
+    formData.append("is_free", String(!!values.is_free));
     formData.append("course_hour", values.course_hour || "");
 
     if (values.banner_file?.[0]) {
@@ -151,9 +154,18 @@ export function CourseForm({ course_id }) {
       formData.append("trailer_file", values.trailer_file[0]);
     }
 
-    update_data({
-      data: formData,
-    });
+    update_data(
+      { data: formData },
+      {
+        onSuccess: () => {
+          initialized.current = false;
+          queryClient.invalidateQueries({
+            queryKey: [course_id, "course_detail"],
+          });
+          queryClient.invalidateQueries({ queryKey: ["courseList"] });
+        },
+      },
+    );
   }
 
   if (courseLoading || categoryLoading) {
@@ -176,40 +188,58 @@ export function CourseForm({ course_id }) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8">
-      <input type="hidden" {...register("teacherId")} />
-
       <Input
         label="عنوان فارسی دوره"
         registerName="title"
         register={register}
         errors={errors}
-        validation={{
-          required: "عنوان فارسی دوره الزامی است",
-        }}
+        validation={{ required: "عنوان فارسی دوره الزامی است" }}
         className={inputClassName}
         lableClassName={labelClassName}
       />
 
       <Input
-        label="توضیحات دوره"
-        registerName="description"
+        label="عنوان انگلیسی دوره"
+        registerName="slug"
         register={register}
         errors={errors}
         validation={{
-          required: "توضیحات دوره الزامی است",
+          required: "عنوان انگلیسی دوره الزامی است",
+          pattern: {
+            value: /^[a-z0-9]+(?:-[a-z0-9]+)*$/i,
+            message: "فقط حروف انگلیسی، عدد و خط تیره مجاز است",
+          },
         }}
         className={inputClassName}
         lableClassName={labelClassName}
       />
+
+      <div className="flex flex-col gap-2 w-full">
+        <label htmlFor="description" className={labelClassName}>
+          توضیحات دوره
+        </label>
+
+        <textarea
+          id="description"
+          {...register("description", {
+            required: "توضیحات دوره الزامی است",
+          })}
+          className={`${inputClassName} min-h-32 resize-none ${
+            errors.description ? "border-red-500" : ""
+          }`}
+        />
+
+        {errors.description && (
+          <p className="text-red-500 text-sm">{errors.description.message}</p>
+        )}
+      </div>
 
       <SelectField
         id="category_id"
         label="دسته‌بندی محتوایی"
         register={register}
         errors={errors}
-        validation={{
-          required: "دسته‌بندی محتوایی الزامی است",
-        }}
+        validation={{ required: "دسته‌بندی محتوایی الزامی است" }}
         options={categories}
       />
 
@@ -265,26 +295,32 @@ export function CourseForm({ course_id }) {
         label="سطح دوره"
         register={register}
         errors={errors}
-        validation={{
-          required: "سطح دوره الزامی است",
-        }}
+        validation={{ required: "سطح دوره الزامی است" }}
         options={courseLevels}
       />
+      <div className="flex flex-col gap-2 w-full">
+        <label htmlFor="prerequisites" className={labelClassName}>
+          پیش‌نیازهای دوره
+        </label>
 
-      <Input
-        label="پیش‌نیازهای دوره"
-        registerName="prerequisites"
-        register={register}
-        errors={errors}
-        className={inputClassName}
-        lableClassName={labelClassName}
-      />
+        <textarea
+          id="prerequisites"
+          {...register("prerequisites")}
+          className={`${inputClassName} min-h-24 resize-none ${
+            errors.prerequisites ? "border-red-500" : ""
+          }`}
+        />
+
+        {errors.prerequisites && (
+          <p className="text-red-500 text-sm">{errors.prerequisites.message}</p>
+        )}
+      </div>
 
       <div className="flex items-center gap-3">
         <input
           id="is_free"
           type="checkbox"
-          {...register("isFree")}
+          {...register("is_free")}
           className="border-slate-300 rounded w-4 h-4"
         />
 

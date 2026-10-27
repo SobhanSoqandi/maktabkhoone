@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { FiMenu } from "react-icons/fi";
+import useMutationData from "@/app/(hooks)/useMutationData";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const gridClass =
   "grid grid-cols-[72px_1fr_130px_130px_90px] items-center gap-2 px-4";
@@ -12,7 +14,28 @@ export function ChapterRow({ chapter, index, basePath, onDelete }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: chapter.id });
 
+  const queryClient = useQueryClient();
+
+  const { mutate: delete_chapter, isPending: deleting } = useMutationData(
+    `section/id?section_id=${chapter.id}`,
+    "delete",
+    "delete_chapter",
+    "فصل با موفقیت حذف شد ",
+  );
   const style = { transform: CSS.Transform.toString(transform), transition };
+  function handleDelete(id) {
+    console.log(12);
+    if (!confirm("این فصل حذف شود؟")) return;
+    delete_chapter(
+      {},
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ["get_chapters"] });
+        },
+      },
+    );
+    // setChapters((prev) => prev.filter((c) => c.id !== id));
+  }
 
   return (
     <div
@@ -24,7 +47,7 @@ export function ChapterRow({ chapter, index, basePath, onDelete }) {
         <span>{(index + 1).toLocaleString("fa-IR")}</span>
         <button
           type="button"
-          className="cursor-grab touch-none text-slate-500"
+          className="text-slate-500 touch-none cursor-grab"
           {...attributes}
           {...listeners}
         >
@@ -50,7 +73,7 @@ export function ChapterRow({ chapter, index, basePath, onDelete }) {
 
       <button
         type="button"
-        onClick={() => onDelete(chapter.id)}
+        onClick={() => handleDelete()}
         className="btn btn-success"
       >
         حذف

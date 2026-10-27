@@ -10,34 +10,61 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { FiPlus } from "react-icons/fi";
+import { useQueryClient } from "@tanstack/react-query";
+
+import useMutationData from "@/app/(hooks)/useMutationData";
 import { ChapterRow, gridClass } from "./ChapterRow";
+
+const sortByOrder = (list) =>
+  [...(list ?? [])].sort((a, b) => a.order_index - b.order_index);
 
 export function ChaptersList({ initialChapters }) {
   const basePath = usePathname();
+  const client = useQueryClient();
 
-  const [chapters, setChapters] = useState(initialChapters);
-  console.log(chapters);
+  const [chapters, setChapters] = useState(() => sortByOrder(initialChapters));
   const [changed, setChanged] = useState(false);
+
   useEffect(() => {
-    setChapters(initialChapters ?? []);
+    setChapters(sortByOrder(initialChapters));
+    setChanged(false);
   }, [initialChapters]);
+
+  const { mutate: update_index, isPending: saving } = useMutationData(
+    "section/update_list_order",
+    "post",
+    "update_sections_order",
+    "با موفقیت تغییر کرد ",
+    {
+      onSuccess: () => {
+        client.invalidateQueries({ queryKey: ["get_chapters"] });
+      },
+    },
+  );
+
   function handleDragEnd({ active, over }) {
     if (!over || active.id === over.id) return;
 
     const from = chapters.findIndex((c) => c.id === active.id);
     const to = chapters.findIndex((c) => c.id === over.id);
-    setChapters(arrayMove(chapters, from, to));
+    if (from === -1 || to === -1) return;
+
+    const reordered = arrayMove(chapters, from, to).map((chapter, index) => ({
+      ...chapter,
+      order_index: index,
+    }));
+
+    setChapters(reordered);
     setChanged(true);
   }
 
-  function handleDelete(id) {
-    if (!confirm("این فصل حذف شود؟")) return;
-    setChapters(chapters.filter((c) => c.id !== id));
-  }
-
   function handleSave() {
-    console.log(chapters.map((c) => c.id));
-    setChanged(false);
+    const payload = chapters.map((chapter) => ({
+      id: chapter.id,
+      order_index: chapter.order_index,
+    }));
+
+    update_index({ data: payload }, { onSuccess: () => setChanged(false) });
   }
 
   return (
@@ -54,6 +81,7 @@ export function ChaptersList({ initialChapters }) {
         </div>
 
         <DndContext
+          id="chapters-dnd"
           collisionDetection={closestCenter}
           onDragEnd={handleDragEnd}
         >
@@ -67,7 +95,6 @@ export function ChaptersList({ initialChapters }) {
                 chapter={chapter}
                 index={index}
                 basePath={basePath}
-                onDelete={handleDelete}
               />
             ))}
           </SortableContext>
@@ -96,10 +123,10 @@ export function ChaptersList({ initialChapters }) {
         <button
           type="button"
           onClick={handleSave}
-          disabled={!changed}
+          disabled={!changed || saving}
           className="bg-slate-600 hover:bg-slate-500 disabled:opacity-50 px-4 py-4 rounded text-white text-lg"
         >
-          ذخیره تغییرات
+          {saving ? "در حال ذخیره..." : "ذخیره تغییرات"}
         </button>
       </aside>
     </div>
