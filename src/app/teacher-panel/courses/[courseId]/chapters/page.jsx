@@ -12,6 +12,7 @@ export default function ChaptersPage() {
     params: {
       id: courseId,
     },
+    staleTime: 0,
   });
   console.log(data);
 

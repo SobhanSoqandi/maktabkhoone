@@ -4,27 +4,68 @@ import Link from "next/link";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { FiMenu } from "react-icons/fi";
+import { useQueryClient } from "@tanstack/react-query";
+
+import useMutationData from "@/app/(hooks)/useMutationData";
 
 export const gridClass =
   "grid grid-cols-[72px_1fr_130px_130px_90px] items-center gap-2 px-4";
 
 export function ChapterRow({ chapter, index, basePath, onDelete }) {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: chapter.id });
+  const queryClient = useQueryClient();
 
-  const style = { transform: CSS.Transform.toString(transform), transition };
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: chapter.id });
+
+  const { mutate: delete_chapter, isPending: deleting } = useMutationData(
+    `/section/id?section_id=${chapter.id}`,
+    "delete",
+    "delete_chapter",
+    "فصل با موفقیت حذف شد ",
+  );
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    position: isDragging ? "relative" : undefined,
+    zIndex: isDragging ? 10 : undefined,
+  };
+
+  function handleDelete() {
+    // console.log(!confirm("این فصل حذف شود؟"));
+    // if (!confirm("این فصل حذف شود؟")) return;
+
+    delete_chapter(
+      {},
+      {
+        onSuccess: () => {
+          onDelete(chapter.id);
+          queryClient.invalidateQueries({ queryKey: ["get_chapters"] });
+        },
+      },
+    );
+  }
 
   return (
     <div
       ref={setNodeRef}
       style={style}
-      className={`${gridClass} border border-slate-200 bg-slate-50 py-5 text-sm text-slate-700`}
+      className={`${gridClass} border border-slate-200 bg-slate-50 py-5 text-sm text-slate-700 ${
+        isDragging ? "shadow-lg" : ""
+      }`}
     >
       <div className="flex items-center gap-3">
         <span>{(index + 1).toLocaleString("fa-IR")}</span>
         <button
           type="button"
-          className="cursor-grab touch-none text-slate-500"
+          aria-label="جابجایی فصل"
+          className="text-slate-500 touch-none cursor-grab"
           {...attributes}
           {...listeners}
         >
@@ -50,10 +91,11 @@ export function ChapterRow({ chapter, index, basePath, onDelete }) {
 
       <button
         type="button"
-        onClick={() => onDelete(chapter.id)}
-        className="w-fit rounded bg-teal-600 px-5 py-2 text-white hover:bg-teal-500"
+        onClick={handleDelete}
+        disabled={deleting}
+        className="bg-teal-600 hover:bg-teal-500 disabled:opacity-50 px-5 py-2 rounded w-fit text-white"
       >
-        حذف
+        {deleting ? "..." : "حذف"}
       </button>
     </div>
   );
