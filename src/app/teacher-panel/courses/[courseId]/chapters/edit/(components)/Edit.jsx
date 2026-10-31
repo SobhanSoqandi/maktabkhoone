@@ -10,7 +10,8 @@ export function Edit() {
   const router = useRouter();
   const pathname = usePathname();
   const { courseId } = useParams();
-  console.log(courseId);
+  
+  
   const listPath = pathname.replace(/\/edit$/, "");
 
   const { mutate: createChapter } = useMutationData(

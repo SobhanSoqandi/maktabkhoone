@@ -63,13 +63,34 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
 }
+.video-js {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+}
 
+.video-js .vjs-control-bar {
+  bottom: 15px !important;
+  
+  width: auto !important;
+  border-radius: 8px;
+}
+
+.video-js .vjs-progress-control {
+  min-width: 0;
+}
+
+.video-js .vjs-control {
+  flex-shrink: 0;
+}
 .swiper-button-prev,
 .swiper-button-next {
   display: none !important;
