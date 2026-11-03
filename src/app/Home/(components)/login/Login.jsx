@@ -12,13 +12,17 @@ import { useAuth } from "@/context/AuthContext";
 
 export default function Login() {
   const { isLogin } = useContext(loginContext);
-
   const { user } = useAuth();
-  console.log(user);
 
+  // باعث می‌شود رندر اول کلاینت دقیقاً با سرور یکی باشد
+  const [mounted, setMounted] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
   const menuRef = useRef(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     setIsUserMenuOpen(false);
@@ -43,6 +47,12 @@ export default function Login() {
     setIsUserMenuOpen((prev) => !prev);
   }
 
+  // قبل از mount: سرور و کلاینت هر دو همین را رندر می‌کنند
+  // اندازه را مطابق دکمه‌ی واقعی تنظیم کن تا لایه‌ی صفحه نپرد
+  if (!mounted) {
+    return <div className="w-72 h-10" aria-hidden="true" />;
+  }
+
   return (
     <>
       {user?.role_id ? (
@@ -60,15 +70,19 @@ export default function Login() {
           تدریس کنید
         </Link>
       )}
+
       <div>
         {isLogin ? (
           <div className="flex items-center gap-3">
-            <button type="button" className="btn btn-light text-gray-500">
+            <button type="button" className="text-gray-500 btn btn-light">
               <FaBook className="w-5 h-5" />
               <span>دوره‌های من</span>
             </button>
 
-            <Link href="/cart" className="btn border border-cyan-200 hover:bg-cyan-50 text-cyan-500">
+            <Link
+              href="/cart"
+              className="hover:bg-cyan-50 border border-cyan-200 text-cyan-500 btn"
+            >
               <TiShoppingCart className="w-5 h-5" />
             </Link>
 
@@ -76,11 +90,10 @@ export default function Login() {
               <button
                 type="button"
                 onClick={toggleUserMenu}
-                className="btn btn-primary text-medium font-bold"
+                className="font-bold text-medium btn btn-primary"
                 aria-expanded={isUserMenuOpen}
                 aria-haspopup="menu"
               >
-                
                 <FaRegUser className="w-5 h-5" />
                 داشبورد
               </button>
