@@ -74,10 +74,17 @@ export default function Login() {
       <div>
         {isLogin ? (
           <div className="flex items-center gap-3">
+admin-panel
+            <Link
+              href="/dashboard/courses"
+              className="btn btn-light text-gray-500"
+            >
+
             <button type="button" className="text-gray-500 btn btn-light">
+ start
               <FaBook className="w-5 h-5" />
               <span>دوره‌های من</span>
-            </button>
+            </Link>
 
             <Link
               href="/cart"
@@ -94,6 +101,9 @@ export default function Login() {
                 aria-expanded={isUserMenuOpen}
                 aria-haspopup="menu"
               >
+ admin-panel
+
+ start
                 <FaRegUser className="w-5 h-5" />
                 داشبورد
               </button>

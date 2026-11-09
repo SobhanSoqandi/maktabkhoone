@@ -3,7 +3,7 @@ import { LuShoppingBag } from "react-icons/lu";
 
 export default function EmptyCart() {
   return (
-    <div className="flex flex-col justify-center items-center bg-white shadow-sm px-6 border border-gray-100 rounded-2xl min-h-[400px] text-center">
+    <div className="flex max-w-5xl mx-auto flex-col justify-center items-center min-h-[400px] text-center">
       <div className="flex justify-center items-center bg-gray-100 mb-5 rounded-full w-20 h-20">
         <LuShoppingBag className="w-10 h-10 text-gray-400" />
       </div>

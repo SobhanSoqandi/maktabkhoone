@@ -7,6 +7,7 @@ import CartList from "./(cart-list)/CartList";
 import CartSummary from "./(cart-list)/CartSummary";
 import useGet from "../(hooks)/useGet";
 import EmptyCart from "./(cart-list)/EmptyCart";
+import BackButton from "../(components)/BackButton";
 
 function CartLoading() {
   return (
@@ -50,12 +51,16 @@ export default function Page() {
     <div className="mx-auto mt-5 mb-10 px-4 container">
       <div className="gap-8 grid grid-cols-12">
         <div className="order-2 lg:order-1 col-span-12 lg:col-span-8">
-          <div className="flex items-center gap-2 mb-6">
-            <h1 className="font-bold text-gray-800 text-2xl">سبد خرید</h1>
+          <div className="flex justify-between items-center gap-2 mb-6">
+            <div className="flex items-center gap-x-2" > 
+              <h1 className="font-bold text-gray-800 text-2xl">سبد خرید</h1>
 
-            <span className="text-gray-500 text-sm">
-              ({cart.items.length} دوره)
-            </span>
+              <span className="text-gray-500 text-sm">
+                ({cart.items.length} دوره)
+              </span>
+            </div>
+
+            <BackButton lable="بازگشت" />
           </div>
 
           <CartList courses={cart.items} />

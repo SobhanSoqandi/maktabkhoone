@@ -74,7 +74,7 @@ export default function CartItem({ course }) {
           onClick={() => delete_course()}
           aria-label="حذف دوره از سبد خرید"
           title="حذف از سبد خرید"
-          className="flex h-10 w-10 items-center justify-center rounded-xl border border-blue-100 bg-blue-50 text-blue-500 transition-all duration-200 hover:border-red-100 hover:bg-red-50 hover:text-red-500 active:scale-95 sm:h-11 sm:w-11"
+          className="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-100 shadow bg-white text-gray-500 transition-all duration-200 hover:border-red-100 hover:bg-red-50 hover:text-red-500 active:scale-95 sm:h-11 sm:w-11"
         >
           <BiTrash size={22} />
         </button>
