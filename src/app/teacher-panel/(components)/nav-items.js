@@ -1,3 +1,4 @@
+import { BiUser } from "react-icons/bi";
 import {
   FiLayers,
   FiSmile,
@@ -7,14 +8,15 @@ import {
   FiHeadphones,
   FiInfo,
 } from "react-icons/fi";
-import { PiStudentBold } from "react-icons/pi";
+import { PiStudentBold, PiStudentDuotone } from "react-icons/pi";
 
 export const primaryNavItems = [
   { label: "دوره‌های من", href: "/teacher-panel/courses", icon: FiLayers },
+  { label: " دانشجویان من ", href: "/teacher-panel/mystudents", icon: PiStudentBold },
   {
 
     label: "پروفایل",
-    icon: PiStudentBold ,
+    icon: BiUser ,
     children: [
       // { label: "اطلاعات حساب", href: "/teacher-panel/profile/profile-info" },
       { label: " اطلاعات هویتی ", href: "/teacher-panel/profile/profile-info" },

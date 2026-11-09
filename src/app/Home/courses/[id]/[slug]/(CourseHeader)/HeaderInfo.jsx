@@ -52,14 +52,14 @@ export default function HeaderInfo({
           <div className="flex flex-1 items-center gap-3 min-w-0">
             <div className="relative shrink-0">
               <div className="absolute -inset-1 bg-gradient-to-br from-sky-300 to-blue-500 opacity-50 blur-[3px] rounded-full" />
-              <Image
+              {/* <Image
                 src={base_url + avatar}
                 width={50}
                 unoptimized
                 alt="teacherProfile"
                 height={50}
                 className="relative bg-blue-100 border-2 border-white rounded-full ring-2 ring-blue-100 w-14 h-14 object-cover"
-              />
+              /> */}
               <span className="right-0 bottom-0 absolute bg-sky-400 border-2 border-white rounded-full w-3.5 h-3.5" />
             </div>
             <div className="min-w-0">

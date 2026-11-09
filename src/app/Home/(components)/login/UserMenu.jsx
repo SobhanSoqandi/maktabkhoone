@@ -32,7 +32,7 @@ export default function UserMenu() {
     {
       title: "سبد خرید",
       description: "دوره‌های انتخاب‌شده",
-      href: "/checkout",
+      href: "/cart",
       icon: HiOutlineShoppingBag,
     },
   ];

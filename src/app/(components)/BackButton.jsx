@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { HiOutlineArrowRight } from "react-icons/hi2";
 
-export default function BackButton({ className = "" }) {
+export default function BackButton({ className = "" , lable }) {
   const router = useRouter();
 
   return (
@@ -12,9 +12,10 @@ export default function BackButton({ className = "" }) {
       type="button"
       aria-label="بازگشت"
       onClick={() => router.back()}
-      className="shrink-0 bg-blue-50 p-2 place-items-center rounded-xl "
+      className="flex gap-2 text-blue-500 bg-blue-50 p-2 place-items-center rounded-xl "
     >
-      <FaArrowLeftLong className="text-blue-500" />
+      {lable}
+      <FaArrowLeftLong />
     </button>
   );
 }

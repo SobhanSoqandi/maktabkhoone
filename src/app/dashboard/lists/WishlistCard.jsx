@@ -5,7 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { base_url } from "../../../../data/info";
 import { HiOutlineClock } from "react-icons/hi2";
-import { FiBookOpen } from "react-icons/fi";
+import { courseLevels } from "@/app/Utils/constants";
+import { toPersianNumbers } from "@/app/Utils/toPersianNumbers";
+import { IoMdPricetags } from "react-icons/io";
 
 export default function WishlistCourseCard({ course }) {
   return (
@@ -21,8 +23,8 @@ export default function WishlistCourseCard({ course }) {
           unoptimized
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        <span className="absolute right-3 top-3 rounded-lg bg-white/95 px-3 py-1.5 text-xs font-semibold text-blue-700 shadow-sm">
-          {course.course_level}
+        <span className="absolute right-3 top-3 rounded-lg bg-white/95 px-3 py-1.5 text-xs font-semibold text-emerald-700 shadow-sm">
+          {courseLevels(course.course_level)}
         </span>
       </div>
 
@@ -33,18 +35,18 @@ export default function WishlistCourseCard({ course }) {
 
         <div className="flex items-center gap-2 text-sm text-gray-500">
           <HiOutlineClock size={18} className="text-blue-600" />
-          <span>{course.course_hour} ساعت آموزش</span>
+          <span>{toPersianNumbers(course.course_hour)} ساعت آموزش</span>
         </div>
 
         <div className="flex items-center justify-between border-t border-gray-100 pt-4">
           <div className="flex items-center gap-2 text-sm text-gray-500">
-            <FiBookOpen size={17} className="text-blue-600" />
+            <IoMdPricetags size={17} className="text-emerald-600" />
             <span>قیمت دوره</span>
           </div>
 
           <div className="flex items-baseline gap-1">
-            <span className="text-lg font-extrabold text-blue-700">
-              {Number(course.price).toLocaleString("fa-IR")}
+            <span className="text-lg font-extrabold text-emerald-800">
+              {toPersianNumbers(course.price)}
             </span>
             <span className="text-xs text-gray-500">تومان</span>
           </div>

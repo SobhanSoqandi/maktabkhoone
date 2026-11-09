@@ -2,6 +2,8 @@ import Image from "next/image";
 import { HiOutlinePlay, HiOutlineEllipsisHorizontal } from "react-icons/hi2";
 import { base_url } from "../../../../data/info";
 import Link from "next/link";
+import { courseLevels } from "@/app/Utils/constants";
+
 
 
 export default function CourcesCard({ course }) {
@@ -25,7 +27,7 @@ export default function CourcesCard({ course }) {
           <p className="mt-2 text-gray-500 text-sm">{course.teacher_name}</p>
 
           <div className="flex justify-end mt-4">
-            <span className="badge">{course.course_level}</span>
+            <span className="badge">{courseLevels(course.course_level)}</span>
           </div>
         </div>
       </div>
@@ -45,7 +47,13 @@ export default function CourcesCard({ course }) {
 
       <div className="flex justify-between items-center mt-8">
         <div className="flex gap-3">
-          <button className="btn btn-primary">ثبت امتیاز</button>
+          
+          <Link 
+          className="btn btn-primary"
+           href={`/Home/courses/${course.id}/${course.slug}`}
+          >
+            ثبت امتیاز
+          </Link>
 
           <button className="btn btn-primary">
             <HiOutlineEllipsisHorizontal className="text-2xl" />

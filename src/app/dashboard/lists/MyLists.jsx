@@ -7,6 +7,7 @@ import WishlistCourseCard from "./WishlistCard";
 import useGet from "@/app/(hooks)/useGet";
 import Loading from "@/app/(components)/Loading";
 import { FiBookmark, FiBookOpen, FiHeart } from "react-icons/fi";
+import { toPersianNumbers } from "@/app/Utils/toPersianNumbers";
 
 export default function MyList() {
   const { data: myCourse, isLoading } = useGet(
@@ -28,7 +29,7 @@ export default function MyList() {
 
             <div className="space-y-2">
               <span className="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white/80 px-3 py-1 text-xs font-semibold text-blue-700">
-                <FiHeart size={13} />
+                <FiHeart className="text-rose-500" size={15} />
                 مجموعه شخصی شما
               </span>
 
@@ -36,10 +37,10 @@ export default function MyList() {
                 دوره‌های ذخیره‌شده
               </h1>
 
-              <p className="max-w-lg text-sm leading-7 text-gray-500 sm:text-base">
+              {/* <p className="max-w-lg text-sm leading-7 text-gray-500 sm:text-base">
                 دوره‌های موردعلاقه‌ات را یکجا داشته باش و هر زمان که خواستی
                 به آن‌ها برگرد.
-              </p>
+              </p> */}
             </div>
           </div>
 
@@ -54,7 +55,7 @@ export default function MyList() {
                   تعداد دوره‌ها
                 </p>
                 <p className="text-xl font-extrabold tabular-nums text-blue-700">
-                  {myCourse.length.toLocaleString("fa-IR")}
+                  {toPersianNumbers(myCourse.length)}
                 </p>
               </div>
             </div>

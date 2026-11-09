@@ -195,8 +195,8 @@ export default function HeaderPreview({ course, section }) {
                 >
                   <span className="absolute inset-0 bg-gradient-to-l from-transparent via-white/15 to-transparent transition-transform translate-x-full group-hover/start:translate-x-[-100%] duration-700" />
                   <HiPlay className="relative text-xl" />
-                  <span className="relative">شروع یادگیری</span>
-                  <HiArrowLeft className="relative mr-auto text-lg transition-transform group-hover/start:-translate-x-1 duration-300" />
+                  <span className="relative"> شروع یادگیری </span>
+           
                 </Link>
               ) : (
                 <div className="flex flex-1 justify-center items-center bg-slate-100 px-4 py-3 rounded-2xl min-h-[54px] font-bold text-slate-400 text-sm">

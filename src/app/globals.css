@@ -53,7 +53,7 @@
 }
 
 @utility badge {
-  @apply flex items-center gap-x-1 bg-gray-200 p-2 rounded-xl;
+  @apply flex items-center gap-x-1 bg-blue-50 text-blue-500 p-2 rounded-xl;
 }
 
 @theme inline {

@@ -1,8 +1,11 @@
 "use client";
 
+import Modal from "@/app/(components)/modal";
 import { toPersianDate } from "@/app/Utils/date";
 import { toPersianNumbers } from "@/app/Utils/toPersianNumbers";
 import { HiOutlineCheckCircle, HiOutlineXMark, HiOutlineDocumentText } from "react-icons/hi2";
+import ReceiptModal from "./(components)/ReceiptModal";
+import { transactionStatuses } from "@/app/Utils/constants";
 
 function TransactionRow({ transaction }) {
   const isSuccess = transaction.status == "success";
@@ -29,7 +32,7 @@ function TransactionRow({ transaction }) {
           }`}
         >
           {isSuccess ? <HiOutlineCheckCircle className="text-base" /> : <HiOutlineXMark className="text-base" />}
-          {transaction.status}
+          {transactionStatuses(transaction.status)}
         </div>
 
         <div className="min-w-[80px] text-sm font-medium text-slate-500">{toPersianDate(transaction.created_at)}</div>
@@ -39,10 +42,24 @@ function TransactionRow({ transaction }) {
           <span className="mr-1 text-xs font-medium text-slate-400">تومان</span>
         </div>
 
-        <button className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-blue-600/25 transition hover:bg-blue-700 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 sm:w-auto">
-          <HiOutlineDocumentText className="text-lg" />
-          مشاهده رسید
-        </button>
+      <Modal>
+  <Modal.Open name="receipt">
+    <button
+      type="button"
+      className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-blue-600/25 transition hover:bg-blue-700 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 sm:w-auto"
+    >
+      <HiOutlineDocumentText className="text-lg" />
+      مشاهده رسید
+    </button>
+  </Modal.Open>
+
+  <Modal.Window name="receipt">
+    <div className="w-[min(100vw-2rem,32rem)]">
+      <Modal.Close />
+      <ReceiptModal transaction={transaction} />
+    </div>
+  </Modal.Window>
+</Modal>
       </div>
     </div>
   );
