@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 import { CoursesToolbar } from "./(components)/CoursesToolbar";
 import { CourseCard } from "./(components)/CourseCard";
 import useGet from "@/app/(hooks)/useGet";
+import Loading from "@/app/(components)/Loading";
 
 export default function CoursesPage() {
   const { data: courses, isLoading } = useGet("course/teacher/me", [
@@ -44,9 +45,7 @@ export default function CoursesPage() {
 
       <div className="flex flex-col gap-4 sm:gap-5">
         {isLoading ? (
-          <div className="py-16 text-blue-600 text-sm text-center">
-             در حال دریافت دوره‌ها...
-          </div>
+          <Loading lable=" درحال  دریافت دوره ها . . . " />
         ) : filteredCourses.length > 0 ? (
           filteredCourses.map((course) => (
             <CourseCard key={course.id} course={course} />
