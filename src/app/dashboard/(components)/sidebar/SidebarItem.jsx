@@ -3,34 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import {
-  HiOutlineBookOpen,
-  HiOutlineLightBulb,
-  HiOutlineAcademicCap,
-  HiOutlineChatBubbleLeftRight,
-  HiOutlineFolder,
-  HiOutlineLifebuoy,
-  HiOutlineClipboardDocumentList,
-  HiOutlineUser,
-  HiOutlineCog6Tooth,
-  HiChevronLeft,
-} from "react-icons/hi2";
-
-const icons = {
-  book: HiOutlineBookOpen,
-  light: HiOutlineLightBulb,
-  academic: HiOutlineAcademicCap,
-  question: HiOutlineChatBubbleLeftRight,
-  folder: HiOutlineFolder,
-  support: HiOutlineLifebuoy,
-  transaction: HiOutlineClipboardDocumentList,
-  user: HiOutlineUser,
-  setting: HiOutlineCog6Tooth,
-};
+import { HiChevronLeft } from "react-icons/hi2";
 
 export default function SidebarItem({ item, onNavigate }) {
   const pathname = usePathname();
-  const Icon = icons[item.icon];
+  const Icon = item.icon;
   const isActive = pathname.startsWith(item.href);
 
   return (

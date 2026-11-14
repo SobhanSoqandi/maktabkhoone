@@ -17,3 +17,7 @@ export function toPersianNumbers(n) {
 
   return n.toString().replace(/\d/g, (x) => farsiDigits[parseInt(x)]);
 }
+
+
+export const toman = (n) => n.toLocaleString("fa-IR");
+export const fdate = (d) => new Date(d).toLocaleDateString("fa-IR");

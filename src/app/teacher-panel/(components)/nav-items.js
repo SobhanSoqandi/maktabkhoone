@@ -24,7 +24,7 @@ export const primaryNavItems = [
     ],
 
   },
-  { label: "آمارها", href: "/stats", icon: FiTrendingUp },
+  { label: "آمارها", href: "/teacher-panel/stats", icon: FiTrendingUp },
   { label: "گزارش درآمد", href: "/income", icon: FiFileText },
   { label: "قراردادها", href: "/contracts", icon: FiEdit2 },
 ];
