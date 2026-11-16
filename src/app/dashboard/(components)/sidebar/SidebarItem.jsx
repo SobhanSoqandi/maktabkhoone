@@ -8,7 +8,9 @@ import { HiChevronLeft } from "react-icons/hi2";
 export default function SidebarItem({ item, onNavigate }) {
   const pathname = usePathname();
   const Icon = item.icon;
-  const isActive = pathname.startsWith(item.href);
+  const isActive =
+    pathname === item.href ||
+    (item.href !== "/dashboard" && pathname.startsWith(item.href + "/"));
 
   return (
     <Link
