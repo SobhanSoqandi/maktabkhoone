@@ -1,3 +1,4 @@
+
 "use client";
 
 import { FaBook, FaRegUser } from "react-icons/fa";
@@ -14,7 +15,6 @@ export default function Login() {
   const { isLogin } = useContext(loginContext);
   const { user } = useAuth();
 
-  // باعث می‌شود رندر اول کلاینت دقیقاً با سرور یکی باشد
   const [mounted, setMounted] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
@@ -47,8 +47,6 @@ export default function Login() {
     setIsUserMenuOpen((prev) => !prev);
   }
 
-  // قبل از mount: سرور و کلاینت هر دو همین را رندر می‌کنند
-  // اندازه را مطابق دکمه‌ی واقعی تنظیم کن تا لایه‌ی صفحه نپرد
   if (!mounted) {
     return <div className="w-72 h-10" aria-hidden="true" />;
   }
@@ -74,14 +72,10 @@ export default function Login() {
       <div>
         {isLogin ? (
           <div className="flex items-center gap-3">
-admin-panel
             <Link
               href="/dashboard/courses"
               className="btn btn-light text-gray-500"
             >
-
-            <button type="button" className="text-gray-500 btn btn-light">
- start
               <FaBook className="w-5 h-5" />
               <span>دوره‌های من</span>
             </Link>
@@ -101,9 +95,6 @@ admin-panel
                 aria-expanded={isUserMenuOpen}
                 aria-haspopup="menu"
               >
- admin-panel
-
- start
                 <FaRegUser className="w-5 h-5" />
                 داشبورد
               </button>
