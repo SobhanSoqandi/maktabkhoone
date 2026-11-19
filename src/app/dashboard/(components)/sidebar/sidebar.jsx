@@ -14,6 +14,8 @@ import { loginContext } from "@/context/LoginContext";
 export default function Sidebar({ onClose }) {
   const { user , setUser } = useAuth();
 
+  console.log("this is user:" , user )
+
   
     const { setIsLogin } = useContext(loginContext);
 
@@ -37,59 +39,64 @@ export default function Sidebar({ onClose }) {
         </button>
       </div>
 
+      
       <div className="mx-3 mb-2 mt-3 shrink-0">
-        <div className="relative overflow-hidden rounded-2xl border border-slate-100 bg-gradient-to-l from-slate-50 to-white p-4">
-          <div className="absolute -left-8 -top-8 h-24 w-24 rounded-full bg-blue-100/50 blur-2xl" />
+  <div className="relative overflow-hidden rounded-2xl border border-slate-100 bg-gradient-to-l from-slate-50 to-white p-4">
+    <div className="absolute -left-8 -top-8 h-24 w-24 rounded-full bg-blue-100/50 blur-2xl" />
 
-          <div className="relative flex items-center gap-3.5">
-            <div className="relative shrink-0">
-              <div className="rounded-full bg-gradient-to-br from-blue-500 to-indigo-400 p-[2.5px] shadow-md shadow-blue-500/20">
-                <div className="grid h-[58px] w-[58px] place-items-center overflow-hidden rounded-full border-2 border-white bg-white">
-                  {user?.avatar ? (
-                    <Image
-                      src={base_url + user.avatar}
-                      alt={user.name || "User avatar"}
-                      width={58}
-                      height={58}
-                      unoptimized
-                      className="h-full w-full object-cover"
-                    />
-                  ) : (
-                    <HiOutlineUser className="text-3xl text-blue-500" />
-                  )}
-                </div>
-              </div>
-
-              <span className="absolute bottom-0.5 right-0.5 flex h-3.5 w-3.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
-                <span className="relative inline-flex h-3.5 w-3.5 rounded-full border-[2.5px] border-white bg-emerald-500" />
-              </span>
-            </div>
-
-            <div className="min-w-0 flex-1">
-              <h2 className="truncate text-[15px] font-extrabold tracking-tight text-slate-800">
-                {user?.username || "کاربر"}
-              </h2>
-              <p
-                dir="ltr"
-                className="mt-1.5 truncate text-right text-xs font-medium tracking-wide text-slate-500"
-              >
-                {user?.phone_number || "شماره ثبت نشده"}
-              </p>
-            </div>
-          </div>
-
-          <div className="relative mt-4 flex items-center justify-between border-t border-slate-200/70 pt-3">
-            <span className="text-[11px] font-medium text-slate-400">
-              پنل کاربری
-            </span>
-            <span className="flex items-center gap-1.5 rounded-full bg-blue-50 px-2.5 py-1 text-[10px] font-bold text-blue-600 ring-1 ring-blue-100">
-              <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
-              مکتب‌خونه
-            </span>
+    <div className="relative flex items-center gap-3.5">
+      <div className="relative shrink-0">
+        <div className="rounded-full bg-gradient-to-br from-blue-500 to-indigo-400 p-[2.5px] shadow-md shadow-blue-500/20">
+          <div className="grid h-[58px] w-[58px] place-items-center overflow-hidden rounded-full border-2 border-white bg-white">
+            {user?.avatar ? (
+              <Image
+                src={base_url + user.avatar}
+                alt={user.username || "User avatar"}
+                width={58}
+                height={58}
+                unoptimized
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <HiOutlineUser className="text-3xl text-blue-500" />
+            )}
           </div>
         </div>
+
+        <span className="absolute bottom-0.5 right-0.5 flex h-3.5 w-3.5">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+          <span className="relative inline-flex h-3.5 w-3.5 rounded-full border-[2.5px] border-white bg-emerald-500" />
+        </span>
       </div>
+
+      <div className="min-w-0 flex-1">
+        <h2 className="truncate text-[15px] font-extrabold tracking-tight text-slate-800">
+          {user?.username || "کاربر"}
+        </h2>
+
+        <p
+          dir="ltr"
+          className="mt-1.5 truncate text-right text-xs font-medium tracking-wide text-slate-500"
+        >
+          {user?.phone_number || "شماره ثبت نشده"}
+        </p>
+      </div>
+    </div>
+
+    <div className="relative mt-4 flex items-center justify-between border-t border-slate-200/70 pt-3">
+      <span className="text-[11px] font-medium text-slate-400">
+        پنل کاربری
+      </span>
+
+      <span className="flex items-center gap-1.5 rounded-full bg-blue-50 px-2.5 py-1 text-[10px] font-bold text-blue-600 ring-1 ring-blue-100">
+        <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+        مکتب‌خونه
+      </span>
+    </div>
+  </div>
+</div>
+
+
 
       <nav className="flex min-h-0 flex-1 flex-col gap-1.5 overflow-y-auto p-3 [scrollbar-width:thin]">
         {sidebarItems.map((item) => (

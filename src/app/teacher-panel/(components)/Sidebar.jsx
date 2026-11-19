@@ -37,7 +37,9 @@ export function Sidebar({ isMobileOpen, onMobileClose }) {
   const pathname = usePathname();
 
   const { user } = useAuth();
-  console.log(user);
+
+  console.log("this is sidebar main : " , user)
+
   useEffect(() => {
     const stored = window.localStorage.getItem(STORAGE_KEY);
     if (stored === "1") setCollapsed(true);
