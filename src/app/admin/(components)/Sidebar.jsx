@@ -1,13 +1,24 @@
-"use client"
+"use client";
 
+import Image from "next/image";
 import { toPersianNumbers } from "@/app/Utils/toPersianNumbers";
 import { useAuth } from "@/context/AuthContext";
 import { loginContext } from "@/context/LoginContext";
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useContext } from "react";
-import { FiBook, FiChevronLeft, FiChevronsRight, FiFileText, FiLogOut, FiUserPlus, FiUsers, FiX } from "react-icons/fi"
+import {
+  FiBook,
+  FiChevronLeft,
+  FiChevronsRight,
+  FiFileText,
+  FiLogOut,
+  FiUserPlus,
+  FiUsers,
+  FiX
+} from "react-icons/fi";
 import { MdDashboard } from "react-icons/md";
+import { base_url } from "../../../../data/info";
 
 const menu = [
   {
@@ -37,7 +48,7 @@ export default function Sidebar({ open, onClose }) {
 
   const { user, setUser } = useAuth();
 
-  console.log("user is : ", user)
+
 
   const { setIsLogin } = useContext(loginContext);
 
